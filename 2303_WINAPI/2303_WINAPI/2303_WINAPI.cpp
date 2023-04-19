@@ -10,9 +10,8 @@
 // Window 창에 대한 Apllication interface (인터페이스 : 정보에 접근할 수 있게 해주는 것)
 // 운영체제
 
-// hWnd : 윈도우 핸들 : 윈도우를 수정, 기타 등등에 필요한 얘
+// hWnd 윈도우 핸들 : 윈도우를 수정, 기타 등등에 필요한 얘
 // hdc (deviceContextHandle) : 모든 출력 담당 
-//
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
@@ -62,8 +61,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     return (int) msg.wParam;
 }
-
-
 
 //
 //  함수: MyRegisterClass()
@@ -129,13 +126,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
-float mousePosX = 0.0f;
-float mousePosY = 0.0f;
+Vector2 mousePos;
 
-HPEN bluePen;
-HPEN redPen;
-HBRUSH blueBrush;
-HBRUSH redBrush;
+
+
+shared_ptr<Program> program;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -143,11 +138,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
     {
-        bluePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
-        redPen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));
-        blueBrush = CreateSolidBrush(RGB(0,0,255));
-        redBrush = CreateSolidBrush(RGB(255, 0, 0));
-
+        program = make_shared<Program>();
+        SetTimer(hWnd, 1, 1, nullptr); //0.01초마다 한번씩 WM_TIMER 메시지 함수가 호출
+        break;
+    }
+    case WM_TIMER:
+    {
+        program->Update();
+        InvalidateRect(hWnd, nullptr, true);
         break;
     }
     case WM_COMMAND:
@@ -169,11 +167,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
      case WM_MOUSEMOVE:
      {
-        mousePosX = static_cast<float>(LOWORD(lParam));
-        mousePosY = static_cast<float>(HIWORD(lParam));
-
-        InvalidateRect(hWnd, nullptr, true);
-
+        mousePos.x = static_cast<float>(LOWORD(lParam));
+        mousePos.y = static_cast<float>(HIWORD(lParam));
         break;
      }
     case WM_PAINT:
@@ -181,26 +176,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            SelectObject(hdc, redBrush);
-            SelectObject(hdc, bluePen);
-            Rectangle(hdc, 100, 100, 300, 300);
-            SelectObject(hdc, blueBrush);
-            Ellipse(hdc, 100, 100, 300, 300);
-
-            SelectObject(hdc, bluePen);
-
-            MoveToEx(hdc, 0, 0, nullptr);             //start
-            LineTo(hdc, mousePosX, mousePosY);        //end
+            program->Render(hdc);
 
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
     {
-        DeleteObject(blueBrush);
-        DeleteObject(redBrush);
-        DeleteObject(bluePen);
-        DeleteObject(redPen);
         PostQuitMessage(0);
     }
         break;
