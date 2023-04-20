@@ -1,10 +1,7 @@
 #include "framework.h"
 #include "PaintScene.h"
 
-PaintScene::PaintScene()
-{
-	
-}
+
 
 PaintScene::~PaintScene()
 {
@@ -12,11 +9,13 @@ PaintScene::~PaintScene()
 
 void PaintScene::Update()
 {
-	mousePos;
-	_circleCollider;
+	Vector2 lerp = LERP(_rectangleCollider->GetCenter(), mousePos, 0.1f);
+	_circleCollider->SetCenter(mousePos);
+	_rectangleCollider->SetCenter(lerp);
 }
 
 void PaintScene::Render(HDC hdc)
 {
 	_circleCollider->Render(hdc);
+	_rectangleCollider->Render(hdc);
 }

@@ -4,7 +4,8 @@ class PaintScene : public Scene
 public:
 	PaintScene()
 	{
-		_circleCollider = CircleCollider();
+		_circleCollider = make_shared<CircleCollider>(mousePos, 50);
+		_rectangleCollider = make_shared<RectangleCollider>(mousePos, 50);
 	}
 	virtual ~PaintScene();
 
@@ -12,7 +13,7 @@ public:
 	virtual void Render(HDC hdc) override;
 
 private:
-	CircleCollider _circleCollider;
-
+	shared_ptr<CircleCollider> _circleCollider;
+	shared_ptr<RectangleCollider> _rectangleCollider;
 };
 

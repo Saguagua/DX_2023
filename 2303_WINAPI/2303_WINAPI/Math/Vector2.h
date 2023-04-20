@@ -32,7 +32,16 @@ public:
 		return result;
 	}
 
-	Vector2 operator*(const int& value)
+	Vector2 operator-(const Vector2& other)
+	{
+		Vector2 result;
+		result.x = this->x - other.x;
+		result.y = this->y - other.y;
+
+		return result;
+	}
+
+	Vector2 operator*(const float& value)
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);

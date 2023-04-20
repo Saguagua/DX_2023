@@ -21,8 +21,12 @@
 #include <algorithm>
 
 using namespace std;
+
+#include "Types.h"
 //Math
 #include "Math/Vector2.h"
+#include "Math/CircleCollider.h"
+#include "Math/RectangleCollider.h"
 
 //Scene
 #include "Scene/Scene.h"
@@ -30,6 +34,6 @@ using namespace std;
 //Program
 #include "Program/Program.h"
 
-#include "Math/CircleCollider.h"
+
 
 extern Vector2 mousePos;
