@@ -23,7 +23,7 @@ public:
 	{
 	}
 
-	Vector2 operator+(const Vector2& other)
+	Vector2 operator+(const Vector2& other) const
 	{
 		Vector2 result;
 		result.x = (*this).x + other.x;
@@ -32,16 +32,16 @@ public:
 		return result;
 	}
 
-	Vector2 operator-(const Vector2& other)
+	Vector2 operator-(const Vector2& other) const
 	{
 		Vector2 result;
-		result.x = this->x - other.x;
+		result.x = (*this).x - other.x;
 		result.y = this->y - other.y;
 
 		return result;
 	}
 
-	Vector2 operator*(const float& value)
+	Vector2 operator*(const float& value)const
 	{
 		Vector2 result;
 		return result = Vector2(this->x * value, this->y * value);
@@ -56,11 +56,17 @@ public:
 	}
 
 
-	float Length() const
+	float Length()const
 	{
 		float result = sqrtf(x * x + y * y);
 
 		return result;
+	}
+	float Distance(const Vector2& other) const
+	{
+		Vector2 result = *this - other;
+
+		return result.Length();
 	}
 
 	float Dot(const Vector2& other) const

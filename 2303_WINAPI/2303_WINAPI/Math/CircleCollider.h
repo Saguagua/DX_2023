@@ -1,22 +1,34 @@
 #pragma once
-class CircleCollider
+class CircleCollider : public enable_shared_from_this<CircleCollider>
 {
 public:
-	CircleCollider() {};
-	CircleCollider(Vector2 v, float radius)
-		:_center(v), _radius(radius)
-	{}
-	~CircleCollider() {};
+	CircleCollider() { CreatePens(); }
+	CircleCollider(float radius, Vector2 center);
+	~CircleCollider();
+
 	void Update();
 	void Render(HDC hdc);
 
-	Vector2 GetCenter() { return _center; }
-	void SetCenter(Vector2 v);
+	void SetCenter(Vector2 pos) { _center = pos; }
+	const Vector2& GetCenter() { return _center; }
 
-	float GetRadius() { return _radius; }
 	void SetRadius(float radius) { _radius = radius; }
+	float GetRadius() { return _radius; }
+
+	bool IsCollision(Vector2 pos);
+	bool IsCollision(shared_ptr<CircleCollider> other);
+	bool IsCollision(shared_ptr<class RectangleCollider> other);
+
+	void SetGreen() { _curPenIdex = 0; }
+	void SetRed() { _curPenIdex = 1; }
+
 private:
-	Vector2 _center = {0,0};
+	void CreatePens();
+
+	int _curPenIdex;
+	vector<HPEN> _pens;
+
 	float _radius = 0.0f;
+	Vector2 _center = { 0.0f,0.0f };
 };
 

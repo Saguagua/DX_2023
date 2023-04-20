@@ -23,17 +23,17 @@
 using namespace std;
 
 #include "Types.h"
-//Math
+
+// Math
 #include "Math/Vector2.h"
+#include "Math/Line.h"
 #include "Math/CircleCollider.h"
 #include "Math/RectangleCollider.h"
 
-//Scene
+// Scene
 #include "Scene/Scene.h"
 
-//Program
+// Program
 #include "Program/Program.h"
-
-
 
 extern Vector2 mousePos;
