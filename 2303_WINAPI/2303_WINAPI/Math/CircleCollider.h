@@ -1,34 +1,27 @@
 #pragma once
-class CircleCollider : public enable_shared_from_this<CircleCollider>
+class CircleCollider : public enable_shared_from_this<CircleCollider>, public Collider
 {
 public:
-	CircleCollider() { CreatePens(); }
-	CircleCollider(float radius, Vector2 center);
-	~CircleCollider();
+	CircleCollider() :Collider(Vector2(0, 0)) 
+	{ _type = Collider::Type::CIRCLE; }
 
-	void Update();
-	void Render(HDC hdc);
+	CircleCollider(float radius, Vector2 center) : _radius(radius), Collider(center) 
+	{ _type = Collider::Type::CIRCLE; }
 
-	void SetCenter(Vector2 pos) { _center = pos; }
-	const Vector2& GetCenter() { return _center; }
+	virtual ~CircleCollider() {};
+
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
 
 	void SetRadius(float radius) { _radius = radius; }
 	float GetRadius() { return _radius; }
 
-	bool IsCollision(Vector2 pos);
-	bool IsCollision(shared_ptr<CircleCollider> other);
-	bool IsCollision(shared_ptr<class RectangleCollider> other);
-
-	void SetGreen() { _curPenIdex = 0; }
-	void SetRed() { _curPenIdex = 1; }
+	bool IsCollision(Vector2 other);
+	virtual bool IsCollision(shared_ptr<CircleCollider> other) override;
+	virtual bool IsCollision(shared_ptr<RectangleCollider> other) override;
 
 private:
-	void CreatePens();
-
-	int _curPenIdex;
-	vector<HPEN> _pens;
-
 	float _radius = 0.0f;
-	Vector2 _center = { 0.0f,0.0f };
+
 };
 

@@ -15,6 +15,11 @@ LineScene::~LineScene()
 void LineScene::Update()
 {
 	_mouseLine->_endPos = mousePos;
+
+	Vector2 floor = Vector2(_floorLine->_endPos - _floorLine->_startPos);
+	Vector2 mouse = Vector2(_mouseLine->_endPos - _mouseLine->_startPos);
+
+	
 }
 
 void LineScene::Render(HDC hdc)

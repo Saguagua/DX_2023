@@ -9,10 +9,10 @@ public:
 	virtual void Render(HDC hdc) override;
 
 private:
-	shared_ptr<CircleCollider> _mouseCircle;
-	shared_ptr<CircleCollider> _circle;
+	shared_ptr<Collider> _mouseCircle;
+	shared_ptr<Collider> _circle;
 
-	shared_ptr<RectangleCollider> _mouseRect;
-	shared_ptr<RectangleCollider> _rect;
+	shared_ptr<Collider> _mouseRect;
+	shared_ptr<Collider> _rect;
 };
 

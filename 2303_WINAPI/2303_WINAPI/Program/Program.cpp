@@ -8,8 +8,8 @@
 Program::Program()
 {
 	// ¾À ¹Ù²Ù±â
-	//_scene = make_shared<LineScene>();
-	_scene = make_shared<PaintScene>();
+	_scene = make_shared<LineScene>();
+	//_scene = make_shared<PaintScene>();
 }
 
 Program::~Program()

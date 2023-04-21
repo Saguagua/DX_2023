@@ -1,26 +1,13 @@
 #include "framework.h"
 #include "CircleCollider.h"
 
-CircleCollider::CircleCollider(float radius, Vector2 center)
-	: _radius(radius)
-	, _center(center)
-{
-	CreatePens();
-}
-
-CircleCollider::~CircleCollider()
-{
-	for (auto pen : _pens)
-		DeleteObject(pen);
-}
 
 void CircleCollider::Update()
-{
-}
+{}
 
 void CircleCollider::Render(HDC hdc)
 {
-	SelectObject(hdc, _pens[_curPenIdex]);
+	SelectObject(hdc, _pens[_penIndex]);
 
 	float left = _center.x - _radius;
 	float right = _center.x + _radius;
@@ -30,28 +17,17 @@ void CircleCollider::Render(HDC hdc)
 	Ellipse(hdc, left, top, right, bottom);
 }
 
-bool CircleCollider::IsCollision(Vector2 pos)
+bool CircleCollider::IsCollision(Vector2 other)
 {
-	float distance = _center.Distance(pos);
-
-	return distance < _radius;
+	return _radius > _center.Distance(other);
 }
 
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-	float distance = _center.Distance(other->_center);
-
-	return distance < (_radius + other->_radius);
+	return _radius + other->GetRadius() > _center.Distance(other->GetCenter());
 }
 
 bool CircleCollider::IsCollision(shared_ptr<RectangleCollider> other)
 {
 	return other->IsCollision(shared_from_this());
-}
-
-void CircleCollider::CreatePens()
-{
-	_curPenIdex = 0;
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, GREEN)); // 0
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, RED));   // 1
 }

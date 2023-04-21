@@ -1,51 +1,25 @@
 #include "framework.h"
 #include "RectangleCollider.h"
 
-RectangleCollider::RectangleCollider()
-{
-	CreatePens();
-}
-
-RectangleCollider::RectangleCollider(Vector2 center, Vector2 size)
-	: _center(center)
-	, _size(size)
-{
-	CreatePens();
-}
 
 void RectangleCollider::Update()
-{
-}
+{}
 
 void RectangleCollider::Render(HDC hdc)
 {
-	SelectObject(hdc, _pens[_curPenIdex]);
-
-	float left = _center.x - _size.x * 0.5f;
-	float right = _center.x + _size.x * 0.5f;
-	float top = _center.y - _size.y * 0.5f;
-	float bottom = _center.y + _size.y * 0.5f;
-
-	Rectangle(hdc, left, top, right, bottom);
-}
-
-bool RectangleCollider::IsCollision(const Vector2& pos)
-{
-	if (pos.x < Right() && pos.x > Left())
-	{
-		if (pos.y < Bottom() && pos.y > Top())
-			return true;
-	}
-
-	return false;
+	SelectObject(hdc, _pens[_penIndex]);
+	Rectangle(hdc, Left(), Top(), Right(), Bottom());
 }
 
 bool RectangleCollider::IsCollision(shared_ptr<RectangleCollider> other)
 {
-	if (Left() > other->Right() || Right() < other->Left())
+	if (Top() > other->Bottom())
 		return false;
-
-	if (Top() > other->Bottom() || Bottom() < other->Top())
+	if (Bottom() < other->Top())
+		return false;
+	if (Left() > other->Right())
+		return false;
+	if (Right() < other->Left())
 		return false;
 
 	return true;
@@ -53,17 +27,32 @@ bool RectangleCollider::IsCollision(shared_ptr<RectangleCollider> other)
 
 bool RectangleCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-	return false;
-}
+	Vector2 otherCenter = other->GetCenter();
+	float otherRadius = other->GetRadius();
+	if (other->GetCenter().x > Left() && other->GetCenter().x < Right()
+		|| other->GetCenter().y < Bottom() && other->GetCenter().y > Top())
+	{
+		if (Top() - otherRadius > otherCenter.y)
+			return false;
+		if (Bottom() + otherRadius < otherCenter.y)
+			return false;
+		if (Left() - otherRadius > otherCenter.x)
+			return false;
+		if (Right() + otherRadius < otherCenter.x)
+			return false;
 
-void RectangleCollider::SetCenter(const Vector2& center)
-{
-	_center = center;
-}
-
-void RectangleCollider::CreatePens()
-{
-	_curPenIdex = 0;
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, GREEN)); // 0
-	_pens.emplace_back(CreatePen(PS_SOLID, 3, RED));   // 1
+		return true;
+	}
+	else
+	{
+		if (other->IsCollision(Vector2(Left(), Top())))
+			return true;
+		if (other->IsCollision(Vector2(Left(), Bottom())))
+			return true;
+		if (other->IsCollision(Vector2(Right(), Top())))
+			return true;
+		if (other->IsCollision(Vector2(Right(), Bottom())))
+			return true;
+		return false;
+	}
 }
