@@ -21,7 +21,7 @@ public:
 	virtual bool IsCollision(shared_ptr<RectangleCollider> other) override;
 
 private:
-	float _radius = 0.0f;
+	float _radius = 50.0f;
 
 };
 

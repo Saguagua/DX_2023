@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
+    <ClInclude Include="Scene\CannonScene.h" />
     <ClInclude Include="Math\Collider.h" />
     <ClInclude Include="Scene\LineScene.h" />
     <ClInclude Include="Math\Line.h" />
@@ -162,12 +163,14 @@
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Object\Tank.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2303_WINAPI.cpp" />
+    <ClCompile Include="Scene\CannonScene.cpp" />
     <ClCompile Include="Math\Collider.cpp" />
     <ClCompile Include="Scene\LineScene.cpp" />
     <ClCompile Include="Math\Line.cpp" />
@@ -187,6 +190,7 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Object\Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2303_WINAPI.rc" />
