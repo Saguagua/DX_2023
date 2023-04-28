@@ -48,19 +48,16 @@ void Tank::Move()
 	{
 		direction.y += _speed;
 	}
-
+	
 	Vector2 current = direction - _center;
-	Vector2 barrel = _barrel->_endPos - _barrel->_startPos;
-	float dot = current.Dot(barrel);
-	float length = current.Length() * barrel.Length();
-	if (length == 0) return;
-
-	float cosine = dot / length;
 	_center = direction;
-	float ceta = acos(cosine);
+	if (current.x == 0 && current.y == 0) return;
 
-	if (ceta == 0.0f)
-		return;
+	
+	_barrelUnit;
+	float dot = current.Unit().Dot(_barrelUnit);
+	float error = dot - (_barrelUnit.Length() * _barrelUnit.Length());
+	if (error < 0.001f && error > -0.001f) return;
 	else
 		_angle -= 0.01f;
 	
