@@ -88,9 +88,10 @@ public:
 		return result;
 	}
 
-	Vector2 Unit()
+	Vector2 Unit() const
 	{
-
+		Vector2 unit = {this->x / Length(), this->y / Length()};
+		return unit;
 	}
 
 public:
