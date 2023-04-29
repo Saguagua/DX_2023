@@ -24,6 +24,7 @@ using namespace std;
 #include "Math/RectangleCollider.h"
 
 // Object
+#include "Object/Bullet.h"
 #include "Object/Tank.h"
 
 // Scene

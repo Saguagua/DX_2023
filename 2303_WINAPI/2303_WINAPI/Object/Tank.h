@@ -7,8 +7,10 @@ public:
 	void Update();
 	void Render(HDC hdc);
 	void Move();
+	void Fire();
 
 private:
+	
 	shared_ptr<CircleCollider> _body;
 	shared_ptr<Line> _barrel;
 	Vector2 _center = {200, 300};
@@ -19,5 +21,8 @@ private:
 	float _barrelLength = 150.0f;
 	Vector2 _barrelUnit;
 
+	Vector2 direction = _center;
+
+	shared_ptr<Bullet> _bullet;
 };
 
