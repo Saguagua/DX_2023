@@ -37,3 +37,4 @@ using namespace std;
 #include "Types.h"
 
 extern Vector2 mousePos;
+extern HWND hWnd;
