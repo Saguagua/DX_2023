@@ -10,3 +10,6 @@
 
 #define RED		 RGB(255,0,0)
 #define GREEN	 RGB(0,255,0)
+#define BLUE	 RGB(0, 0, 255)
+#define GREY	 RGB(100, 100, 100)
+#define DARKGREY RGB(50, 50, 50)

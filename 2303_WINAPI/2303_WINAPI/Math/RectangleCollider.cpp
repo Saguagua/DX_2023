@@ -7,7 +7,7 @@ void RectangleCollider::Update()
 
 void RectangleCollider::Render(HDC hdc)
 {
-	SelectObject(hdc, _pens[_penIndex]);
+	//SelectObject(hdc, _pens[_penIndex]);
 	Rectangle(hdc, Left(), Top(), Right(), Bottom());
 }
 

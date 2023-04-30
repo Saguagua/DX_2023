@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <time.h>
 #include <algorithm>
 
 using namespace std;
@@ -26,6 +27,9 @@ using namespace std;
 // Object
 #include "Object/Bullet.h"
 #include "Object/Tank.h"
+#include "Object/Maze/MazeBlock.h"
+#include "Object/Maze/Maze.h"
+#include "Object/Maze/Player.h"
 
 // Scene
 #include "Scene/Scene.h"
