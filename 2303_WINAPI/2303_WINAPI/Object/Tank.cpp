@@ -6,7 +6,8 @@ Tank::Tank()
 	_body = make_shared<CircleCollider>(50, _center);
 	_barrel = make_shared<Line>(_center, _center + Vector2(_barrelLength, 0.0f));
 	_barrelUnit = (_barrel->_endPos - _barrel->_startPos).Unit();
-	_bullet = make_shared<Bullet>();
+	for (int i = 0; i < 30; i++)
+		_bullets.push_back(make_shared<Bullet>());
 }
 
 Tank::~Tank()
@@ -16,18 +17,20 @@ Tank::~Tank()
 void Tank::Update()
 {
 	Move();
-	Fire();
 	_body->SetCenter(_center);
 	_barrel->_startPos = _center;
 	_barrel->_endPos = _center + (_barrelUnit * _barrelLength);
-	_bullet->Update();
+	Fire();
+	for (auto bullet : _bullets)
+		bullet->Update();
 }
 
 void Tank::Render(HDC hdc)
 {
 	_barrel->Render(hdc);
 	_body->Render(hdc);
-	_bullet->Render(hdc);
+	for (auto bullet : _bullets)
+		bullet->Render(hdc);
 }
 
 void Tank::Move()
@@ -67,9 +70,36 @@ void Tank::Move()
 
 void Tank::Fire()
 {
-	if (GetAsyncKeyState(VK_SPACE))
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		_bullet->SetPos(_barrel->_endPos);
-		_bullet->SetDirection(_barrelUnit);
+		_spacePress = true;
+		_spaceUp = false;
 	}
+	else
+		_spaceUp = true;
+
+	if (_spacePress && _spaceUp)
+	{
+		shared_ptr<Bullet> bullet = SetBullet();
+		if (bullet == nullptr) return;
+		bullet->SetPos(_barrel->_endPos);
+		bullet->SetDirection(_barrelUnit);
+
+		_spacePress = false;
+		_spaceUp = false;
+	}
+}
+
+shared_ptr<Bullet> Tank::SetBullet()
+{
+	for (auto bullet : _bullets)
+	{
+		if (!bullet->IsActive())
+		{
+			bullet->SetActive(true);
+			return bullet;
+		}
+	}
+
+	return nullptr;
 }

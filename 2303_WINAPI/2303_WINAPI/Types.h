@@ -1,6 +1,10 @@
 #pragma once
 
+#define WIN_WIDTH 1280
+#define WIN_HEIGHT 720
+
 #define PI 3.141592
+#define GRAVITY 0.07f
 
 #define LERP(s,e,t) s + (e - s)*t
 

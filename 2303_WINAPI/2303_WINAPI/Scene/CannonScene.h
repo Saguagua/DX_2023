@@ -8,5 +8,7 @@ public:
 
 private:
 	shared_ptr<Tank>tank;
+	shared_ptr<CircleCollider>circle;
+	//shared_ptr<Tank>tank2;
 };
 

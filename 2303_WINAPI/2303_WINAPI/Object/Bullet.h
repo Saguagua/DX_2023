@@ -10,12 +10,19 @@ public:
 
 	void SetPos(Vector2 pos) { _pos = pos; }
 	void SetDirection(Vector2 direction) { _direction = direction; }
-	void Move() { _pos += _direction.Unit() * _speed; }
+	void Move();
+
+	bool IsActive() { return _isActive; }
+	void SetActive(bool active) { _isActive = active; }
+
+	bool AttackObject(shared_ptr<Collider> object);
+	
 private:
-	shared_ptr<CircleCollider> _collision;
+	shared_ptr<Collider> _collision;
 	Vector2 _pos = Vector2(300, 300);
 	Vector2 _direction = Vector2();
 
-	float _speed = 20.0f;
+	bool _isActive = false;
+	float _speed = 2.0f;
 };
 
