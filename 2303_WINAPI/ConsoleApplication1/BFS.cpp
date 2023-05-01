@@ -65,9 +65,14 @@ void BFS(int here)
 
 		for (int there = 0; there < adjacent.size(); there++)
 		{
-			
 			if (discovered[there] == true)
 				continue;
+			if (adjacent[here][there] == true)
+			{
+				q.push(adjacent[here][there]);
+				discovered[there] = true;
+				parent[there] = here;
+			}
 		}
 	}
 }

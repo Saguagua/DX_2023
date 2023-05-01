@@ -8,11 +8,15 @@ MazeBlock::MazeBlock()
 	HBRUSH able = CreateSolidBrush(GREEN);
 	HBRUSH end = CreateSolidBrush(BLUE);
 	HBRUSH player = CreateSolidBrush(GREY);
+	HBRUSH current = CreateSolidBrush(WHITE);
+	HBRUSH shortCut = CreateSolidBrush(BLACK);
 
 	_brushes.push_back(disable);
 	_brushes.push_back(able);
 	_brushes.push_back(end);
 	_brushes.push_back(player);
+	_brushes.push_back(current);
+	_brushes.push_back(shortCut);
 }
 
 MazeBlock::~MazeBlock()

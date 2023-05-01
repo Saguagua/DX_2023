@@ -14,6 +14,8 @@ public:
 	Vector2 EndPos() { return Vector2((int)_mazeWidth - 2, (int)_mazeHeight - 2); }
 
 	shared_ptr<MazeBlock> GetBlock(int x, int y) { return _blocks[y][x]; }
+	int GetWidth() { return _mazeWidth; }
+	int GetHeight() { return _mazeHeight; }
 
 private:
 	vector<vector<shared_ptr<MazeBlock>>> _blocks;

@@ -8,6 +8,8 @@ public:
 		ABLE,
 		END,
 		PLAYER,
+		CURRENT,
+		SHORTCUT,
 		NONE
 	};
 
