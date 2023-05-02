@@ -35,7 +35,6 @@ using namespace std;
 // Scene
 #include "Scene/Scene.h"
 
-
 // Program
 #include "Program/Program.h"
 
