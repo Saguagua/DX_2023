@@ -9,7 +9,10 @@ Player::Player(shared_ptr<Maze> maze)
 		_startPos = _maze.lock()->StartPos();
 		_endPos = _maze.lock()->EndPos();
 		_maze.lock()->GetBlock(_startPos.x, _startPos.y)->SetType(MazeBlock::BlockType::PLAYER);
-		BFS(_startPos);
+		int height = _maze.lock()->GetHeight();
+		int width = _maze.lock()->GetWidth();
+		_discovered = vector<vector<bool>>(height, vector<bool>(width, false));
+		DFS(_startPos);
 	}
 	
 }
@@ -41,11 +44,7 @@ void Player::Update()
 
 void Player::BFS(Vector2 startPos)
 {
-	int height = _maze.lock()->GetHeight();
-	int width = _maze.lock()->GetHeight();
-
-	_discovered = vector<vector<bool>>(height, vector<bool>(width, false));
-	_parent = vector<vector<Vector2>>(height, vector<Vector2>(width, Vector2(-1, -1)));
+	_parent = vector<vector<Vector2>>(_maze.lock()->GetHeight(), vector<Vector2>(_maze.lock()->GetWidth(), Vector2(-1, -1)));
 
 	_discovered[_startPos.y][_startPos.x] = true;
 	_parent[_startPos.y][_startPos.x] = Vector2(_startPos.x, _startPos.y);
@@ -53,14 +52,6 @@ void Player::BFS(Vector2 startPos)
 	queue<Vector2> q;
 	q.push(startPos);
 	_path.push_back(startPos);
-
-	Vector2 frontPos[4] =
-	{
-		Vector2 {0, -1}, // UP
-		Vector2 {-1, 0}, // LEFT
-		Vector2 {0, 1}, // DOWN
-		Vector2 {1, 0} // RIGHT
-	};
 
 	while (true)
 	{
@@ -94,6 +85,26 @@ void Player::BFS(Vector2 startPos)
 		direction = _parent[direction.y][direction.x];
 		_maze.lock()->GetBlock(direction.x, direction.y)->SetType(MazeBlock::BlockType::SHORTCUT);
 	}
+
+}
+
+void Player::DFS(Vector2 startPos)
+{
+	_discovered[startPos.y][startPos.x] = true;
+	if (startPos == _endPos) return;
+	
+	for (int i = 0; i < 4; i++)
+	{
+		Vector2 newDirection = startPos + frontPos[i];
+		if (_discovered[newDirection.y][newDirection.x])
+			continue;
+		if (Cango(newDirection))
+		{
+			_path.push_back(newDirection);
+			DFS(newDirection);
+		}
+	}
+
 
 }
 
