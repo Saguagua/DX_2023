@@ -16,7 +16,7 @@ Player::Player(shared_ptr<Maze> maze)
 		_parent = vector<vector<Vector2>>(height, vector<Vector2>(width, Vector2(-1, -1)));
 		_best = vector<vector<int>>(height, vector<int>(width, INT_MAX));
 
-		Dijkstra(_startPos);
+		//Astar();
 	}
 }
 
@@ -173,6 +173,62 @@ void Player::Dijkstra(Vector2 startPos)
 			break;
 		_stack.push(root);
 		root = _parent[root.y][root.x];
+	}
+}
+
+void Player::Astar()
+{
+	int weights[8] = {10, 10, 10, 10, 14, 14, 14, 14};
+
+	priority_queue<Vertex2, vector<Vertex2>, greater<Vertex2>> pq;
+
+	Vertex2 startV;
+	startV.pos = _startPos;
+	startV.g = 0;
+	startV.h = _startPos.ManhettenDistance(_endPos) * 10;
+	startV.f = startV.g + startV.h;
+
+	pq.push(startV);
+	_discovered[_startPos.y][_startPos.x] = true;
+	_best[_startPos.y][_startPos.x] = startV.f;
+	_parent[_startPos.y][_startPos.x] = _startPos;
+	while (true)
+	{
+		if (pq.empty())
+			break;
+		Vertex2 hereV = pq.top();
+		int hereG = hereV.g;
+		int hereH = hereV.h;
+		int hereF = hereV.f;
+
+		pq.pop();
+		if (hereV.pos == _endPos)
+			break;
+
+		for (int i = 0; i < 8; i++)
+		{
+			Vector2 there = hereV.pos + frontPos[i];
+			
+			if (Cango(there))
+				continue;
+			int newG = hereG + weights[i];
+			int newH = there.ManhettenDistance(_endPos) * 10;
+			int newF = newG + newH;
+
+			if (_best[there.y][there.x] < newF)
+				continue;
+
+				Vertex2 thereV;
+				thereV.pos = there;
+				thereV.g = newG;
+				thereV.h = newH;
+				thereV.f = newF;
+
+				pq.push(thereV);
+				_best[there.y][there.x] = newF;
+				_discovered[there.y][there.x] = true;
+				_parent[there.y][there.x] = hereV.pos;
+		}
 	}
 }
 

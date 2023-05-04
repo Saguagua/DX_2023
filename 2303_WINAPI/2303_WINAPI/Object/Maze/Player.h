@@ -10,6 +10,7 @@ public:
 	void BFS(Vector2 startPos);
 	void DFS(Vector2 startPos);
 	void Dijkstra(Vector2 startPos);
+	void Astar();
 
 	bool Cango(Vector2 pos);
 private:
@@ -22,6 +23,23 @@ private:
 	vector<Vector2> _path;
 	int _pathIndex = 0;
 	stack<Vector2> _stack;
+	struct Vertex2
+	{
+		Vector2 pos;
+		int g;
+		int h;
+		int f;
+
+		bool operator<(const Vertex2& other) const
+		{
+			return f < other.f;
+		}
+
+		bool operator>(const Vertex2& other) const
+		{
+			return f > other.f;
+		}
+	};
 
 	struct Vertex
 	{
