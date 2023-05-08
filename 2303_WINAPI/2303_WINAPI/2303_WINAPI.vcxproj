@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2303_WINAPI.h" />
+    <ClInclude Include="Math\DisjointSet.h" />
     <ClInclude Include="Object\Maze\Player.h" />
     <ClInclude Include="Scene\MazeScene.h" />
     <ClInclude Include="Object\Maze\MazeBlock.h" />

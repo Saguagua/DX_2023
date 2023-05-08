@@ -18,7 +18,7 @@ Maze::Maze()
 		}
 	}
 
-	CreateMaze();
+	CreateMaze_Kruskal();
 }
 
 Maze::~Maze()
@@ -86,4 +86,64 @@ void Maze::CreateMaze()
 	}
 
 	_blocks[_mazeHeight - 2][_mazeWidth - 2]->SetType(MazeBlock::BlockType::END);
+}
+
+void Maze::CreateMaze_Kruskal()
+{
+
+	for (int i = 0; i < _mazeHeight; i++)
+	{
+		for (int j = 0; j < _mazeWidth; j++)
+		{
+			if (i % 2 == 0 || j % 2 == 0)
+				continue;
+			_blocks[i][j]->SetType(MazeBlock::BlockType::ABLE);
+		}
+	}
+
+	for (int i = 0; i < _mazeHeight; i++)
+	{
+		for (int j = 0; j < _mazeWidth; j++)
+		{
+			if (i % 2 == 0 || j % 2 == 0)
+				continue;
+			_blocks[i][j]->SetType(MazeBlock::BlockType::ABLE);
+		}
+	}
+
+	for (int i = 1; i < _mazeHeight; i+=2)
+	{
+		for (int j = 1; j < _mazeWidth; j+=2)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Vector2 nextBlock = Vector2(i, j) + frontPos[i];
+				if (nextBlock.x >= _mazeWidth || nextBlock.y >= _mazeHeight)
+					continue;
+				Edge edge;
+				edge.u = Vector2(i, j);
+				edge.v = nextBlock;
+				edge.cost = rand() % 10000;
+				edges.push_back(edge);
+			}
+		}
+	}
+
+	std::sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b)->bool
+	{
+		return a.cost < b.cost;
+	}
+	);
+
+	DisJointSet sets(25, 25);
+
+	for (auto edge : edges)
+	{
+		if (sets.FindLeader(edge.u) == sets.FindLeader(edge.v))
+			continue;
+
+		sets.Merge(edge.vertexU, edge.vertexV);
+		result.push_back(edge);
+	}
+
 }

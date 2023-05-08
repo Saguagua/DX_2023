@@ -21,6 +21,7 @@ using namespace std;
 
 // Math
 #include "Math/Vector2.h"
+#include "Math/DisjointSet.h"
 #include "Math/Collider.h"
 #include "Math/Line.h"
 #include "Math/CircleCollider.h"
