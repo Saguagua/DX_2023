@@ -115,15 +115,20 @@ void Maze::CreateMaze_Kruskal()
 	{
 		for (int j = 1; j < _mazeWidth; j+=2)
 		{
-			for (int i = 0; i < 4; i++)
+			Edge edge;
+			if (i < _mazeHeight - 2)
 			{
-				Vector2 nextBlock = Vector2(i, j) + frontPos[i];
-				if (nextBlock.x >= _mazeWidth || nextBlock.y >= _mazeHeight)
-					continue;
-				Edge edge;
-				edge.u = Vector2(i, j);
-				edge.v = nextBlock;
-				edge.cost = rand() % 10000;
+				edge.u = Vector2(j, i);
+				edge.v = Vector2(j, i + 2);
+				edge.cost = rand() % 1000;
+				edges.push_back(edge);
+			}
+
+			if (j < _mazeWidth - 2)
+			{
+				edge.u = Vector2(j, i);
+				edge.v = Vector2(j + 2, i);
+				edge.cost = rand() % 1000;
 				edges.push_back(edge);
 			}
 		}
@@ -135,15 +140,19 @@ void Maze::CreateMaze_Kruskal()
 	}
 	);
 
-	DisJointSet sets(25, 25);
+	DisJointSet sets(_mazeHeight * _mazeWidth);
 
-	for (auto edge : edges)
+	for (const auto& edge : edges)
 	{
-		if (sets.FindLeader(edge.u) == sets.FindLeader(edge.v))
+		int uIndex = edge.u.x + edge.u.y * _mazeHeight;
+		int vIndex = edge.v.x + edge.v.y * _mazeHeight;
+		if (sets.FindLeader(uIndex) == sets.FindLeader(vIndex))
 			continue;
 
-		sets.Merge(edge.vertexU, edge.vertexV);
-		result.push_back(edge);
-	}
+		sets.Merge(uIndex, vIndex);
+		int x = (edge.u.x + edge.v.x) / 2;
+		int y = (edge.u.y + edge.v.y) / 2;
 
+		_blocks[y][x]->SetType(MazeBlock::BlockType::ABLE);
+	}
 }

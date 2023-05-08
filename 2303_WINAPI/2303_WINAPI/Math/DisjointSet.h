@@ -1,51 +1,45 @@
 #pragma once
 #include <framework.h>
-
 class DisJointSet
 {
 public:
-	DisJointSet(int height, int width)
+	DisJointSet(int n)
 	{
-		_parent.resize(height);
-		_rank.resize(height);
+		_parent.resize(n);
+		_rank.resize(n, 1);
 
-		for (int i = 0; i < height; i++)
+		for (int i = 0; i < n; i++)
 		{
-			_parent[i].reserve(width);
-			_rank[i].reserve(width);
-			for (int j = 0; j < width; j++)
-			{
-				_parent[i][j] = Vector2(j, i);
-				_rank[i][j] = 1;
-			}
+			_parent[i] = i;
 		}
 	}
 
-	Vector2 FindLeader(Vector2 u)
+	int FindLeader(int u)
 	{
-		if (u == _parent[u.y][u.x])
+		if (u == _parent[u])
 			return u;
-		Vector2 parent = _parent[u.y][u.x];
+		int parent = _parent[u];
 
 		return FindLeader(parent);
 	}
 
-	void Merge(Vector2 u, Vector2 v)
+	void Merge(int u, int v)
 	{
-		Vector2 uLeader = FindLeader(u);
-		Vector2 vLeader = FindLeader(v);
+		int uLeader = FindLeader(u);
+		int vLeader = FindLeader(v);
 
 		if (uLeader == vLeader)
 			return;
-		if (_rank[vLeader.y][vLeader.x] > _rank[uLeader.y][uLeader.x])
+		if (_rank[vLeader] > _rank[uLeader])
 			std::swap(uLeader, vLeader);
 
-		_parent[vLeader.y][vLeader.x] = uLeader;
+		_parent[vLeader] = uLeader;
 
-		if (_rank[uLeader.y][uLeader.x] == _rank[vLeader.y][vLeader.x])
-			_rank[uLeader.y][uLeader.x]++;
+		if (_rank[uLeader] == _rank[vLeader])
+			_rank[uLeader]++;
 	}
+
 private:
-	vector<vector<Vector2>> _parent;
-	vector<vector<int>> _rank;
+	vector<int> _parent;
+	vector<int> _rank;
 };
