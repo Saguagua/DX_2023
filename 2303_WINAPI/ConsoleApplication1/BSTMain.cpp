@@ -19,7 +19,12 @@ int main()
 	Node* a6 = bst.search(bst._root, 6);
 	Node* b = bst.Max(bst._root);
 	Node* c = bst.Min(bst._root);
-	Node* d = bst.Next(bst._root);
+	Node* d1 = bst.Next(a1);
+	Node* d2 = bst.Next(a2);
+	Node* d3 = bst.Next(a3);
+	Node* d4 = bst.Next(a4);
+	Node* d5 = bst.Next(a5);
+	Node* d6 = bst.Next(a6);
 	Node* e1 = bst.Previous(a1);
 	Node* e2 = bst.Previous(a2);
 	Node* e3 = bst.Previous(a3);
@@ -30,6 +35,6 @@ int main()
 	cout << "bst.search(bst._root, 5) ->" << a1->key << endl;
 	cout << "bst.Max(bst._root) ->" << b->key << endl;
 	cout << "bst.Min(bst._root) ->" << c->key << endl;
-	cout << "bst.Next(bst._root) ->" << d->key << endl;
+	cout << "bst.Next(bst._root) ->" << d1->key << endl;
 	cout << "bst.Previous(a)" << e1->key << endl;
 }

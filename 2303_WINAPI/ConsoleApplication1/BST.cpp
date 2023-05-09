@@ -112,13 +112,10 @@ Node* BST::Previous(Node* node)
 				return nullptr;
 			if (current->key < node->key)
 				return current;
-			if (current->left->key < node->key)
-				break;
-			
 		}
 	}
-	else
-		current = current->left;
+	
+	current = current->left;
 
 	while (true)
 	{
@@ -139,12 +136,17 @@ Node* BST::Next(Node* node)
 
 	if (current->right == nullptr)
 	{
-		current = current->parent;
-		if (current->right->key == node->key)
-			return nullptr;
+		while (true)
+		{
+			current = current->parent;
+			if (current == nullptr)
+				return nullptr;
+			if (current->key > node->key)
+				return current;
+		}
 	}
-	else
-		current = current->right;
+	
+	current = current->right;
 
 	while (true)
 	{
