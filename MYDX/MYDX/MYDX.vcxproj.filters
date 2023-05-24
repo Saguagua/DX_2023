@@ -51,5 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\tutorialShader.hlsl" />
+    <FxCompile Include="Shader\TextureShaderVS.hlsl" />
+    <FxCompile Include="Shader\TextureShaderPS.hlsl" />
   </ItemGroup>
 </Project>
