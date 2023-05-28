@@ -147,6 +147,7 @@
     <ClInclude Include="DXTutorial.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
+    <ClInclude Include="Framework\Render\IndexBuffer.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
@@ -166,6 +167,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">framework.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
     <ClCompile Include="Object\BasicObject\Quad.cpp" />
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />

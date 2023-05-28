@@ -13,8 +13,10 @@ public:
 
 private:
 	vector<Vertex> _vertices;
-	
+	vector<int> _indexies;
+
 	shared_ptr<VertexBuffer> _vertexBuffer;
+	shared_ptr<IndexBuffer> _indexBuffer;
 	shared_ptr<VertexShader> _vertexShader;
 	shared_ptr<PixelShader> _pixelShader;
 

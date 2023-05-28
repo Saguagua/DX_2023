@@ -46,6 +46,7 @@ using namespace Microsoft::WRL;
 //Render
 #include "Framework/Render/VertexLayout.h"
 #include "Framework/Render/VertexBuffer.h"
+#include "Framework/Render/IndexBuffer.h"
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 //TextureMapping
