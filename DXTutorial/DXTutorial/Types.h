@@ -5,3 +5,5 @@
 
 #define DEVICE Device::GetInstance()->GetDevice()
 #define DEVICECONTEXT Device::GetInstance()->GetContext()
+
+#define WINTER L"Resource/Texture/Winter.png"

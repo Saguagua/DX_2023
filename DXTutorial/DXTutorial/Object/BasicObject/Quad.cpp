@@ -9,6 +9,8 @@ Quad::Quad()
 
 Quad::Quad(wstring path)
 {
+	CreateTextureVertices(path);
+	CreateTextureData(path);
 }
 
 void Quad::Update()
@@ -25,7 +27,22 @@ void Quad::Render()
 	_vertexShader->Set_VertexShader();
 	_pixelShader->Set_PixelShader();
 
-	//DEVICECONTEXT->Draw(3, 0);
+	DEVICECONTEXT->DrawIndexed(_indexies.size(), 0, 0);
+}
+
+void Quad::TextureRender()
+{
+	_vertexBuffer->SetIA_VertexBuffer();
+	_indexBuffer->SetIA_IndexBuffer();
+	_vertexShader->SetIA_InputLayout();
+	DEVICECONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	_srv->SetSRV();
+	_sampler->SetSampler();
+
+	_vertexShader->Set_VertexShader();
+	_pixelShader->Set_PixelShader();
+
 	DEVICECONTEXT->DrawIndexed(_indexies.size(), 0, 0);
 }
 
@@ -36,18 +53,22 @@ void Quad::CreateVertices()
 	Vertex v;
 	v.pos = { -0.5f, 0.5f, 0.0f };        //¿Þ À§
 	v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
+	v.uv = {-1.0f, -1.0f};
 	_vertices.push_back(v);
 
 	v.pos = { 0.5f, 0.5f, 0.0f };         //¿À À§
 	v.color = { 0.0f, 1.0f, 0.0f, 1.0f };
+	v.uv = { -1.0f, -1.0f };
 	_vertices.push_back(v);
 
 	v.pos = { 0.5f, -0.5f, 0.0f };        //¿À ¾Æ
 	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+	v.uv = { -1.0f, -1.0f };
 	_vertices.push_back(v);
 
 	v.pos = { -0.5f, -0.5f, 0.0f };       //¿Þ ¾Æ
 	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+	v.uv = { -1.0f, -1.0f };
 	_vertices.push_back(v);
 
 	_indexies.push_back(0);
@@ -64,4 +85,46 @@ void Quad::CreateData()
 	_indexBuffer = make_shared<IndexBuffer>(_indexies.data(), _indexies.size());
 	_vertexShader = make_shared<VertexShader>();
 	_pixelShader = make_shared<PixelShader>();
+}
+
+void Quad::CreateTextureVertices(wstring path)
+{
+	Vertex v;
+	v.pos = { -0.5f, 0.5f, 0.0f };        //¿Þ À§
+	v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
+	v.uv = { 0.0f, 0.0f };
+	_vertices.push_back(v);
+
+	v.pos = { 0.5f, 0.5f, 0.0f };         //¿À À§
+	v.color = { 0.0f, 1.0f, 0.0f, 1.0f };
+	v.uv = { 1.0f, 0.0f };
+	_vertices.push_back(v);
+
+	v.pos = { 0.5f, -0.5f, 0.0f };        //¿À ¾Æ
+	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+	v.uv = { 1.0f, 1.0f };
+	_vertices.push_back(v);
+
+	v.pos = { -0.5f, -0.5f, 0.0f };       //¿Þ ¾Æ
+	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+	v.uv = { 0.0f, 1.0f };
+	_vertices.push_back(v);
+
+	_indexies.push_back(0);
+	_indexies.push_back(1);
+	_indexies.push_back(2);
+	_indexies.push_back(0);
+	_indexies.push_back(2);
+	_indexies.push_back(3);
+}
+
+void Quad::CreateTextureData(wstring path)
+{
+	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
+	_indexBuffer = make_shared<IndexBuffer>(_indexies.data(), _indexies.size());
+	_vertexShader = make_shared<VertexShader>();
+	_pixelShader = make_shared<PixelShader>();
+
+	_srv = make_shared<SRV>(path);
+	_sampler = make_shared<SamplerState>();
 }

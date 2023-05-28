@@ -22,11 +22,14 @@ void Device::Clear()
 	FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
 
 	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), clearColor);
+	//렌더 타겟을 원하는 색상으로 초기화
 }
 
 void Device::Present()
 {
 	_swapChain->Present(0, 0);
+	//1. 수직 동기화 간격, 0이면 즉시 그리기
+	//2. present 동작에 대한 플래그를 지정
 }
 
 //디바이스, 컨텍스트, 스왑체인 생성하는 함수

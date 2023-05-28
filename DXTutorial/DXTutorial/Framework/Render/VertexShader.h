@@ -3,10 +3,12 @@ class VertexShader
 {
 public:
 	VertexShader();
+	VertexShader(wstring path);
 	~VertexShader();
 
 	void CreateBlob();
 	void CreateInputLayout();
+	void CreateTextureInputLayout();
 	void CreateVertexShader();
 
 	void SetIA_InputLayout();

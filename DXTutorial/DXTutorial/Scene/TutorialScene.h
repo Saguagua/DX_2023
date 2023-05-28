@@ -11,6 +11,7 @@ public:
 
 private:
 	shared_ptr<Quad> _quad;
+	shared_ptr<Line> _line;
 
 	float _x = 0.0f;
 	float _y = 0.0f;

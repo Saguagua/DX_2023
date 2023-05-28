@@ -148,9 +148,12 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
+    <ClInclude Include="Object\BasicObject\Line.h" />
     <ClInclude Include="Program\Program.h" />
+    <ClInclude Include="TextureMapping\SamplerState.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
+    <ClInclude Include="TextureMapping\SRV.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Framework\Render\VertexLayout.h" />
     <ClInclude Include="Object\BasicObject\Quad.h" />
@@ -168,13 +171,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Object\BasicObject\Line.cpp" />
     <ClCompile Include="Object\BasicObject\Quad.cpp" />
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
     <ClCompile Include="Program\Program.cpp" />
+    <ClCompile Include="TextureMapping\SamplerState.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />
+    <ClCompile Include="TextureMapping\SRV.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DXTutorial.rc" />

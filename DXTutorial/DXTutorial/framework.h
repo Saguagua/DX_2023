@@ -49,10 +49,14 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/IndexBuffer.h"
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
+
 //TextureMapping
+#include "TextureMapping/SamplerState.h"
+#include "TextureMapping/SRV.h"
 
 //Obj
 #include "Object/BasicObject/Quad.h"
+#include "Object/BasicObject/Line.h"
 
 //Scene
 #include "Scene/Scene.h"
