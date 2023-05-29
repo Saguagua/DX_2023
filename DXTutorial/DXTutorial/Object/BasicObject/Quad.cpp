@@ -90,29 +90,30 @@ void Quad::CreateData()
 void Quad::CreateTextureVertices(wstring path)
 {
 	Vertex v;
-	v.pos = { -0.5f, 0.5f, 0.0f };        //왼 위
+	v.pos = { 0.0f, 250.0f, 0.0f }; // 왼쪽 위
 	v.color = { 1.0f, 0.0f, 0.0f, 1.0f };
 	v.uv = { 0.0f, 0.0f };
 	_vertices.push_back(v);
 
-	v.pos = { 0.5f, 0.5f, 0.0f };         //오 위
+	v.pos = { 250.0f, 250.0f, 0.0f }; // 오른쪽 위
 	v.color = { 0.0f, 1.0f, 0.0f, 1.0f };
 	v.uv = { 1.0f, 0.0f };
 	_vertices.push_back(v);
 
-	v.pos = { 0.5f, -0.5f, 0.0f };        //오 아
+	v.pos = { 250.0f, 0.0f, 0.0f }; // 오른쪽 아래
 	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
-	v.uv = { 1.0f, 1.0f };
+	v.uv = { 1.0, 1.0f };
 	_vertices.push_back(v);
 
-	v.pos = { -0.5f, -0.5f, 0.0f };       //왼 아
-	v.color = { 0.0f, 0.0f, 1.0f, 1.0f };
+	v.pos = { 0.0f, 0.0f, 0.0f }; // 왼쪽 아래
+	v.color = { 0.0f, 0.0f, 0.0f, 1.0f };
 	v.uv = { 0.0f, 1.0f };
 	_vertices.push_back(v);
 
 	_indexies.push_back(0);
 	_indexies.push_back(1);
 	_indexies.push_back(2);
+
 	_indexies.push_back(0);
 	_indexies.push_back(2);
 	_indexies.push_back(3);

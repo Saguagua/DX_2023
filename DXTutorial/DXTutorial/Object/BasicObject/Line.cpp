@@ -15,12 +15,12 @@ void Line::CreateVertex()
 {
 	Vertex v;
 
-	v.pos = {0.0f, 1.0f, 0.0f};
+	v.pos = {100.0f, 0.0f, 0.0f};
 	v.color = {1.0f, 0.0f, 1.0f, 1.0f };
 	v.uv = { -1.0f, -1.0f };
 	_vertices.push_back(v);
 
-	v.pos = { 0.0f, -1.0f, 0.0f };
+	v.pos = { 100.0f, WIN_HEIGHT, 0.0f };
 	v.color = {1.0f, 0.0f, 1.0f, 1.0f };
 	v.uv = { -1.0f, -1.0f };
 	_vertices.push_back(v);
