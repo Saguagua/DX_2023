@@ -5,6 +5,8 @@ public:
 	Quad();
 	Quad(wstring path);
 
+	void Init();
+
 	void Update();
 	void Render();
 
@@ -16,7 +18,15 @@ public:
 	void CreateTextureVertices(wstring path);
 	void CreateTextureData(wstring path);
 
+	void Scale(Vector2<float> other);
+	void Rotate(float angle);
+	void Translate(Vector2<float> other);
+
+	void ShapeChange(vector<Vertex>* other);
+	void DrawChange(vector<int>* other);
+
 private:
+	shared_ptr<Transform> _transform = make_shared<Transform>();
 	vector<Vertex> _vertices;
 	vector<int> _indexies;
 
@@ -27,5 +37,6 @@ private:
 
 	shared_ptr<SRV> _srv;
 	shared_ptr<SamplerState> _sampler;
+
 };
 

@@ -10,7 +10,6 @@ public:
 	virtual void Render() override;
 
 private:
-	void InputCheck();
 
 	shared_ptr<Quad> _quad;
 	//shared_ptr<Line> _line;
