@@ -26,5 +26,5 @@ void SamplerState::CreateSampler()
 
 void SamplerState::SetSampler(UINT slot)
 {
-    DEVICECONTEXT->PSSetSamplers(0, 1, _samplerState.GetAddressOf());
+    DEVICECONTEXT->PSSetSamplers(slot, 1, _samplerState.GetAddressOf());
 }

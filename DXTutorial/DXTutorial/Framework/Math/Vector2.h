@@ -34,7 +34,7 @@ public:
 		x = other.x;
 		y = other.y;
 
-		return this;
+		return *this;
 	}
 
 	Vector2<T> operator+=(const Vector2<T>& other)

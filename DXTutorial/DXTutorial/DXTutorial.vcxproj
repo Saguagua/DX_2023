@@ -151,7 +151,10 @@
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
     <ClInclude Include="Object\BasicObject\Line.h" />
+    <ClInclude Include="Object\Obj\Planet.h" />
+    <ClInclude Include="Scene\SolarSystemScene.h" />
     <ClInclude Include="Program\Program.h" />
+    <ClInclude Include="Object\BasicObject\Square.h" />
     <ClInclude Include="TextureMapping\SamplerState.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
@@ -181,7 +184,10 @@
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
+    <ClCompile Include="Object\Obj\Planet.cpp" />
+    <ClCompile Include="Scene\SolarSystemScene.cpp" />
     <ClCompile Include="Program\Program.cpp" />
+    <ClCompile Include="Object\BasicObject\Square.cpp" />
     <ClCompile Include="TextureMapping\SamplerState.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />

@@ -13,6 +13,10 @@ public:
 	void AddScale(Vector2<float> scale);
 	void AddAngle(float angle);
 
+	void SetPos(Vector2<float> pos);
+	void SetScale(Vector2<float> scale);
+	void SetAngle(float angle);
+
 
 private:
 	Vector2<float> _pos = {0.0f, 0.0f};

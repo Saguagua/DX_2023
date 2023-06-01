@@ -47,6 +47,7 @@ using namespace Microsoft::WRL;
 //Framework
 #include "Framework/Device/Device.h"
 
+
 //Render
 #include "Framework/Render/ConstantBuffer.h"
 #include "Framework/Render/GlobalBuffer.h"
@@ -56,6 +57,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
 
+
 //TextureMapping
 #include "TextureMapping/SamplerState.h"
 #include "TextureMapping/SRV.h"
@@ -63,6 +65,7 @@ using namespace Microsoft::WRL;
 //Obj
 #include "Object/BasicObject/Quad.h"
 #include "Object/BasicObject/Line.h"
+#include "Object/Obj/Planet.h"
 
 //Scene
 #include "Scene/Scene.h"

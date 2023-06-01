@@ -2,8 +2,8 @@
 class Quad
 {
 public:
-	Quad();
-	Quad(wstring path);
+	Quad(UINT slot = 0);
+	Quad(wstring path, UINT slot = 0);
 
 	void Init();
 
@@ -15,17 +15,14 @@ public:
 	void CreateVertices();
 	void CreateData();
 
-	void CreateTextureVertices(wstring path);
+	void CreateTextureVertices();
 	void CreateTextureData(wstring path);
 
-	void Scale(Vector2<float> other);
-	void Rotate(float angle);
-	void Translate(Vector2<float> other);
-
-	void ShapeChange(vector<Vertex>* other);
-	void DrawChange(vector<int>* other);
+	shared_ptr<Transform> GetTransform();
 
 private:
+	int _slot = 0;
+
 	shared_ptr<Transform> _transform = make_shared<Transform>();
 	vector<Vertex> _vertices;
 	vector<int> _indexies;

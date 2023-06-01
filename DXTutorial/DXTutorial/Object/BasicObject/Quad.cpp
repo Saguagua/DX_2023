@@ -1,30 +1,28 @@
 #include "framework.h"
 #include "Quad.h"
 
-Quad::Quad()
+Quad::Quad(UINT slot)
+	:_slot(slot)
 {
 	CreateVertices();
 	CreateData();
 	Init();
 }
 
-Quad::Quad(wstring path)
+Quad::Quad(wstring path, UINT slot)
+	:_slot(slot)
 {
-	CreateTextureVertices(path);
+	CreateTextureVertices();
 	CreateTextureData(path);
 	Init();
 }
 
 void Quad::Init()
 {
-	_transform->SetBuffer(0);
-	_vertexBuffer->SetIA_VertexBuffer();
+	_vertexBuffer->SetIA_VertexBuffer(_slot);
 	_indexBuffer->SetIA_IndexBuffer();
 	_vertexShader->SetIA_InputLayout();
 	DEVICECONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	_srv->SetSRV();
-	_sampler->SetSampler();
 
 	_vertexShader->Set_VertexShader();
 	_pixelShader->Set_PixelShader();
@@ -43,10 +41,12 @@ void Quad::Render()
 
 void Quad::TextureRender()
 {
+	_transform->SetBuffer();
+	_srv->SetSRV(_slot);
+	_sampler->SetSampler(_slot);
+
 	DEVICECONTEXT->DrawIndexed(_indexies.size(), 0, 0);
 }
-
-
 
 void Quad::CreateData()
 {
@@ -101,7 +101,7 @@ void Quad::CreateVertices()
 }
 
 
-void Quad::CreateTextureVertices(wstring path)
+void Quad::CreateTextureVertices()
 {
 	Vertex v;
 	v.pos = { 0.0f, 250.0f, 0.0f }; // ¿ÞÂÊ À§
@@ -133,29 +133,7 @@ void Quad::CreateTextureVertices(wstring path)
 	_indexies.push_back(3);
 }
 
-
-
-void Quad::Scale(Vector2<float> other)
+shared_ptr<Transform> Quad::GetTransform()
 {
-	_transform->AddScale(other);
-}
-
-void Quad::Rotate(float angle)
-{
-	_transform->AddAngle(angle);
-}
-
-void Quad::Translate(Vector2<float> other)
-{
-	_transform->AddPos(other);
-}
-
-void Quad::ShapeChange(vector<Vertex>* other)
-{
-	_vertexBuffer->SetBuffer(other);
-}
-
-void Quad::DrawChange(vector<int>* other)
-{
-	_indexBuffer->SetBuffer(other);
+	return _transform;
 }
