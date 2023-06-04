@@ -65,7 +65,7 @@ using namespace Microsoft::WRL;
 //Obj
 #include "Object/BasicObject/Quad.h"
 #include "Object/BasicObject/Line.h"
-#include "Object/Obj/Planet.h"
+//#include "Object/Obj/Planet.h"
 
 //Scene
 #include "Scene/Scene.h"
