@@ -41,7 +41,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Math/Transform.h"
 
 // Utility
-//#include "Framework/Utility/InputManager.h"
+#include "Framework/Utility/InputManager.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
@@ -55,8 +55,8 @@ using namespace Microsoft::WRL;
 // TextureMapping
 #include "Framework/TextureMapping/SRV.h"
 #include "Framework/TextureMapping/SamplerState.h"
-//#include "Framework/TextureMapping/BlendState.h"
-//#include "Framework/TextureMapping/StateManager.h"
+#include "Framework/TextureMapping/BlendState.h"
+#include "Framework/TextureMapping/StateManager.h"
 
 // Collider
 //#include "Framework/Collider/RectCollider.h"
@@ -68,7 +68,7 @@ using namespace Microsoft::WRL;
 #include "Object/Obj/Planet.h"
 #include "Object/Obj/Character.h"
 #include "Object/Obj/Bow.h"
-#include "Bullet.h"
+#include "Object/Obj/Bullet.h"
 
 // Scene
 #include "Scene/Scene.h"

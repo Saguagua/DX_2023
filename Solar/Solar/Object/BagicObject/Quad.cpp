@@ -26,8 +26,8 @@ void Quad::Render()
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     _srv->SetSRV(0);
-    _sampler->SetSampler(0);
-    
+    SAMPLER->SetSampler();
+
     _vs->Set_VS();
     _ps->Set_PS();
 
@@ -75,5 +75,4 @@ void Quad::CreateData(wstring path)
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
     _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
     _ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
-    _sampler = make_shared<SamplerState>();
 }

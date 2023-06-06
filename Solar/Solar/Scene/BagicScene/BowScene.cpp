@@ -6,8 +6,9 @@ BowScene::BowScene()
 	_player = make_shared<Character>(L"Player");
 	_bow = make_shared<Bow>(L"Bow");
 	_sun = make_shared<Planet>(L"sun");
-	_sun->SetScale(Vector2(0.1f, 0.1f));
+	_bullet = make_shared<Bullet>();
 
+	_sun->SetScale(Vector2(0.1f, 0.1f));
 	_bow->SetParent(_player->GetTransform());
 }
 
