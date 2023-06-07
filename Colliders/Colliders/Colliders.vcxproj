@@ -151,6 +151,7 @@
     <ClInclude Include="Framework\Render\GlobalBuffer.h" />
     <ClInclude Include="Framework\Render\PixelShader.h" />
     <ClInclude Include="Framework\Render\VertexLayout.h" />
+    <ClInclude Include="Framework\Utility\InputManager.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Resource.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Framework\Render\PixelShader.cpp" />
     <ClCompile Include="Framework\Render\VertexShader.cpp" />
     <ClCompile Include="Framework\Render\VertexBuffer.cpp" />
+    <ClCompile Include="Framework\Utility\InputManager.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />

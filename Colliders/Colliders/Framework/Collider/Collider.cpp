@@ -25,6 +25,16 @@ void Collider::SetAngle(float angle)
 	_transform->SetRotate(angle);
 }
 
+shared_ptr<Transform> Collider::GetTransform()
+{
+	return _transform;
+}
+
+void Collider::SetParent(shared_ptr<Collider> other)
+{
+	_transform->SetParent(other->GetTransform());
+}
+
 Vector2 Collider::GetWorldPos()
 {
 	return _transform->GetWorldPos();

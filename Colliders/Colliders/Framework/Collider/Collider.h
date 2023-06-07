@@ -12,6 +12,8 @@ public:
 	void SetPos(Vector2 pos);
 	void SetAngle(float angle);
 
+	shared_ptr<Transform> GetTransform(); 
+	void SetParent(shared_ptr<Collider> other);
 	Vector2 GetWorldPos();
 	Vector2 GetWorldScale();
 

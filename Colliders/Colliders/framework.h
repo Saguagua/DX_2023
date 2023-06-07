@@ -41,7 +41,7 @@ using namespace Microsoft::WRL;
 #include "Framework/Math/Transform.h"
 
 // Utility
-//#include "Framework/Utility/InputManager.h"
+#include "Framework/Utility/InputManager.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"

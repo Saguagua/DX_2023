@@ -2,8 +2,18 @@
 class RectCollider:public Collider
 {
 public:
+	struct AABB_Info
+	{
+		float left = 0;
+		float right = 0;
+		float top = 0;
+		float bottom = 0;
+	};
+
 	RectCollider(Vector2 size);
 	~RectCollider();
+
+	AABB_Info GetAABB_Info();
 
 	// Collider을(를) 통해 상속됨
 	virtual void Update() override;
@@ -14,13 +24,7 @@ public:
 	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
 
 private:
-	struct AABB_Info
-	{
-		float left = 0;
-		float right = 0;
-		float top = 0;
-		float bottom = 0;
-	};
+	
 
 	void CreateVertices();
 	void CreateData();

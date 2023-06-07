@@ -42,6 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_COLLIDERS));
 
     Device::Create();
+    InputManager::Create();
 
     MSG msg = {};
     shared_ptr<Program> program = make_shared<Program>();
@@ -64,6 +65,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
+    InputManager::Delete();
     Device::Delete();
 
     return (int) msg.wParam;
@@ -122,6 +124,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    ShowWindow(hWnd, nCmdShow);
+   SetMenu(hWnd, nullptr);
    UpdateWindow(hWnd);
 
    return TRUE;
@@ -158,6 +161,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_MOUSEMOVE:
+    {
+        Vector2 mousePos;
+        mousePos.x = static_cast<float>(LOWORD(lParam));
+        mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
+
+        InputManager::GetInstance()->SetMousePos(mousePos);
+
+        break;
+    }
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
