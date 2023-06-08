@@ -35,8 +35,6 @@ void TutorialScene::Update()
 	_rect->SetPos(_pos);
 	_rect->SetAngle(_angle);
 	_rect->SetScale(_scale);
-
-	
 }
 
 void TutorialScene::Render()

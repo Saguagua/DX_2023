@@ -29,7 +29,8 @@ RectCollider::OBB_Info RectCollider::GetOBB_Info()
 {
 	OBB_Info info = {};
 	info.pos = _transform->GetWorldPos();
-	XMFLOAT4X4 matrix = {};
+	
+	XMFLOAT4X4 matrix;
 	XMStoreFloat4x4(&matrix, _transform->GetSRT());
 
 	info.direction[0] = {matrix._11, matrix._12};
@@ -55,10 +56,10 @@ float RectCollider::SeperateAxis(Vector2 seperate, Vector2 eb1, Vector2 eb2)
 
 void RectCollider::SetScale(Vector2 scale)
 {
-	_size.x *= scale.x;
-	_size.y *= scale.y;
-
-	Collider::SetScale(scale);
+	//_size.x *= scale.x;
+	//_size.y *= scale.y;
+	_transform->SetScale(scale);
+	//Collider::SetScale(scale);
 }
 
 void RectCollider::Update()
