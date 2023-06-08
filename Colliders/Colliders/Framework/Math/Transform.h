@@ -11,7 +11,6 @@ public:
 	void Set_World(UINT slot);
 	void SetParent(shared_ptr<Transform> other);
 
-
 	Vector2 GetScale();
 	float GetAngle();
 	Vector2 GetPos();
@@ -25,7 +24,10 @@ public:
 
 	XMMATRIX GetSRT();
 private:
-	XMMATRIX _srt;
+	XMMATRIX _srt = XMMatrixIdentity();
+	XMMATRIX _scaleM = XMMatrixIdentity();
+	XMMATRIX _translateM = XMMatrixIdentity();
+	XMMATRIX _rotateM = XMMatrixIdentity();
 
 	Vector2 _scale = {1.0f, 1.0f};
 	FLOAT _angle = 0.0f;

@@ -29,6 +29,11 @@
 
 //#include "../DXTex/DirectXTex.h"
 
+#include "../ImGUI/imgui.h"
+#include "../ImGUI/imgui_impl_dx11.h"
+#include "../ImGUI/imgui_impl_win32.h"
+
+
 using namespace std;
 using namespace DirectX;
 using namespace Microsoft::WRL;

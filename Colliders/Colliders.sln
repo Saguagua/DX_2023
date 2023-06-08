@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Colliders", "Colliders\Colliders.vcxproj", "{BEB76C15-2E45-4CF5-95A4-4FB7C404FB42}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGUI", "ImGUI\ImGUI.vcxproj", "{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{BEB76C15-2E45-4CF5-95A4-4FB7C404FB42}.Release|x64.Build.0 = Release|x64
 		{BEB76C15-2E45-4CF5-95A4-4FB7C404FB42}.Release|x86.ActiveCfg = Release|Win32
 		{BEB76C15-2E45-4CF5-95A4-4FB7C404FB42}.Release|x86.Build.0 = Release|Win32
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Debug|x64.ActiveCfg = Debug|x64
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Debug|x64.Build.0 = Debug|x64
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Debug|x86.ActiveCfg = Debug|Win32
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Debug|x86.Build.0 = Debug|Win32
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Release|x64.ActiveCfg = Release|x64
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Release|x64.Build.0 = Release|x64
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Release|x86.ActiveCfg = Release|Win32
+		{F2C80C92-7073-4ACE-8E20-4ACD89BC197C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

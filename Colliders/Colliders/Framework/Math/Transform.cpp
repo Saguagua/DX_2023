@@ -18,11 +18,11 @@ void Transform::Update()
 
 void Transform::Update_SRT()
 {
-	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
-	XMMATRIX rotate = XMMatrixRotationZ(_angle);
-	XMMATRIX translate = XMMatrixTranslation(_pos.x, _pos.y, 0.0f);
+	_scaleM = XMMatrixScaling(_scale.x, _scale.y, 1.0f);
+	_rotateM = XMMatrixRotationZ(_angle);
+	_translateM = XMMatrixTranslation(_pos.x, _pos.y, 0.0f);
 	
-	_srt = scale * rotate * translate;
+	_srt = _scaleM * _rotateM * _translateM;
 	
 	if (!_parent.expired())
 	{
@@ -90,7 +90,7 @@ Vector2 Transform::GetWorldScale()
 
 	XMFLOAT4X4 temp;
 
-	XMStoreFloat4x4(&temp, _srt);
+	XMStoreFloat4x4(&temp, _scaleM);
 
 	if (_parent.expired() == false)
 	{

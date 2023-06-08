@@ -25,6 +25,42 @@ RectCollider::AABB_Info RectCollider::GetAABB_Info()
 	return info;
 }
 
+RectCollider::OBB_Info RectCollider::GetOBB_Info()
+{
+	OBB_Info info = {};
+	info.pos = _transform->GetWorldPos();
+	XMFLOAT4X4 matrix = {};
+	XMStoreFloat4x4(&matrix, _transform->GetSRT());
+
+	info.direction[0] = {matrix._11, matrix._12};
+	info.direction[1] = {matrix._21, matrix._22};
+	
+	info.direction[0].Normalize();
+	info.direction[1].Normalize();
+
+	Vector2 scale = _transform->GetWorldScale();
+
+	info.length[0] = _size.x * 0.5f * scale.x;
+	info.length[1] = _size.y * 0.5f * scale.y;
+	
+	return info;
+}
+
+float RectCollider::SeperateAxis(Vector2 seperate, Vector2 eb1, Vector2 eb2)
+{
+	 float r1 = abs(seperate.Dot(eb1));
+	 float r2 = abs(seperate.Dot(eb2));
+	return r1 + r2;
+}
+
+void RectCollider::SetScale(Vector2 scale)
+{
+	_size.x *= scale.x;
+	_size.y *= scale.y;
+
+	Collider::SetScale(scale);
+}
+
 void RectCollider::Update()
 {
 	_transform->Update();
@@ -46,6 +82,54 @@ void RectCollider::Render()
 	_psShader->Set_PS();
 
 	DC->Draw(_vertices.size(), 0);
+}
+
+bool RectCollider::IsOBB(shared_ptr<RectCollider> other)
+{
+	OBB_Info aInfo = GetOBB_Info();
+	OBB_Info bInfo = other->GetOBB_Info();
+
+	Vector2 nea1 = aInfo.direction[0];
+	Vector2 nea2 = aInfo.direction[1];
+	Vector2 neb1 = bInfo.direction[0];
+	Vector2 neb2 = bInfo.direction[1];
+
+	Vector2 ea1 = nea1 * aInfo.length[0];
+	Vector2 ea2 = nea2 * aInfo.length[1];
+	Vector2 eb1 = neb1 * bInfo.length[0];
+	Vector2 eb2 = neb2 * bInfo.length[1];
+
+	Vector2 AtoB = aInfo.pos - bInfo.pos;
+	
+	float length = abs(nea1.Dot(AtoB));
+	float lengthA = ea1.Length();
+	float lengthB = SeperateAxis(nea1, eb1, eb2);
+	
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(nea2.Dot(AtoB));
+	lengthA = ea2.Length();
+	lengthB = SeperateAxis(nea2, eb1, eb2);
+
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(neb1.Dot(AtoB));
+	lengthA = eb1.Length();
+	lengthB = SeperateAxis(neb1, ea1, ea2);
+
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(neb2.Dot(AtoB));
+	lengthA = eb2.Length();
+	lengthB = SeperateAxis(neb2, ea1, ea2);
+
+	if (length > lengthA + lengthB)
+		return false;
+
+	return true;
 }
 
 bool RectCollider::IsCollision(Vector2 other)

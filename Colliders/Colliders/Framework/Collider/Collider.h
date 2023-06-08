@@ -10,6 +10,7 @@ public:
 
 	void SetColor(XMFLOAT4 color);
 	void SetPos(Vector2 pos);
+	virtual void SetScale(Vector2 scale);
 	void SetAngle(float angle);
 
 	shared_ptr<Transform> GetTransform(); 

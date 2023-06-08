@@ -33,7 +33,16 @@ void Program::Render()
 	_view->SetVS_Buffer(1);
 	_proj->SetVS_Buffer(2);
 
+
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
 	_scene->Render();
+	ImGui::Text("Im GUI");
+
+	_scene->PostRender();
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	Device::GetInstance()->Present();
 }

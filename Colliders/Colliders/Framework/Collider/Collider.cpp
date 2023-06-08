@@ -20,6 +20,11 @@ void Collider::SetPos(Vector2 pos)
 	_transform->SetPos(pos);
 }
 
+void Collider::SetScale(Vector2 scale)
+{
+	_transform->SetScale(scale);
+}
+
 void Collider::SetAngle(float angle)
 {
 	_transform->SetRotate(angle);
