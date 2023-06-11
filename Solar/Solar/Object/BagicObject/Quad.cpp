@@ -11,6 +11,11 @@ Quad::Quad(wstring path)
     _transform = make_shared<Transform>();
 }
 
+Vector2 Quad::GetSize()
+{
+    return _size;
+}
+
 void Quad::Update()
 {
     _transform->Update();
@@ -18,8 +23,7 @@ void Quad::Update()
 
 void Quad::Render()
 {
-    _transform->SetWorldBuffer(0);
-
+    _transform->Set_World(0);
     _vertexBuffer->SetIA_VertexBuffer();
     _indexBuffer->SetIA_IndexBuffer();
     _vs->SetIA_InputLayOut();
@@ -38,7 +42,8 @@ void Quad::CreateVertices()
 {
     Vertex_Texture v;
 
-    Vector2 halfSize = _srv->GetImageSize() * 0.5f;
+    _size = _srv->GetImageSize();
+    Vector2 halfSize = _size * 0.5f;
 
     v.pos = { -halfSize.x, halfSize.y, 0.0f }; // ¿ÞÂÊ À§
     v.color = { 1.0f, 0.0f, 0.0f, 1.0f };

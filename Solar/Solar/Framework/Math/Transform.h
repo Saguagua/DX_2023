@@ -7,33 +7,35 @@ public:
 
 	void Update();
 	void Update_SRT();
-	void Update_WorldBuffer();
-	void SetWorldBuffer(UINT slot);
+	void Update_World();
+	void Set_World(UINT slot);
+	void SetParent(shared_ptr<Transform> other);
 
-	void SetPosition(Vector2 pos) { _pos = pos; }
-	void SetScale(Vector2 scale) { _scale = scale; }
-	void SetAngle(float angle) { _angle = angle; }
+	Vector2 GetScale();
+	float GetAngle();
+	Vector2 GetPos();
 
-	void AddVector2(Vector2 pos) { _pos += pos; }
-	void AddScale(Vector2 scale) { _scale += scale; }
-	void AddAngle(float angle) { _angle += angle; }
+	void SetScale(Vector2 scale);
+	void SetRotate(float angel);
+	void SetPos(Vector2 pos);
 
-	const Vector2& GetPos() { return _pos; }
-	const Vector2& GetScale() { return _scale; }
-	const float& GetAngle() { return _angle; }
+	void AddScale(Vector2 scale);
+	void AddAngle(float angle);
+	void AddPos(Vector2 pos);
 
-	Vector2 GetWorldPos() const;
+	Vector2 GetWorldPos();
+	Vector2 GetWorldScale();
 
-	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
-
-	const XMMATRIX& GetSRT() { return _srtMatrix; }
-
+	XMMATRIX GetSRT();
 private:
-	Vector2 _pos;
-	Vector2 _scale = { 1.0f, 1.0f };
-	float _angle = 0.0f;
+	XMMATRIX _srt = XMMatrixIdentity();
+	XMMATRIX _scaleM = XMMatrixIdentity();
+	XMMATRIX _translateM = XMMatrixIdentity();
+	XMMATRIX _rotateM = XMMatrixIdentity();
 
-	XMMATRIX _srtMatrix = XMMatrixIdentity();
+	Vector2 _scale = { 1.0f, 1.0f };
+	FLOAT _angle = 0.0f;
+	Vector2 _pos;
 
 	shared_ptr<class MatrixBuffer> _world;
 	weak_ptr<Transform> _parent;

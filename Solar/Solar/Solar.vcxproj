@@ -142,10 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Collider\CircleCollider.h" />
+    <ClInclude Include="Framework\Collider\Collider.h" />
     <ClInclude Include="Framework\TextureMapping\BlendState.h" />
     <ClInclude Include="Object\Obj\Bullet.h" />
     <ClInclude Include="Framework\Utility\InputManager.h" />
     <ClInclude Include="Object\Obj\Bow.h" />
+    <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Scene\BagicScene\BowScene.h" />
     <ClInclude Include="Object\Obj\Character.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
@@ -167,16 +170,20 @@
     <ClInclude Include="Framework\TextureMapping\StateManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
+    <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
+    <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Framework\TextureMapping\BlendState.cpp" />
     <ClCompile Include="Object\Obj\Bullet.cpp" />
     <ClCompile Include="Framework\Utility\InputManager.cpp" />
     <ClCompile Include="Object\Obj\Bow.cpp" />
+    <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Scene\BagicScene\BowScene.cpp" />
     <ClCompile Include="Object\Obj\Character.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
@@ -200,6 +207,7 @@
     <ClCompile Include="Framework\TextureMapping\SRV.cpp" />
     <ClCompile Include="Scene\BagicScene\SolarSystem.cpp" />
     <ClCompile Include="Framework\TextureMapping\StateManager.cpp" />
+    <ClCompile Include="Framework\Utility\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Solar.rc" />

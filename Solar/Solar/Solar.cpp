@@ -154,6 +154,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         mousePos.x = static_cast<float>(LOWORD(lParam));
         mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
+        InputManager::GetInstance()->SetMousePos(mousePos);
         break;
     }
     case WM_COMMAND:
