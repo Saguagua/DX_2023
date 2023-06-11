@@ -54,12 +54,66 @@ float RectCollider::SeperateAxis(Vector2 seperate, Vector2 eb1, Vector2 eb2)
 	return r1 + r2;
 }
 
-void RectCollider::SetScale(Vector2 scale)
+bool RectCollider::Block(shared_ptr<class CircleCollider> other)
 {
-	//_size.x *= scale.x;
-	//_size.y *= scale.y;
-	_transform->SetScale(scale);
-	//Collider::SetScale(scale);
+	if (!IsCollision(other))
+		return false;
+	Vector2 AtoB = other->GetWorldPos() - GetWorldPos();
+
+	AABB_Info info = GetAABB_Info();
+	float circleRadius = other->GetWorldRadius();
+
+	Vector2 mySize = Vector2();
+	mySize.x = (info.right - info.left) * 0.5f;
+	mySize.y = (info.top - info.bottom) * 0.5f;
+
+	Vector2 overlap = Vector2();
+	overlap.x = mySize.x + circleRadius - abs(AtoB.x);
+	overlap.y = mySize.y + circleRadius - abs(AtoB.y);
+
+	if (overlap.x > overlap.y)
+	{
+		AtoB.Normalize();
+		//Vector2 tmp = Vector2(0, );
+		other->AddPos(AtoB * overlap.y);
+	}
+	else
+	{
+		AtoB.Normalize();
+		other->AddPos(AtoB * overlap.x);
+	}
+
+	return true;
+}
+
+bool RectCollider::Block(shared_ptr<class RectCollider> other)
+{
+	if (!IsCollision(other))
+		return false;
+
+	AABB_Info myInfo = GetAABB_Info();
+	AABB_Info otherInfo = other->GetAABB_Info();
+
+	Vector2 AtoB = other->GetWorldPos() - GetWorldPos();
+	
+	Vector2 mySize = Vector2((myInfo.right - myInfo.left) * 0.5f, (myInfo.top - myInfo.bottom) * 0.5f);
+	Vector2 otherSize = Vector2((otherInfo.right - otherInfo.left) * 0.5f, (otherInfo.top - otherInfo.bottom) * 0.5f);
+	Vector2 overlap = Vector2(mySize.x + otherSize.x - abs(AtoB.x), mySize.y + otherSize.y - abs(AtoB.y));
+	
+	if (overlap.x > overlap.y)
+	{
+		AtoB.Normalize();
+		Vector2 tmp = Vector2(0.0f, overlap.y * AtoB.y);
+		other->AddPos(tmp);
+	}
+	else
+	{
+		AtoB.Normalize();
+		Vector2 tmp = Vector2(overlap.x * AtoB.x, 0.0f);
+		other->AddPos(tmp);
+	}
+
+	return true;
 }
 
 void RectCollider::Update()
@@ -83,6 +137,33 @@ void RectCollider::Render()
 	_psShader->Set_PS();
 
 	DC->Draw(_vertices.size(), 0);
+}
+
+bool RectCollider::IsOBB(shared_ptr<CircleCollider> other)
+{
+	OBB_Info aInfo = GetOBB_Info();
+	float circleRadius = other->GetWorldRadius();
+	Vector2 circlePos = other->GetWorldPos();
+
+	Vector2 AtoB = aInfo.pos - circlePos;
+	Vector2 ne1 = aInfo.direction[0];
+	Vector2 ne2 = aInfo.direction[1];
+	Vector2 e1 = ne1 * aInfo.length[0];
+	Vector2 e2 = ne2 * aInfo.length[1];
+
+	float length = abs(AtoB.Dot(ne1));
+	float lengthA = SeperateAxis(ne1, e1, e2);
+	
+	if (length > lengthA + circleRadius)
+		return false;
+
+	length = abs(AtoB.Dot(ne2));
+	lengthA = SeperateAxis(ne2, e1, e2);
+
+	if (length > lengthA + circleRadius)
+		return false;
+
+	return true;
 }
 
 bool RectCollider::IsOBB(shared_ptr<RectCollider> other)

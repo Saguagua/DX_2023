@@ -76,6 +76,21 @@ void Transform::SetPos(Vector2 pos)
 	_pos = pos;
 }
 
+void Transform::AddScale(Vector2 scale)
+{
+	_scale += scale;
+}
+
+void Transform::AddAngle(float angle)
+{
+	_angle += angle;
+}
+
+void Transform::AddPos(Vector2 pos)
+{
+	_pos += pos;
+}
+
 Vector2 Transform::GetWorldPos()
 {
 	XMFLOAT4X4 tmp;

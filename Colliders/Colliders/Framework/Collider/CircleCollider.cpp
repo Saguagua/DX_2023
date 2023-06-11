@@ -86,3 +86,25 @@ void CircleCollider::CreateData()
 	_vsShader = make_shared<VertexShader>(L"Shader/VertexShader.hlsl");
 	_psShader = make_shared<PixelShader>(L"Shader/PixelShader.hlsl");
 }
+
+bool CircleCollider::Block(shared_ptr<class CircleCollider> other)
+{
+	if (!IsCollision(other))
+		return false;
+	
+	Vector2 AtoB = other->GetWorldPos() - GetWorldPos();
+
+	float scalar = GetWorldRadius() + other->GetWorldRadius() - AtoB.Length();
+
+	AtoB.Normalize();
+
+	other->AddPos(AtoB * scalar);
+
+	return true;
+}
+
+bool CircleCollider::Block(shared_ptr<class RectCollider> other)
+{
+
+	return other->Block(shared_from_this());
+}

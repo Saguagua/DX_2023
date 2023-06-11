@@ -10,6 +10,12 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
+
+
+	// Collider을(를) 통해 상속됨
+	virtual bool Block(shared_ptr<class CircleCollider> other) override;
+	virtual bool Block(shared_ptr<class RectCollider> other) override;
+
 	virtual bool IsCollision(Vector2 other) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
 	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
@@ -19,5 +25,6 @@ private:
 
 	float _radius;
 
-	// Collider을(를) 통해 상속됨
+
+
 };

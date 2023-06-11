@@ -19,6 +19,10 @@ public:
 	void SetRotate(float angel);
 	void SetPos(Vector2 pos);
 
+	void AddScale(Vector2 scale);
+	void AddAngle(float angle);
+	void AddPos(Vector2 pos);
+
 	Vector2 GetWorldPos();
 	Vector2 GetWorldScale();
 

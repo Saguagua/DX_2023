@@ -42,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_COLLIDERS));
 
     Device::Create();
-
+    Timer::Create();
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
 
@@ -79,7 +79,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
 
-
+    Timer::Delete();
     Device::Delete();
 
     return (int) msg.wParam;

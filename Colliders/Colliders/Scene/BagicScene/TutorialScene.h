@@ -10,15 +10,15 @@ public:
 	virtual void PostRender();
 
 private:
-	Vector2 _pos = CENTER;
+	Vector2 _pos = CENTER - Vector2(200, 0);
 	Vector2 _scale = {1.0f, 1.0f};
 	float _angle = 0.0f;
 
 	shared_ptr<RectCollider> _rect;
 	shared_ptr<RectCollider> _rect2;
 	shared_ptr<RectCollider> _rect3;
-	shared_ptr<Collider> _circle;
-	shared_ptr<Collider> _circle2;
-	shared_ptr<Collider> _circle3;
+	shared_ptr<CircleCollider> _circle;
+	shared_ptr<CircleCollider> _circle2;
+	shared_ptr<CircleCollider> _circle3;
 };
 

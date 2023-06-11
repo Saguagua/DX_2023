@@ -23,6 +23,7 @@ Program::~Program()
 
 void Program::Update()
 {
+	Timer::GetInstance()->Update();
 	_scene->Update();
 }
 

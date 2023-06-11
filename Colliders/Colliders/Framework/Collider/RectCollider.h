@@ -25,16 +25,18 @@ public:
 
 	float SeperateAxis(Vector2 seperate, Vector2 eb1, Vector2 eb2);
 
-	// Collider을(를) 통해 상속됨
-	virtual void SetScale(Vector2 scale) override;
-
-	virtual void Update() override;
-	virtual void Render() override;
-
+	bool IsOBB(shared_ptr<CircleCollider> other);
 	bool IsOBB(shared_ptr<RectCollider> other);
+	
+	virtual bool Block(shared_ptr<class CircleCollider> other) override;
+	virtual bool Block(shared_ptr<class RectCollider> other) override;
+
 	virtual bool IsCollision(Vector2 other) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
 	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
+
+	virtual void Update() override;
+	virtual void Render() override;
 
 private:
 	void CreateVertices();
