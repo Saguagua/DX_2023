@@ -9,8 +9,8 @@ TutorialScene::TutorialScene()
 	_circle2 = make_shared<CircleCollider>(80.0f);
 
 	_rect->SetPos(CENTER - Vector2(200, 0));
-	_rect2->SetPos(CENTER);
-	_circle->SetPos(CENTER - Vector2(200, 0));
+	_rect2->SetPos(CENTER - Vector2(200, 100));
+	_circle->SetPos(CENTER - Vector2(200, 300));
 	_circle2->SetPos(CENTER);
 }
 
@@ -38,10 +38,11 @@ void TutorialScene::Update()
 	_circle->Block(_circle2);
 	_rect->Block(_rect2);
 	_circle2->Block(_rect);
-	_rect->SetPos(_pos);
-	_rect->SetAngle(_angle);
-	_rect->SetScale(_scale);
-	
+	_circle2->Block(_rect2);
+	//_rect->SetPos(_pos);
+	//_rect->SetAngle(_angle);
+	//_rect->SetScale(_scale);
+	_rect->SetPos(MOUSE_POS);
 	//_circle->AddPos(Vector2(1.0f ,0.0f) * DELTA * 20.0f);
 }
 

@@ -42,6 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SOLAR));
 
     Device::Create();
+    Timer::Create();
 
     InputManager::Create();
     StateManager::Create();
@@ -70,6 +71,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
     StateManager::Delete();
     InputManager::Delete();
+    Timer::Delete();
     Device::Delete();
 
     return (int) msg.wParam;

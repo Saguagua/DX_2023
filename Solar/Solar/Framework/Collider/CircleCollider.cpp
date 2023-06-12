@@ -60,10 +60,8 @@ bool CircleCollider::IsCollision(shared_ptr<class CircleCollider> other)
 
 bool CircleCollider::IsCollision(shared_ptr<class RectCollider> other)
 {
-	return false;
+	return other->IsCollision(shared_from_this());
 }
-
-
 
 void CircleCollider::CreateVertices()
 {
@@ -83,8 +81,8 @@ void CircleCollider::CreateData()
 {
 	_vsBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
 	_colorBuffer = make_shared<ColorBuffer>();
-	_vsShader = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
-	_psShader = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
+	_vsShader = make_shared<VertexShader>(L"Shader/VertexShader.hlsl");
+	_psShader = make_shared<PixelShader>(L"Shader/PixelShader.hlsl");
 }
 
 bool CircleCollider::Block(shared_ptr<class CircleCollider> other)

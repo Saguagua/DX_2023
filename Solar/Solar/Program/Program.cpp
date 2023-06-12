@@ -27,6 +27,7 @@ Program::~Program()
 
 void Program::Update()
 {
+	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
 	_curScene->Update();
 }

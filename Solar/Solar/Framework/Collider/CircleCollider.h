@@ -5,6 +5,7 @@ public:
 	CircleCollider(float radius);
 	virtual ~CircleCollider();
 
+	bool IsRed() { return _color.x == 1; }
 	float GetRadius() { return _radius; }
 	float GetWorldRadius();
 

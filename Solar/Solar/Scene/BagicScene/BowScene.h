@@ -11,6 +11,10 @@ public:
 private:
 	shared_ptr<Character> _player;
 	shared_ptr<Planet> _sun;
-	shared_ptr<Bullet> _bullet;
+	shared_ptr<CircleCollider> _object;
+
+	vector<shared_ptr<Bullet>> _bullet;
+
+	double _timer = 0.0;
 };
 
