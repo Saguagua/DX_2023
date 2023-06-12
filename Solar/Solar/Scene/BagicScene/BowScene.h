@@ -13,7 +13,7 @@ private:
 	shared_ptr<Planet> _sun;
 	shared_ptr<CircleCollider> _object;
 
-	vector<shared_ptr<Bullet>> _bullet;
+	vector<shared_ptr<class Monster>> _monsters;
 
 	double _timer = 0.0;
 };

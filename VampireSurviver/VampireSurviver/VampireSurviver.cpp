@@ -1,8 +1,8 @@
-﻿// Solar.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+﻿// VampireSurviver.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
 #include "framework.h"
-#include "Solar.h"
+#include "VampireSurviver.h"
 
 #define MAX_LOADSTRING 100
 
@@ -30,7 +30,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_SOLAR, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_VAMPIRESURVIVER, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // 애플리케이션 초기화를 수행합니다:
@@ -39,15 +39,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SOLAR));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_VAMPIRESURVIVER));
 
     Device::Create();
-    Timer::Create();
-
-    InputManager::Create();
-    StateManager::Create();
-    SRVManager::Create();
     shared_ptr<Program> program = make_shared<Program>();
+
 
     MSG msg = {};
 
@@ -69,10 +65,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             program->Render();
         }
     }
-    SRVManager::Delete();
-    StateManager::Delete();
-    InputManager::Delete();
-    Timer::Delete();
+
     Device::Delete();
 
     return (int) msg.wParam;
@@ -96,10 +89,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SOLAR));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_VAMPIRESURVIVER));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_SOLAR);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_VAMPIRESURVIVER);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -131,7 +124,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    ShowWindow(hWnd, nCmdShow);
-   SetMenu(hWnd, nullptr);
    UpdateWindow(hWnd);
 
    return TRUE;
@@ -147,19 +139,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
-Vector2 mousePos;
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_MOUSEMOVE:
-    {
-        mousePos.x = static_cast<float>(LOWORD(lParam));
-        mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
-        InputManager::GetInstance()->SetMousePos(mousePos);
-        break;
-    }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);

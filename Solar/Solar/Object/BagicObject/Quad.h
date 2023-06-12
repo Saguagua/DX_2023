@@ -3,7 +3,7 @@ class Quad
 {
 public:
 	Quad(wstring path);
-
+	Quad(wstring path, Vector2 size);
 	Vector2 GetSize();
 
 	void Update();

@@ -8,20 +8,20 @@ public:
 	void Update();
 	void Update_SRT();
 	void Update_World();
-	void Set_World(UINT slot);
-	void SetParent(shared_ptr<Transform> other);
+	void SetWorld(UINT slot);
+	void SetParent(shared_ptr<Transform> other) { _parent = other; }
 
-	Vector2 GetScale();
-	float GetAngle();
-	Vector2 GetPos();
+	Vector2 GetScale() { return _scale; }
+	float GetAngle() { return _angle; }
+	Vector2 GetPos() { return _pos; }
 
-	void SetScale(Vector2 scale);
-	void SetRotate(float angel);
-	void SetPos(Vector2 pos);
+	void SetScale(Vector2 scale) { _scale = scale; }
+	void SetRotate(float angle) { _angle = angle; }
+	void SetPos(Vector2 pos) { _pos = pos; }
 
-	void AddScale(Vector2 scale);
-	void AddAngle(float angle);
-	void AddPos(Vector2 pos);
+	void AddScale(Vector2 scale) { _scale += scale; }
+	void AddAngle(float angle) { _angle += angle; }
+	void AddPos(Vector2 pos) { _pos += pos; }
 
 	Vector2 GetWorldPos();
 	Vector2 GetWorldScale();
@@ -35,7 +35,7 @@ private:
 
 	Vector2 _scale = { 1.0f, 1.0f };
 	FLOAT _angle = 0.0f;
-	Vector2 _pos = {0.0f, 0.0f};
+	Vector2 _pos;
 
 	shared_ptr<class MatrixBuffer> _world;
 	weak_ptr<Transform> _parent;

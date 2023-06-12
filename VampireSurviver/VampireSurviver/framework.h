@@ -27,55 +27,48 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-#include "../DXTex/DirectXTex.h"
-
 using namespace std;
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
-// Framework
 #include "Framework/Device/Device.h"
 
-// Math
 #include "Framework/Math/Vector2.h"
 #include "Framework/Math/Transform.h"
 
 // Utility
-#include "Framework/Utility/InputManager.h"
-#include "Framework/Utility/Timer.h"
+//#include "Framework/Utility/InputManager.h"
+//#include "Framework/Utility/Timer.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
-#include "Framework/Render/GlobalBuffer.h"
-#include "Framework/Render/VertexLayout.h"
-#include "Framework/Render/VertexBuffer.h"
-#include "Framework/Render/IndexBuffer.h"
-#include "Framework/Render/VertexShader.h"
-#include "Framework/Render/PixelShader.h"
+#include "Framework/Render/Buffers.h"
+//#include "Framework/Render/VertexLayout.h"
+//#include "Framework/Render/VertexBuffer.h"
+//#include "Framework/Render/IndexBuffer.h"
+//#include "Framework/Render/VertexShader.h"
+//#include "Framework/Render/PixelShader.h"
 
 // TextureMapping
-#include "Framework/TextureMapping/SRV.h"
-#include "Framework/TextureMapping/SRVManager.h"
-#include "Framework/TextureMapping/SamplerState.h"
-#include "Framework/TextureMapping/BlendState.h"
-#include "Framework/TextureMapping/StateManager.h"
+//#include "Framework/TextureMapping/SRV.h"
+//#include "Framework/TextureMapping/SamplerState.h"
+//#include "Framework/TextureMapping/BlendState.h"
+//#include "Framework/TextureMapping/StateManager.h"
 
 // Collider
-#include "Framework/Collider/Collider.h"
-#include "Framework/Collider/CircleCollider.h"
-#include "Framework/Collider/RectCollider.h"
+//#include "Framework/Collider/Collider.h"
+//#include "Framework/Collider/CircleCollider.h"
+//#include "Framework/Collider/RectCollider.h"
 
 
 // Obj
-#include "Object/BagicObject/Quad.h"
+//#include "Object/BagicObject/Quad.h"
 
 // GameObj
-#include "Object/Obj/Planet.h"
-#include "Object/Obj/Character.h"
-#include "Object/Obj/Monster.h"
-#include "Object/Obj/Bow.h"
-#include "Object/Obj/Bullet.h"
-#include "Object/Obj/Vible.h"
+//#include "Object/Obj/Planet.h"
+//#include "Object/Obj/Character.h"
+//#include "Object/Obj/Bow.h"
+//#include "Object/Obj/Bullet.h"
 
 // Scene
 #include "Scene/Scene.h"

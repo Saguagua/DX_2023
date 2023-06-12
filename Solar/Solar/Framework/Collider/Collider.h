@@ -19,6 +19,7 @@ public:
 
 	shared_ptr<Transform> GetTransform();
 	void SetParent(shared_ptr<Collider> other);
+	void SetParent(shared_ptr<Transform> other) { _transform->SetParent(other); }
 	Vector2 GetWorldPos();
 	Vector2 GetWorldScale();
 
