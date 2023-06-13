@@ -1,24 +1,24 @@
 #include "framework.h"
 #include "Quad.h"
 
-Quad::Quad(wstring path)
+Quad::Quad(wstring path, wstring PS)
 {
     _srv = ADD_SRV(path);
     _size = _srv->GetImageSize();
 
     CreateVertices();
-    CreateData(path);
+    CreateData(PS);
 
     _transform = make_shared<Transform>();
 }
 
-Quad::Quad(wstring path, Vector2 size)
+Quad::Quad(wstring path, Vector2 size, wstring shader)
     : _size(size)
 {
     _srv = ADD_SRV(path);
 
     CreateVertices();
-    CreateData(path);
+    CreateData(shader);
 
     _transform = make_shared<Transform>();
 }
@@ -90,5 +90,5 @@ void Quad::CreateData(wstring path)
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size());
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
     _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
-    _ps = make_shared<PixelShader>(L"Shader/TexturePS.hlsl");
+    _ps = make_shared<PixelShader>(path);
 }

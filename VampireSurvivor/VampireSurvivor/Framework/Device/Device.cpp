@@ -15,18 +15,18 @@ Device::~Device()
 
 void Device::Clear()
 {
-    FLOAT myColorR = 1.0f;
-    FLOAT myColorG = 1.0f;
-    FLOAT myColorB = 1.0f;
+    FLOAT myColorR = 0.0f;
+    FLOAT myColorG = 0.0f;
+    FLOAT myColorB = 0.0f;
 
     FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
 
-    deviceContext->ClearRenderTargetView(renderTargetView.Get(), clearColor);
+    _deviceContext->ClearRenderTargetView(_renderTargetView.Get(), clearColor);
 }
 
 void Device::Present()
 {
-    swapChain->Present(0, 0);
+    _swapChain->Present(0, 0);
 }
 
 void Device::CreateDeviceAndSwapChain()
@@ -52,12 +52,11 @@ void Device::CreateDeviceAndSwapChain()
     sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     sd.BufferDesc.RefreshRate.Numerator = 60;
     sd.BufferDesc.RefreshRate.Denominator = 1;
-    // Numerator / Denominator => 화면 프레임 갱신 속도
     sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     sd.OutputWindow = hWnd;
     sd.SampleDesc.Count = 1;
     sd.SampleDesc.Quality = 0;
-    sd.Windowed = true; // 창모드
+    sd.Windowed = true;
 
     D3D11CreateDeviceAndSwapChain(
         nullptr,
@@ -68,10 +67,10 @@ void Device::CreateDeviceAndSwapChain()
         featureSize,
         D3D11_SDK_VERSION,
         &sd,
-        IN swapChain.GetAddressOf(),
-        IN device.GetAddressOf(),
+        IN _swapChain.GetAddressOf(),
+        IN _device.GetAddressOf(),
         nullptr,
-        IN deviceContext.GetAddressOf()
+        IN _deviceContext.GetAddressOf()
     );
 }
 
@@ -79,10 +78,10 @@ void Device::CreateDoubleBuffer()
 {
     ComPtr<ID3D11Texture2D> backBuffer;
 
-    swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
-    device->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView.GetAddressOf());
+    _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
+    _device->CreateRenderTargetView(backBuffer.Get(), nullptr, _renderTargetView.GetAddressOf());
 
-    deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
+    _deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
 
     D3D11_VIEWPORT vp;
     vp.Width = WIN_WIDTH;
@@ -91,5 +90,5 @@ void Device::CreateDoubleBuffer()
     vp.MaxDepth = 1.0f;
     vp.TopLeftX = 0;
     vp.TopLeftY = 0;
-    deviceContext->RSSetViewports(1, &vp);
+    _deviceContext->RSSetViewports(1, &vp);
 }

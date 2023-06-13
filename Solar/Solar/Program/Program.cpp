@@ -8,6 +8,8 @@
 
 Program::Program()
 {
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	_curScene = make_shared<BowScene>();
 
 	_view = make_shared<MatrixBuffer>();

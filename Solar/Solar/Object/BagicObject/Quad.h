@@ -2,8 +2,8 @@
 class Quad
 {
 public:
-	Quad(wstring path);
-	Quad(wstring path, Vector2 size);
+	Quad(wstring path, wstring shader = L"Shader/TexturePS.hlsl");
+	Quad(wstring path, Vector2 size, wstring shader = L"Shader/TexturePS.hlsl");
 	Vector2 GetSize();
 
 	void Update();

@@ -231,11 +231,18 @@
     <Image Include="Solar.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="..\..\..\..\Stage1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Texture\skeleton.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TextureVS.hlsl" />
     <FxCompile Include="Shader\TexturePS.hlsl" />
     <FxCompile Include="Shader\VertexShader.hlsl" />
     <FxCompile Include="Shader\PixelShader.hlsl" />
+    <FxCompile Include="Shader\BowShader.hlsl" />
   </ItemGroup>
 </Project>
