@@ -1,50 +1,54 @@
 #include "framework.h"
-#include "Quad.h"
+#include "Sprite.h"
 
-Quad::Quad(wstring path, wstring PS)
+Sprite::Sprite(wstring path, Vector2 maxFrame)
+    : Quad()
+    , _maxFrame(maxFrame)
 {
     _srv = ADD_SRV(path);
     _size = _srv->GetImageSize();
+    _size.x /= _maxFrame.x;
+    _size.y /= _maxFrame.y;
 
     CreateVertices();
-    CreateData(PS);
+    CreateData(path);
+
+    _frameBuffer = make_shared<FrameBuffer>();
+    _frameBuffer->_data.maxFrame.x = maxFrame.x;
+    _frameBuffer->_data.maxFrame.y = maxFrame.y;
+    _frameBuffer->_data.curFrame = { 0,0 };
 }
 
-Quad::Quad(wstring path, Vector2 size, wstring shader)
-    : _size(size)
+Sprite::Sprite(wstring path, Vector2 maxFrame, Vector2 size)
+    : Quad()
+    , _maxFrame(maxFrame)
 {
     _srv = ADD_SRV(path);
+    _size = size;
 
     CreateVertices();
-    CreateData(shader);
+    CreateData(path);
+
+    _frameBuffer = make_shared<FrameBuffer>();
+    _frameBuffer->_data.maxFrame.x = maxFrame.x;
+    _frameBuffer->_data.maxFrame.y = maxFrame.y;
+    _frameBuffer->_data.curFrame = { 0,0 };
 }
 
-Vector2 Quad::GetSize()
+
+void Sprite::Update()
 {
-    return _size;
+    _frameBuffer->Update_Resource();
+    Quad::Update();
 }
 
-void Quad::Update()
+void Sprite::Render()
 {
+    _frameBuffer->SetPS_Buffer(0);
+    Quad::Render();
 }
 
-void Quad::Render()
-{
-    _vertexBuffer->SetIA_VertexBuffer();
-    _indexBuffer->SetIA_IndexBuffer();
-    _vs->SetIA_InputLayOut();
-    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    _srv->SetSRV(0);
-    SAMPLER->SetSampler();
-
-    _vs->Set_VS();
-    _ps->Set_PS();
-
-    DC->DrawIndexed(_indices.size(), 0, 0);
-}
-
-void Quad::CreateVertices()
+void Sprite::CreateVertices()
 {
     Vertex_Texture v;
 
@@ -79,10 +83,10 @@ void Quad::CreateVertices()
     _indices.push_back(3);
 }
 
-void Quad::CreateData(wstring path)
+void Sprite::CreateData(wstring path)
 {
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size());
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
     _vs = make_shared<VertexShader>(L"Shader/TextureVS.hlsl");
-    _ps = make_shared<PixelShader>(path);
+    _ps = make_shared<PixelShader>(L"Shader/SpritePS.hlsl");
 }

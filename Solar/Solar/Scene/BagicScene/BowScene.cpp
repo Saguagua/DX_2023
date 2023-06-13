@@ -4,7 +4,6 @@
 BowScene::BowScene()
 {
 	_stage = make_shared<Quad>(L"Resource/Texture/Stage1.png", Vector2(WIN_WIDTH, WIN_HEIGHT));
-	_stage->GetTransform()->SetPos(CENTER);
 	_player = make_shared<Character>(L"Player");
 
 	_monsters.resize(30);

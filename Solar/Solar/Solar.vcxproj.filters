@@ -123,6 +123,15 @@
     <ClInclude Include="Object\Obj\Monster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\BagicScene\SpriteScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BagicObject\Sprite.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\Link.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solar.cpp">
@@ -218,6 +227,15 @@
     <ClCompile Include="Object\Obj\Monster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\BagicScene\SpriteScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BagicObject\Sprite.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\Link.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Solar.rc">
@@ -231,10 +249,10 @@
     <Image Include="Solar.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Stage1.png">
+    <Image Include="Resource\Texture\skeleton.png">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Resource\Texture\skeleton.png">
+    <Image Include="Resource\Texture\link.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -244,5 +262,6 @@
     <FxCompile Include="Shader\VertexShader.hlsl" />
     <FxCompile Include="Shader\PixelShader.hlsl" />
     <FxCompile Include="Shader\BowShader.hlsl" />
+    <FxCompile Include="Shader\SpritePS.hlsl" />
   </ItemGroup>
 </Project>

@@ -1,20 +1,22 @@
 #pragma once
 class Quad
 {
+protected:
+	Quad() {}
 public:
 	Quad(wstring path, wstring shader = L"Shader/TexturePS.hlsl");
 	Quad(wstring path, Vector2 size, wstring shader = L"Shader/TexturePS.hlsl");
+	virtual ~Quad() {}
+
 	Vector2 GetSize();
 
-	void Update();
-	void Render();
+	virtual void Update();
+	virtual void Render();
 
-	void CreateVertices();
-	void CreateData(wstring path);
+	virtual void CreateVertices();
+	virtual void CreateData(wstring path);
 
-	shared_ptr<Transform> GetTransform() { return _transform; }
-
-private:
+protected:
 	vector<Vertex_Texture> _vertices;
 	vector<UINT> _indices;
 
@@ -24,9 +26,6 @@ private:
 	shared_ptr<PixelShader> _ps;
 
 	shared_ptr<SRV> _srv;
-
-	// 컴포넌트 패턴
-	shared_ptr<Transform> _transform;
 
 	Vector2 _size;
 };
