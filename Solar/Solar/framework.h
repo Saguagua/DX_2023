@@ -66,6 +66,9 @@ using namespace Microsoft::WRL;
 #include "Framework/Collider/CircleCollider.h"
 #include "Framework/Collider/RectCollider.h"
 
+// Animation
+#include "Framework/Animation/Action.h"
+
 // Obj
 #include "Object/BagicObject/Quad.h"
 #include "Object/BagicObject/Sprite.h"

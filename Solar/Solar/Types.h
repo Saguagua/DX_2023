@@ -22,6 +22,7 @@
 #define SAMPLER		StateManager::GetInstance()->GetSampler()
 
 #define ADD_SRV(k)		SRVManager::GetInstance()->AddSRV(k)
+#define GET_SRV(k)		SRVManager::GetInstance()->GetSRV(k)
 
 #define KEY_UP(k)			InputManager::GetInstance()->Up(k)
 #define KEY_DOWN(k)			InputManager::GetInstance()->Down(k)
@@ -31,5 +32,7 @@
 #define DELTA_TIME			Timer::GetInstance()->GetDeltaTime()
 #define RUN_TIME			Timer::GetInstance()->GetRunTime()
 #define FPS					Timer::GetInstance()->GetFPS()
+
+using CallBack = function<void()>;
 
 #define LERP(s,e,t)			 s + (e - s) * t

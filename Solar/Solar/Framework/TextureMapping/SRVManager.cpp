@@ -18,3 +18,11 @@ shared_ptr<SRV> SRVManager::AddSRV(wstring file)
 
 	return _srvTable[file];
 }
+
+shared_ptr<SRV> SRVManager::GetSRV(wstring file)
+{
+	if (_srvTable.count(file) != 0)
+		return _srvTable[file];
+
+	return nullptr;
+}

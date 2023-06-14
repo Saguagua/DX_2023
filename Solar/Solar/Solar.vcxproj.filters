@@ -132,6 +132,9 @@
     <ClInclude Include="Object\Obj\Link.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Animation\Action.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Solar.cpp">
@@ -236,6 +239,9 @@
     <ClCompile Include="Object\Obj\Link.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Animation\Action.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Solar.rc">
@@ -263,5 +269,6 @@
     <FxCompile Include="Shader\PixelShader.hlsl" />
     <FxCompile Include="Shader\BowShader.hlsl" />
     <FxCompile Include="Shader\SpritePS.hlsl" />
+    <FxCompile Include="Shader\ActionPS.hlsl" />
   </ItemGroup>
 </Project>

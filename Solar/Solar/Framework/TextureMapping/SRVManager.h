@@ -27,7 +27,7 @@ public:
 	}
 
 	shared_ptr<SRV> AddSRV(wstring file);
-
+	shared_ptr<SRV> GetSRV(wstring file);
 private:
 	static SRVManager* _instance;
 

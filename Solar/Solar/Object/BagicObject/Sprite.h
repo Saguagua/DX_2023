@@ -9,17 +9,14 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetCurFrame(Vector2 frame) 
-	{
-		_frameBuffer->_data.curFrame.x = frame.x; 
-		_frameBuffer->_data.curFrame.y = frame.y; 
-	}
+	void SetCurClip(Vector2 frame);
+	void SetCurClip(Action::Clip clip);
 
 private:
 	virtual void CreateVertices() override;
 	virtual void CreateData(wstring path) override;
 
-	shared_ptr<FrameBuffer> _frameBuffer;
+	shared_ptr<ActionBuffer> _actionBuffer;
 	Vector2 _maxFrame;
 };
 
