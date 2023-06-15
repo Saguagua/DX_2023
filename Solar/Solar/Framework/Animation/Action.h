@@ -35,6 +35,7 @@ public:
 	Clip GetCurClip() { return _clips[_curClipIndexY][_curClipIndexX]; }
 
 	void SetEndEvent(CallBack event_) { _endEvent = event_; }
+	void SetType(Action::Type type) { _repeatType = type; }
 
 private:
 	string _name;
