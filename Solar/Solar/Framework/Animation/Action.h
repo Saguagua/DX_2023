@@ -34,7 +34,11 @@ public:
 	void SetCurClip(int y) {_curClipIndexY = y; }
 	Clip GetCurClip() { return _clips[_curClipIndexY][_curClipIndexX]; }
 
-	void SetEndEvent(CallBack event_) { _endEvent = event_; }
+	void SetStartEvent(CallBack startEvent) { _startEvent = startEvent; }
+	void SetEndEvent(CallBack endEvent) { _endEvent = endEvent; }
+	void SetStartEventNum(CallBackInt eventNum) { _startEventNum = eventNum; }
+	void SetEndEventNum(CallBackInt eventNum) { _endEventNum = eventNum; }
+
 	void SetType(Action::Type type) { _repeatType = type; }
 
 private:
@@ -53,5 +57,8 @@ private:
 	bool _isReverse = false;
 
 	CallBack _endEvent = nullptr;
+	CallBack _startEvent = nullptr;
+	CallBackInt _endEventNum = nullptr;
+	CallBackInt _startEventNum = nullptr;
 };
 

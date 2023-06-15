@@ -63,6 +63,10 @@ void Action::Play()
 	_isPlay = true;
 	_isReverse = false;
 	_time = 0.0f;
+	if (_startEvent != nullptr)
+		_startEvent();
+	if (_startEventNum != nullptr)
+		_startEventNum(0);
 }
 
 void Action::Pause()
@@ -78,6 +82,8 @@ void Action::Stop()
 
 	if (_endEvent != nullptr)
 		_endEvent();
+	if (_endEventNum != nullptr)
+		_endEventNum(5);
 }
 
 void Action::Reset()

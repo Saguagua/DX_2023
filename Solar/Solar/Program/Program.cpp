@@ -42,8 +42,19 @@ void Program::Render()
 	_view->SetVS_Buffer(1);
 	_proj->SetVS_Buffer(2);
 
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
 	ALPHA->SetState();
 	_curScene->Render();
+
+	ImGui::Text("FPS : %d", FPS);
+	ImGui::Text("DeltaTime : %1f", DELTA_TIME);
+	ImGui::Text("RunTime : %1f", RUN_TIME);
+	_curScene->PostRender();
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	Device::GetInstance()->Present();
 }
