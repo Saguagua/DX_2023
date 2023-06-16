@@ -30,7 +30,6 @@ public:
 	shared_ptr<BlendState> GetBlend() { return _blend; }
 	shared_ptr<SamplerState> GetSampler() { return _sampler; }
 
-	shared_ptr<SamplerState> AA() { return _sampler; }
 private:
 	static StateManager* _instance;
 
