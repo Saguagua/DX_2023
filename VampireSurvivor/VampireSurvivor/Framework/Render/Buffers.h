@@ -1,11 +1,6 @@
 #pragma once
 struct MatrixBuffer : public ConstantBuffer
 {
-	struct Data
-	{
-		XMMATRIX matrix;
-	};
-
 	MatrixBuffer()
 		:ConstantBuffer(&_data, sizeof(_data))
 	{
@@ -20,16 +15,17 @@ struct MatrixBuffer : public ConstantBuffer
 		_data.matrix = matrix;
 	}
 
+private:
+	struct Data
+	{
+		XMMATRIX matrix;
+	};
+
 	Data _data;
 };
 
 struct ColorBuffer : public ConstantBuffer
 {
-	struct Data
-	{
-		XMFLOAT4 color;
-	};
-
 	ColorBuffer()
 		:ConstantBuffer(&_data, sizeof(_data))
 	{
@@ -42,6 +38,47 @@ struct ColorBuffer : public ConstantBuffer
 	{
 		_data.color = color;
 	}
+
+private:
+	struct Data
+	{
+		XMFLOAT4 color;
+	};
+
+	Data _data;
+};
+
+struct ActionBuffer : public ConstantBuffer
+{
+	ActionBuffer()
+		:ConstantBuffer(&_data, sizeof(_data))
+	{}
+
+	~ActionBuffer() {}
+
+	void SetFullSize(Vector2 size)
+	{
+		_data.textureSize = size;
+	}
+
+	void SetStart(Vector2 pos)
+	{
+		_data.startPos = pos;
+	}
+
+	void SetSize(Vector2 size)
+	{
+		_data.size = size;
+	}
+
+private:
+	struct Data
+	{
+		Vector2 startPos;
+		Vector2 size;
+		Vector2 textureSize;
+		int padding[2];
+	};
 
 	Data _data;
 };

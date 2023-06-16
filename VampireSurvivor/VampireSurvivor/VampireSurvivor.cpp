@@ -44,6 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg = {};
 
     Device::Create();
+    ShaderManager::Create();
     shared_ptr<Program> program = make_shared<Program>();
 
     // 기본 메시지 루프입니다:
@@ -64,12 +65,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
+    ShaderManager::Delete();
     Device::Delete();
 
     return (int) msg.wParam;
 }
-
-
 
 //
 //  함수: MyRegisterClass()

@@ -20,7 +20,6 @@
 #include <string>
 #include <wrl/client.h>
 
-
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
@@ -28,29 +27,45 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
+#include "../DXTex/DirectXTex.h"
+
+#include "../ImGui/imgui.h"
+#include "../ImGui/imgui_impl_dx11.h"
+#include "../ImGui/imgui_impl_win32.h"
+
 using namespace std;
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
+//Device
 #include "Framework/Device/Device.h"
 
+//Math
 #include "Framework/Math/Vector2.h"
 #include "Framework/Math/Transform.h"
 
+//Render
 #include "Framework/Render/ConstantBuffer.h"
 #include "Framework/Render/Buffers.h"
 #include "Framework/Render/VertexLayout.h"
 #include "Framework/Render/IndexBuffer.h"
 #include "Framework/Render/VertexBuffer.h"
+#include "Framework/Render/Shader.h"
 #include "Framework/Render/VertexShader.h"
 #include "Framework/Render/PixelShader.h"
+#include "Framework/Render/ShaderManager.h"
 
+//TextureMapping
+#include "Framework/TextureMapping/SRV.h"
+
+//Object
 #include "Object/BagicObject/Quad.h"
 
+// Scene
 #include "Scene/Scene.h"
 
+//Program
 #include "Program/Program.h"
-
 
 #include "Types.h"
 

@@ -1,24 +1,29 @@
 #pragma once
 class Quad
 {
+protected:
+	Quad() {}
+	Quad(Vector2 size):_size(size) {}
+	virtual ~Quad() {}
+
 public:
-	Quad(wstring path);
-	~Quad();
+	virtual void Render();
+	virtual void Update();
 
-	shared_ptr<Transform> GetTransform() { return _transform; }
-
-private:
-	void CreateVertex();
-	
-
-	shared_ptr<Transform> _transform;
+protected:
+	virtual void CreateVertex() abstract;
+	virtual void CreateData() abstract;
 
 	shared_ptr<VertexBuffer> _vBuffer;
-	shared_ptr<IndexBuffer> _pBuffer;
-	shared_ptr<VertexShader> _vShader;
-	shared_ptr<PixelShader> _pShader;
+	shared_ptr<IndexBuffer> _iBuffer;
+	weak_ptr<VertexShader> _vShader;
+	weak_ptr<PixelShader> _pShader;
+
+	//weak_ptr<SRV> _srv;
 	
 	vector<Vertex> _vertices;
-	vector<int> _indices;
+	vector<UINT> _indices;
+
+	Vector2 _size;
 };
 
