@@ -12,3 +12,8 @@ SRV::SRV(wstring path)
     CreateShaderResourceView(DEVICE.Get(), image.GetImages(),
         image.GetImageCount(), image.GetMetadata(), _srv.GetAddressOf());
 }
+
+void SRV::SetSRV(UINT slot)
+{
+    DC->PSSetShaderResources(slot, 1, _srv.GetAddressOf());
+}

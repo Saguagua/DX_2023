@@ -4,24 +4,36 @@
 Sprite::Sprite(wstring path)
 	:Quad()
 {
-    
+    _srv = SRVManager::GetInstance()->AddSRV(path);
+    _size = _srv.lock()->GetImageSize();
     _actionBuffer = make_shared<ActionBuffer>();
-   
+    _actionBuffer->SetFullSize(_size);
+
+    CreateVertex();
+    CreateData();
 }
 
 Sprite::Sprite(wstring path, Vector2 size)
 	:Quad(size)
 {
+    _srv = SRVManager::GetInstance()->AddSRV(path);
+    _actionBuffer = make_shared<ActionBuffer>();
+    _actionBuffer->SetFullSize(_size);
+
+    CreateVertex();
+    CreateData();
 }
-
-
 
 void Sprite::Update()
 {
+    _actionBuffer->UpdateData();
+    Quad::Update();
 }
 
 void Sprite::Render()
 {
+    _actionBuffer->SetPS_Buffer(0);
+    Quad::Render();
 }
 
 void Sprite::CreateVertex()

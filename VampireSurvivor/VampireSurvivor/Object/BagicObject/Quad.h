@@ -19,7 +19,7 @@ protected:
 	weak_ptr<VertexShader> _vShader;
 	weak_ptr<PixelShader> _pShader;
 
-	//weak_ptr<SRV> _srv;
+	weak_ptr<SRV> _srv;
 	
 	vector<Vertex> _vertices;
 	vector<UINT> _indices;

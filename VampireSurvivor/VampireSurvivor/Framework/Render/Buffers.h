@@ -71,6 +71,8 @@ struct ActionBuffer : public ConstantBuffer
 		_data.size = size;
 	}
 
+
+
 private:
 	struct Data
 	{

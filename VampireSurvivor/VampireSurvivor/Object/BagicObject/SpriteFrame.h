@@ -9,4 +9,3 @@ public:
 private:
 	Vector2 _maxFrame;
 };
-
