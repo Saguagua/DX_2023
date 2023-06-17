@@ -41,7 +41,7 @@ void Program::Render()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	//ALPHA->SetState();
+	ALPHA->SetState();
 	_curScene->Render();
 
 	ImGui::Text("FPS : %d", FPS);

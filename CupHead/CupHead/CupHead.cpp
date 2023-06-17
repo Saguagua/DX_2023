@@ -47,6 +47,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     Timer::Create();
     InputManager::Create();
     ShaderManager::Create();
+    StateManager::Create();
+    SRVManager::Create();
 
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
@@ -79,6 +81,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ImGui::DestroyContext();
 
 
+    SRVManager::Delete();
+    StateManager::Delete();
     ShaderManager::Delete();
     InputManager::Delete();
     Timer::Delete();
@@ -161,6 +165,9 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+
     switch (message)
     {
     case WM_COMMAND:

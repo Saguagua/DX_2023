@@ -66,7 +66,7 @@ struct ActionBuffer : public ConstantBuffer
 		_data.clipSize = clipSize;
 	}
 
-	void SetfullSize(Vector2 full)
+	void SetFullSize(Vector2 full)
 	{
 		_data.fullSize = full;
 	}
@@ -78,6 +78,35 @@ private:
 		Vector2 fullSize = {0.0f, 0.0f};
 		Vector2 clipSize = {0.0f, 0.0f};
 		int padding[2];
+	};
+
+	Data _data;
+};
+
+struct IntBuffer :public ConstantBuffer
+{
+	IntBuffer()
+		:ConstantBuffer(&_data, sizeof(_data))
+	{}
+
+	virtual ~IntBuffer() {}
+
+	void SetSlot1(int val) { _data.val1 = val; }
+	void SetSlot2(int val) { _data.val2 = val; }
+	void SetSlot3(int val) { _data.val3 = val; }
+	void SetSlot4(int val) { _data.val4 = val; }
+
+	int GetSlot1() { return _data.val1; }
+	int GetSlot2() { return _data.val2; }
+	int GetSlot3() { return _data.val3; }
+	int GetSlot4() { return _data.val4; }
+private:
+	struct Data
+	{
+		int val1 = 0;
+		int val2 = 0;
+		int val3 = 0;
+		int val4 = 0;
 	};
 
 	Data _data;

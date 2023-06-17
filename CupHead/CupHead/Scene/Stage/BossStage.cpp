@@ -3,11 +3,8 @@
 
 BossStage::BossStage()
 {
-	_cir = make_shared<CircleCollider>(100.0f);
-	_rec = make_shared<RectCollider>(Vector2(100.0f, 100.0f));
-	Vector2 center = CENTER;
-	_cir->GetTransform()->SetPos(CENTER);
-	_rec->GetTransform()->SetPos(CENTER - Vector2(60.0f, 60.0f));
+	_main = make_shared<MainCharacter>();
+	_main->GetCollider()->GetTransform()->SetPos(CENTER);
 }
 
 BossStage::~BossStage()
@@ -16,16 +13,12 @@ BossStage::~BossStage()
 
 void BossStage::Update()
 {
-	_cir->GetTransform()->SetPos(MOUSE_POS);
-	_rec->GetTransform()->AddPos(UP_VECTOR * DELTA_TIME * 200.0f);
-	_cir->Update();
-	_rec->Update();
+	_main->Update();
 }
 
 void BossStage::Render()
 {
-	_cir->Render();
-	_rec->Render();
+	_main->Render();
 }
 
 void BossStage::PostRender()

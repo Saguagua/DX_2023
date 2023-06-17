@@ -10,7 +10,6 @@ public:
 	virtual void PostRender() override;
 
 private:
-	shared_ptr<CircleCollider> _cir;
-	shared_ptr<RectCollider> _rec;
+	shared_ptr<MainCharacter> _main;
 };
 

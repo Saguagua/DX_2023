@@ -51,6 +51,7 @@ using namespace Microsoft::WRL;
 //Utility
 #include "Framework/Utility/InputManager.h"
 #include "Framework/Utility/Timer.h"
+#include "Framework/Utility/tinyxml2.h"
 
 // Render
 #include "Framework/Render/ConstantBuffer.h"
@@ -63,10 +64,24 @@ using namespace Microsoft::WRL;
 #include "Framework/Render/IndexBuffer.h"
 #include "Framework/Render/VertexInput.h"
 
+// TextureMapping
+#include "Framework/TextureMapping/SRV.h"
+#include "Framework/TextureMapping/SRVManager.h"
+#include "Framework/TextureMapping/SamplerState.h"
+#include "Framework/TextureMapping/BlendState.h"
+#include "Framework/TextureMapping/StateManager.h"
+
+//Animation
+#include "Framework/Animation/Action.h"
+
 //Collider
 #include "Framework/Collider/Collider.h"
 #include "Framework/Collider/CircleCollider.h"
 #include "Framework/Collider/RectCollider.h"
+
+//Object
+#include "Object/BagicObj/Sprite.h"
+#include "Object/Obj/MainCharacter.h"
 
 // Scene
 #include "Scene/Scene.h"

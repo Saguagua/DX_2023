@@ -90,6 +90,39 @@
     <ClInclude Include="Framework\Utility\Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\BlendState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\SamplerState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\SRV.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\SRVManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextureMapping\StateManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BagicObj\Sprite.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Animation\Action.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Utility\tinyxml2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\MainCharacter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\Track.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj\Bullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CupHead.cpp">
@@ -152,6 +185,39 @@
     <ClCompile Include="Framework\Utility\Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\BlendState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\SamplerState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\SRV.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\SRVManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextureMapping\StateManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BagicObj\Sprite.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Animation\Action.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Utility\tinyxml2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\MainCharacter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\Track.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj\Bullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CupHead.rc">
@@ -165,10 +231,587 @@
     <Image Include="CupHead.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalDown.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalDownCharge.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalDownShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalUp.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalUpCharge.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDiagonalUpShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDown.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDownCharge.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimDownShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimStraight.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimStraightCharge.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimStraightShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimUp.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AimUpShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Air_Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirDash.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirDiaDownReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirDiaUpReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirDownReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirStraightReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\AirUpReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DashDust.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DiaDownSpecialShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DiaUpSpecialShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DownSpecialShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Duck.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DuckCharge.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DuckIdle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\DuckShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Ground_Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundDash.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundDiaDownReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundDiaUpReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundDownReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundStraightReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundStraightSpecialShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\GroundUpReadySpecial.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Hyper_Skill_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Hyper_Skill_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Hyper_Skill_Start.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Intro_A_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Intro_A_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Intro_A_Start.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Jump.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\JumpDustA.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Parry.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\ParrySucces.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Down_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Down_Idle_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Down_Ready_Special.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Down_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_End_Parry.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Hyper_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Down_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Down_Idle_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Down_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Up_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Up_Idle_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Mini_Up_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Parry.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Ready_End_Hyper.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Ready_Hyper.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Special_Shot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Straight_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Trans_Mini.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Trans_Original.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Up_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Up_Idle_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Up_Ready_Special.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Plane_Up_Trans.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\planeBullet.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Player_Air_Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Player_Ghost.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Player_Hit.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\Run.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\RunShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\RunUpShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\SpecialShootEffect.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\ToothBullet.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\MainCharacter\UpSpecialShot.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Bullet_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Bullet_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Hyper_Shot_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Hyper_Shot_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Hyper_Shot_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Special_Bullet_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet\Special_Bullet_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Back_Image.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Dash.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Dash_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Die_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Die_Middle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Die_Start.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Intro_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Intro_2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Intro_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Move_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Move_2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Move_3.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Move_Break_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Move_Break_2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Die.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_A_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_A_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_A.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_B.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_C.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_D.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro_End_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_C_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Parts_C_Intro_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_End.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_Start.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Two_Die.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Two_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Page_Two_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Ready_Dash.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Clown_Wall_Crash.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Helium_Pipe_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Helium_Pipe_Intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Left_Helium_Tank_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Left_Helium_Tank_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Page_Two_Body_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Page_Two_Intro_1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Page_Two_Intro_2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Right_Helium_Tank_Idle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Boss\Right_Helium_Tank_Loop.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_back_coaster.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_bulb_row_light.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_close_coaster.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_left_slide.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_main.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_mid_coaster.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_sky.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_bg_track.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_fg_left_arrow_light.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_fg_left_sign.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_fg_right_flag.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Background\clown_fg_right_sign_light.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\ColorVS.hlsl" />
     <FxCompile Include="Shader\SingleColorPS.hlsl" />
     <FxCompile Include="Shader\VertexVS.hlsl" />
+    <FxCompile Include="Shader\TextureVS.hlsl" />
+    <FxCompile Include="Shader\ActionPS.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\MainCharacter\AimDiagonalDown.xml" />
+    <Xml Include="Resource\MainCharacter\AimDiagonalDownCharge.xml" />
+    <Xml Include="Resource\MainCharacter\AimDiagonalDownShot.xml" />
+    <Xml Include="Resource\MainCharacter\AimDiagonalUp.xml" />
+    <Xml Include="Resource\MainCharacter\AimDiagonalUpCharge.xml" />
+    <Xml Include="Resource\MainCharacter\AimDiagonalUpShot.xml" />
+    <Xml Include="Resource\MainCharacter\AimDown.xml" />
+    <Xml Include="Resource\MainCharacter\AimDownCharge.xml" />
+    <Xml Include="Resource\MainCharacter\AimDownShot.xml" />
+    <Xml Include="Resource\MainCharacter\AimStraight.xml" />
+    <Xml Include="Resource\MainCharacter\AimStraightCharge.xml" />
+    <Xml Include="Resource\MainCharacter\AimStraightShot.xml" />
+    <Xml Include="Resource\MainCharacter\AimUp.xml" />
+    <Xml Include="Resource\MainCharacter\AimUpShot.xml" />
+    <Xml Include="Resource\MainCharacter\Air_Hit.xml" />
+    <Xml Include="Resource\MainCharacter\AirDash.xml" />
+    <Xml Include="Resource\MainCharacter\AirDiaDownReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\AirDiaUpReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\AirDownReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\AirStraightReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\AirUpReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\DashDust.xml" />
+    <Xml Include="Resource\MainCharacter\DiaDownSpecialShot.xml" />
+    <Xml Include="Resource\MainCharacter\DiaUpSpecialShot.xml" />
+    <Xml Include="Resource\MainCharacter\DownSpecialShot.xml" />
+    <Xml Include="Resource\MainCharacter\Duck.xml" />
+    <Xml Include="Resource\MainCharacter\DuckCharge.xml" />
+    <Xml Include="Resource\MainCharacter\DuckIdle.xml" />
+    <Xml Include="Resource\MainCharacter\DuckShot.xml" />
+    <Xml Include="Resource\MainCharacter\Ground_Hit.xml" />
+    <Xml Include="Resource\MainCharacter\GroundDash.xml" />
+    <Xml Include="Resource\MainCharacter\GroundDiaDownReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\GroundDiaUpReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\GroundDownReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\GroundStraightReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\GroundStraightSpecialShot.xml" />
+    <Xml Include="Resource\MainCharacter\GroundUpReadySpecial.xml" />
+    <Xml Include="Resource\MainCharacter\Hyper_Skill_Intro.xml" />
+    <Xml Include="Resource\MainCharacter\Hyper_Skill_Loop.xml" />
+    <Xml Include="Resource\MainCharacter\Hyper_Skill_Start.xml" />
+    <Xml Include="Resource\MainCharacter\Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Intro_A_End.xml" />
+    <Xml Include="Resource\MainCharacter\Intro_A_Loop.xml" />
+    <Xml Include="Resource\MainCharacter\Intro_A_Start.xml" />
+    <Xml Include="Resource\MainCharacter\Jump.xml" />
+    <Xml Include="Resource\MainCharacter\JumpDustA.xml" />
+    <Xml Include="Resource\MainCharacter\Parry.xml" />
+    <Xml Include="Resource\MainCharacter\ParrySucces.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Down_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Down_Idle_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Down_Ready_Special.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Down_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_End_Parry.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Hyper_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Down_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Down_Idle_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Down_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Up_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Up_Idle_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Mini_Up_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Parry.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Ready_End_Hyper.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Ready_Hyper.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Special_Shot.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Straight_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Trans_Mini.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Trans_Original.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Up_Idle.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Up_Idle_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Up_Ready_Special.xml" />
+    <Xml Include="Resource\MainCharacter\Plane_Up_Trans.xml" />
+    <Xml Include="Resource\MainCharacter\Player_Air_Hit.xml" />
+    <Xml Include="Resource\MainCharacter\Player_Ghost.xml" />
+    <Xml Include="Resource\MainCharacter\Player_Hit.xml" />
+    <Xml Include="Resource\MainCharacter\Run.xml" />
+    <Xml Include="Resource\MainCharacter\RunShot.xml" />
+    <Xml Include="Resource\MainCharacter\RunUpShot.xml" />
+    <Xml Include="Resource\MainCharacter\SpecialShootEffect.xml" />
+    <Xml Include="Resource\MainCharacter\UpSpecialShot.xml" />
+    <Xml Include="Resource\Bullet\Bullet_Intro.xml" />
+    <Xml Include="Resource\Bullet\Bullet_Loop.xml" />
+    <Xml Include="Resource\Bullet\Hyper_Shot_End.xml" />
+    <Xml Include="Resource\Bullet\Hyper_Shot_Intro.xml" />
+    <Xml Include="Resource\Bullet\Hyper_Shot_Loop.xml" />
+    <Xml Include="Resource\Bullet\Special_Bullet_Intro.xml" />
+    <Xml Include="Resource\Bullet\Special_Bullet_Loop.xml" />
+    <Xml Include="Resource\Boss\Clown_Dash.xml" />
+    <Xml Include="Resource\Boss\Clown_Dash_Loop.xml" />
+    <Xml Include="Resource\Boss\Clown_Die_End.xml" />
+    <Xml Include="Resource\Boss\Clown_Die_Middle.xml" />
+    <Xml Include="Resource\Boss\Clown_Die_Start.xml" />
+    <Xml Include="Resource\Boss\Clown_Intro_1.xml" />
+    <Xml Include="Resource\Boss\Clown_Intro_2.xml" />
+    <Xml Include="Resource\Boss\Clown_Intro_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Move_1.xml" />
+    <Xml Include="Resource\Boss\Clown_Move_2.xml" />
+    <Xml Include="Resource\Boss\Clown_Move_3.xml" />
+    <Xml Include="Resource\Boss\Clown_Move_Break_1.xml" />
+    <Xml Include="Resource\Boss\Clown_Move_Break_2.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Die.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_A_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_A_Intro.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_1.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_A.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_B.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_C.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Idle_D.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro_End.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_B_Intro_End_1.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_C_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Parts_C_Intro_End.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_End.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_Loop.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Last_Spawn_Penguin_Start.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Two_Die.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Two_Idle.xml" />
+    <Xml Include="Resource\Boss\Clown_Page_Two_Intro.xml" />
+    <Xml Include="Resource\Boss\Clown_Ready_Dash.xml" />
+    <Xml Include="Resource\Boss\Clown_Wall_Crash.xml" />
+    <Xml Include="Resource\Boss\Helium_Pipe_Idle.xml" />
+    <Xml Include="Resource\Boss\Helium_Pipe_Intro.xml" />
+    <Xml Include="Resource\Boss\Left_Helium_Tank_Idle.xml" />
+    <Xml Include="Resource\Boss\Left_Helium_Tank_Loop.xml" />
+    <Xml Include="Resource\Boss\Page_Two_Body_Idle.xml" />
+    <Xml Include="Resource\Boss\Page_Two_Intro_1.xml" />
+    <Xml Include="Resource\Boss\Page_Two_Intro_2.xml" />
+    <Xml Include="Resource\Boss\Right_Helium_Tank_Idle.xml" />
+    <Xml Include="Resource\Boss\Right_Helium_Tank_Loop.xml" />
   </ItemGroup>
 </Project>
