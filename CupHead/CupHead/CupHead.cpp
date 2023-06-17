@@ -48,6 +48,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     InputManager::Create();
     ShaderManager::Create();
 
+    ImGui::CreateContext();
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplWin32_Init(hWnd);
+    ImGui_ImplDX11_Init(DEVICE.Get(), DC.Get());
+
     shared_ptr<Program> program = make_shared<Program>();
 
     while (msg.message != WM_QUIT)
@@ -67,6 +73,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             program->Render();
         }
     }
+
+    ImGui_ImplDX11_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
+
 
     ShaderManager::Delete();
     InputManager::Delete();
@@ -114,6 +125,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
 //        주 프로그램 창을 만든 다음 표시합니다.
 //
+
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
@@ -145,6 +157,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)

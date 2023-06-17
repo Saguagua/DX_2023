@@ -30,12 +30,12 @@
 #pragma comment(lib,"d3dcompiler.lib")
 
 // DirectX Tex
-//#include "../DXTex/DirectXTex.h"
+#include "../DXTex/DirectXTex.h"
 
 // Imgui
-//#include "../ImGUI/imgui.h"
-//#include "../ImGUI/imgui_impl_dx11.h"
-//#include "../ImGUI/imgui_impl_win32.h"
+#include "../ImGUI/imgui.h"
+#include "../ImGUI/imgui_impl_dx11.h"
+#include "../ImGUI/imgui_impl_win32.h"
 
 using namespace std;
 using namespace DirectX;
