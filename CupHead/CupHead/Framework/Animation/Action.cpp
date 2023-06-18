@@ -1,7 +1,5 @@
 #include "framework.h"
 #include "Action.h"
-
-
 void Action::Update()
 {
 	if (!_isPlay)
@@ -16,15 +14,33 @@ void Action::Update()
 		{
 		case Action::END:
 		{
-			_curClipIndex++;
+			if (!_isReverse)
+			{
+				_curClipIndex++;
 
-			if (_curClipIndex >= _clips.size())
-				Stop();
+				if (_curClipIndex >= _clips.size())
+					Stop();
+			}
+			else
+			{
+				_curClipIndex--;
+
+				if (_curClipIndex < 0)
+					Stop();
+			}
+			
 			break;
 		}
 		case Action::LOOP:
 		{
-			_curClipIndex = (_curClipIndex + 1) % _clips.size();
+			if (!_isReverse)
+			{
+				_curClipIndex = (_curClipIndex + 1) % _clips.size();
+			}
+			else
+			{
+				_curClipIndex = (_curClipIndex - 1) % _clips.size();
+			}
 			break;
 		}
 		case Action::PINGPONG:
@@ -72,6 +88,8 @@ void Action::Stop()
 
 	if (_endEvent != nullptr)
 		_endEvent();
+	if (_endEventInt != nullptr)
+		_endEventInt(5);
 }
 
 void Action::Reset()
@@ -80,4 +98,18 @@ void Action::Reset()
 	_isReverse = false;
 	_curClipIndex = 0;
 	_time = 0.0f;
+}
+
+void Action::SetReverse(bool set)
+{
+	if (set)
+	{
+		_isReverse = false;
+		_curClipIndex = 0;
+	}
+	else
+	{
+		_isReverse = true;
+		_curClipIndex = _clips.size()-1;
+	}
 }

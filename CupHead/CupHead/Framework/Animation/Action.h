@@ -33,7 +33,8 @@ public:
 	Clip GetCurClip() { return _clips[_curClipIndex]; }
 
 	void SetEndEvent(CallBack callback) { _endEvent = callback; }
-
+	void SetEndEvent(CallBackInt callback) { _endEventInt = callback; }
+	void SetReverse(bool set);
 private:
 	string _name;
 	vector<Clip> _clips;
@@ -49,5 +50,6 @@ private:
 	bool _isReverse = false;
 
 	CallBack _endEvent = nullptr;
+	CallBackInt _endEventInt = nullptr;
 };
 
