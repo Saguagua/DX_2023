@@ -6,8 +6,13 @@
 #define UP_VECTOR		 Vector2(0.0f, 1.0f)
 #define RIGHT_VECTOR	 Vector2(1.0f, 0.0f)
 
+#define GRAVITY			400.0f
+
 //Input
 #define MOUSE_POS		InputManager::GetInstance()->GetMousePos()
+#define KEY_UP(k)		InputManager::GetInstance()->Up(k)
+#define KEY_PRESS(k)	InputManager::GetInstance()->Press(k)
+#define KEY_DOWN(k)		InputManager::GetInstance()->Down(k)
 
 //TextureMapping
 #define ALPHA		StateManager::GetInstance()->GetAlpha()

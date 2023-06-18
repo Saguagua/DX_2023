@@ -1,27 +1,28 @@
 #pragma once
-class CircleCollider :public Collider, enable_shared_from_this<CircleCollider>
+class CircleCollider : public enable_shared_from_this<CircleCollider>, public Collider
 {
 public:
 	CircleCollider(float radius);
-	virtual ~CircleCollider() {}
+	virtual ~CircleCollider();
 
-	bool Block(shared_ptr<CircleCollider> col);
-	bool Block(shared_ptr<RectCollider> col) { return false; }
-
+	bool IsRed() { return _color.x == 1; }
 	float GetRadius() { return _radius; }
 	float GetWorldRadius();
-	
+
 	virtual void Update() override;
 	virtual void Render() override;
 
-	virtual bool IsCollision(const Vector2& pos) override;
-	virtual bool IsCollision(shared_ptr<CircleCollider> col) override;
-	virtual bool IsCollision(shared_ptr<RectCollider> col) override;
 
+	// Collider을(를) 통해 상속됨
+	virtual bool Block(shared_ptr<class CircleCollider> other) override;
+	virtual bool Block(shared_ptr<class RectCollider> other) override;
+
+	virtual bool IsCollision(Vector2 other) override;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
+	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
 private:
-	virtual void CreateData() override;
-	virtual void CreateVertices() override;
-	
+	void CreateVertices();
+	void CreateData();
+
 	float _radius;
 };
-

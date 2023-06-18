@@ -35,7 +35,7 @@ const Vector2& Transform::GetWorldPos()
 {
     XMFLOAT4X4 tmp;
 
-    XMStoreFloat4x4(&tmp, _scaleM);
+    XMStoreFloat4x4(&tmp, _srt);
 
     return Vector2(tmp._41, tmp._42);
 }

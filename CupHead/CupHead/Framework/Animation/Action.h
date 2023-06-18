@@ -20,7 +20,7 @@ public:
 		PINGPONG
 	};
 
-	Action(vector<Clip> clips, string name = "", Type type = Type::LOOP, float speed = 0.1f)
+	Action(vector<Clip> clips, string name = "", Type type = Type::LOOP, float speed = 1.0f)
 	: _clips(clips), _name(name), _repeatType(type), _speed(speed){}
 	~Action() {}
 

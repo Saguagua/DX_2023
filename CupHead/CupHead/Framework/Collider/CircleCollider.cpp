@@ -2,109 +2,107 @@
 #include "CircleCollider.h"
 
 CircleCollider::CircleCollider(float radius)
-    : _radius(radius)
+	:_radius(radius)
 {
-    CreateVertices();
-    CreateData();
+	CreateVertices();
+	CreateData();
 
-    _type = Type::CIRCLE;
+	_type = Type::CIRCLE;
 }
 
-void CircleCollider::Update()
+CircleCollider::~CircleCollider()
 {
-    _transform->Update();
-
-    _colorBuffer->SetColor(_color);
-    _colorBuffer->Update_Resource();
-}
-
-void CircleCollider::Render()
-{
-    _transform->Set_World(0);
-    _colorBuffer->SetPS_Buffer(0);
-
-    _vertexBuffer->SetIA_VertexBuffer();
-    _vs.lock()->SetIA_InputLayout();
-
-    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
-    _vs.lock()->Set();
-    _ps.lock()->Set();
-
-    DC->Draw(_vertices.size(), 0);
-}
-
-void CircleCollider::CreateVertices()
-{
-    Vertex v;
-
-    for (int i = 0; i < 37; i++)
-    {
-        v.pos = { _radius * cosf(i * PI / 18.0f), _radius * sinf(i * PI / 18.0f), 0.0f };
-        _vertices.push_back(v);
-    }
-}
-
-void CircleCollider::CreateData()
-{
-    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
-    _colorBuffer = make_shared<ColorBuffer>();
-
-    _vs = ADD_VS(L"Shader/VertexVS.hlsl");
-    _ps = ADD_PS(L"Shader/SingleColorPS.hlsl");
-}
-
-bool CircleCollider::IsCollision(const Vector2& pos)
-{
-    float distance = GetWorldPos().Distance(pos);
-    if (distance < GetWorldRadius())
-        return true;
-    return false;
-}
-
-bool CircleCollider::IsCollision(shared_ptr<CircleCollider> col)
-{
-    float distance = GetWorldPos().Distance(col->GetWorldPos());
-    if (distance < GetWorldRadius() + col->GetWorldRadius())
-        return true;
-    return false;
-}
-
-bool CircleCollider::IsCollision(shared_ptr<RectCollider> col)
-{
-    return col->IsCollision(shared_from_this());
-}
-
-bool CircleCollider::Block(shared_ptr<CircleCollider> col)
-{
-    if (!IsCollision(col))
-        return false;
-
-    Vector2 aPos = GetWorldPos();
-    Vector2 bPos = col->GetWorldPos();
-
-    float aRadius = GetWorldRadius();
-    float bRadius = col->GetWorldRadius();
-
-    Vector2 dir = bPos - aPos;
-
-    float scalar = (aRadius + bRadius) - dir.Length();
-
-    dir.Normalize();
-
-    Vector2 pushVector = dir * scalar;
-
-    bPos = bPos + pushVector;
-    col->GetTransform()->SetPos(bPos);
-
-    return true;
 }
 
 float CircleCollider::GetWorldRadius()
 {
-    Vector2 worldScale = _transform->GetWorldScale();
+	Vector2 worldScale = _transform->GetWorldScale();
 
-    float temp = (worldScale.x + worldScale.y) / 2;
+	float temp = (worldScale.x + worldScale.y) / 2;
 
-    return _radius * temp;
+	return _radius * temp;
+}
+
+void CircleCollider::Update()
+{
+	_transform->Update();
+	_colorBuffer->SetColor(_color);
+	_colorBuffer->Update_Resource();
+}
+
+void CircleCollider::Render()
+{
+	_transform->Set_World(0);
+	_colorBuffer->SetPS_Buffer(0);
+
+	_vsBuffer->SetIA_VertexBuffer();
+	_vsShader.lock()->SetIA_InputLayout();
+
+	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+	_vsShader.lock()->Set();
+	_psShader.lock()->Set();
+
+	DC->Draw(_vertices.size(), 0);
+}
+
+bool CircleCollider::IsCollision(Vector2 other)
+{
+	float len = (_transform->GetWorldPos() - other).Length();
+	return len <= _radius;
+}
+
+bool CircleCollider::IsCollision(shared_ptr<class CircleCollider> other)
+{
+	float length = (_transform->GetWorldPos() - other->GetWorldPos()).Length();
+	return length <= GetWorldRadius() + other->GetWorldRadius();
+}
+
+bool CircleCollider::IsCollision(shared_ptr<class RectCollider> other)
+{
+	return other->IsCollision(shared_from_this());
+}
+
+void CircleCollider::CreateVertices()
+{
+	float p = PI / 30.0f;
+	Vertex v = {};
+
+	for (int i = 0; i < 60; i++)
+	{
+		v.pos = { _radius * std::cosf(p * i), _radius * std::sinf(p * i), 0.0f };
+
+		_vertices.push_back(v);
+	}
+
+}
+
+void CircleCollider::CreateData()
+{
+	_vsBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size());
+	_colorBuffer = make_shared<ColorBuffer>();
+	_vsShader = ADD_VS(L"Shader/VertexVS.hlsl");
+	_psShader = ADD_PS(L"Shader/SingleColorPS.hlsl");
+}
+
+bool CircleCollider::Block(shared_ptr<class CircleCollider> other)
+{
+	if (!IsCollision(other))
+		return false;
+
+	Vector2 AtoB = other->GetWorldPos() - GetWorldPos();
+
+	float scalar = GetWorldRadius() + other->GetWorldRadius() - AtoB.Length();
+
+	AtoB.Normalize();
+
+	other->AddPos(AtoB * scalar);
+
+	return true;
+}
+
+bool CircleCollider::Block(shared_ptr<class RectCollider> other)
+{
+
+	return other->Block(shared_from_this());
 }

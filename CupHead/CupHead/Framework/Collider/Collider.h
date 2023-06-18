@@ -2,48 +2,54 @@
 
 #include "../../Types.h"
 
-class RectCollider;
-class CircleCollider;
-
 class Collider
 {
 public:
 	Collider();
-	virtual ~Collider() {}
+	~Collider() {}
+
+	void SetColor(XMFLOAT4 color);
+	void SetPos(Vector2 pos);
+	void SetScale(Vector2 scale);
+	void SetAngle(float angle);
+
+	void AddPos(Vector2 pos);
+	void AddScale(Vector2 scale);
+	void AddAngle(float angle);
+
+	shared_ptr<Transform> GetTransform();
+	void SetParent(shared_ptr<Collider> other);
+	void SetParent(shared_ptr<Transform> other) { _transform->SetParent(other); }
+	Vector2 GetWorldPos();
+	Vector2 GetWorldScale();
 
 	virtual void Update() abstract;
 	virtual void Render() abstract;
 
-	bool IsCollision(shared_ptr<Collider> col);
-	virtual bool IsCollision(const Vector2& pos) abstract;
-	virtual bool IsCollision(shared_ptr<CircleCollider> col) abstract;
-	virtual bool IsCollision(shared_ptr<RectCollider> col) abstract;
-
-	void SetColorRed() { _color = RED; }
-	void SetColorGreen() { _color = GREEN; }
-
-	shared_ptr<Transform> GetTransform() { return _transform; }
-	Vector2 GetWorldPos() { return _transform->GetWorldPos(); }
+	virtual bool Block(shared_ptr<Collider> other);
+	virtual bool Block(shared_ptr<class CircleCollider> other) abstract;
+	virtual bool Block(shared_ptr<class RectCollider> other) abstract;
+	virtual bool IsCollision(shared_ptr<Collider> other);
+	virtual bool IsCollision(Vector2 other) abstract;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other) abstract;
+	virtual bool IsCollision(shared_ptr<class RectCollider> other) abstract;
 
 protected:
-	virtual void CreateVertices() abstract;
-	virtual void CreateData() abstract;
-
 	enum class Type
 	{
 		NONE,
 		CIRCLE,
 		RECT
 	};
-
-	Type _type = Type::NONE;
-	XMFLOAT4 _color = GREEN;
-	shared_ptr<Transform> _transform;
-
+	Type _type = Collider::Type::NONE;
 	vector<Vertex> _vertices;
-	shared_ptr<VertexBuffer> _vertexBuffer;
+	XMFLOAT4 _color = GREEN;
+
+	shared_ptr<Transform> _transform;
 	shared_ptr<ColorBuffer> _colorBuffer;
 
-	weak_ptr<VertexShader> _vs;
-	weak_ptr<PixelShader> _ps;
+	shared_ptr<VertexBuffer> _vsBuffer;
+	weak_ptr<VertexShader> _vsShader;
+	weak_ptr<PixelShader> _psShader;
 };
+

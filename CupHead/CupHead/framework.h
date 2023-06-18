@@ -80,8 +80,8 @@ using namespace Microsoft::WRL;
 #include "Framework/Collider/RectCollider.h"
 
 //Object
+#include "Object/BagicObj/Quad.h"
 #include "Object/BagicObj/Sprite.h"
-#include "Object/Obj/MainCharacter.h"
 
 // Scene
 #include "Scene/Scene.h"

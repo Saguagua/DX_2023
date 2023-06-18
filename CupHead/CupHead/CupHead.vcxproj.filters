@@ -123,6 +123,9 @@
     <ClInclude Include="Object\Obj\Bullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\BagicObj\Quad.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CupHead.cpp">
@@ -216,6 +219,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Obj\Bullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\BagicObj\Quad.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -679,6 +685,7 @@
     <FxCompile Include="Shader\VertexVS.hlsl" />
     <FxCompile Include="Shader\TextureVS.hlsl" />
     <FxCompile Include="Shader\ActionPS.hlsl" />
+    <FxCompile Include="Shader\TexturePS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\MainCharacter\AimDiagonalDown.xml" />
