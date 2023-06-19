@@ -82,7 +82,9 @@ using namespace Microsoft::WRL;
 //Object
 #include "Object/BagicObj/Quad.h"
 #include "Object/BagicObj/Sprite.h"
+#include "Object/Obj/Bullet.h"
 #include "Object/Obj/MainCharacter.h"
+#include "Object/Obj/Crown.h"
 
 // Scene
 #include "Scene/Scene.h"

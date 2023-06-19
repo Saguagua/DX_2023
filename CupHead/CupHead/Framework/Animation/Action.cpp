@@ -14,6 +14,9 @@ void Action::Update()
 		{
 		case Action::END:
 		{
+			if (_playEvent != nullptr)
+				_playEvent();
+
 			_curClipIndex++;
 
 			if (_curClipIndex >= _clips.size())
@@ -22,6 +25,9 @@ void Action::Update()
 		}
 		case Action::LOOP:
 		{
+			if (_playEvent != nullptr)
+				_playEvent();
+
 			_curClipIndex = (_curClipIndex + 1) % _clips.size();
 			
 			break;
@@ -31,14 +37,16 @@ void Action::Update()
 			if (_isReverse)
 			{
 				_curClipIndex--;
-
+				if (_playEvent != nullptr)
+					_playEvent();
 				if (_curClipIndex <= 0)
 					_isReverse = false;
 			}
 			else
 			{
 				_curClipIndex++;
-
+				if (_playEvent != nullptr)
+					_playEvent();
 				if (_curClipIndex >= _clips.size() - 1)
 					_isReverse = true;
 			}
@@ -58,6 +66,11 @@ void Action::Play()
 	_time = 0.0f;
 }
 
+void Action::UnPause()
+{
+	_isPlay = true;
+}
+
 void Action::Pause()
 {
 	_isPlay = false;
@@ -73,6 +86,8 @@ void Action::Stop()
 		_endEvent();
 	if (_endEventInt != nullptr)
 		_endEventInt(5);
+	if (_endEventDI != nullptr)
+		_endEventDI(1, 1);
 }
 
 void Action::Reset()

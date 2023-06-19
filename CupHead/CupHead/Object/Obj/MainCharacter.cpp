@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "MainCharacter.h"
-#include "Bullet.h"
 
 MainCharacter::MainCharacter()
 {
@@ -211,7 +210,7 @@ void MainCharacter::Input()
 		}
 		else
 		{
-			if (_bitFlag ^ Player_State::ONAIR_PLAYER && !(_bitFlag & Player_State::ATTACK_PLAYER))
+			if (!(_bitFlag & Player_State::ONAIR_PLAYER) && !(_bitFlag & Player_State::ATTACK_PLAYER))
 			{
 				SetAction(Action_State::RUN_ACTION);
 				_bitFlag = _bitFlag | Player_State::RUN_PLAYER;
@@ -316,7 +315,7 @@ void MainCharacter::Input()
 				_dir.x = 1;
 			else
 				_dir.x = -1;
-			Fire(_col->GetWorldPos() - Vector2(0, 20), _dir, Action_State::ATTACK_RUN_ACTION, front);
+			Fire(_col->GetWorldPos(), _dir, Action_State::ATTACK_RUN_ACTION, front);
 		}
 		else if (_bitFlag & Player_State::DOWN_PLAYER)
 		{
@@ -497,6 +496,16 @@ void MainCharacter::Fire(Vector2 pos, Vector2 dir, Action_State state, int front
 void MainCharacter::FireEnd()
 {
 	_bitFlag = _bitFlag & (~Player_State::ATTACK_PLAYER);
+}
+
+void MainCharacter::GetDamage(int amount)
+{
+	_hp -= amount;
+
+	if (_hp <= 0)
+	{
+
+	}
 }
 
 void MainCharacter::CreateAction(string name, float speed, Action::Type type, CallBack callBack)

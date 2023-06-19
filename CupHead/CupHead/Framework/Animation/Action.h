@@ -26,6 +26,7 @@ public:
 
 	void Update();
 	void Play();
+	void UnPause();
 	void Pause();
 	void Stop();
 	void Reset();
@@ -33,8 +34,12 @@ public:
 	Clip GetCurClip() { return _clips[_curClipIndex]; }
 
 	void SetEndEvent(CallBack callback) { _endEvent = callback; }
-	void SetEndEvent(CallBackInt callback) { _endEventInt = callback; }
+	void SetEndEventInt(CallBackInt callback) { _endEventInt = callback; }
+	void SetEndEventDI(CallBackDI callback) { _endEventDI = callback; }
+	void SetPlayEvent(CallBack callback) { _playEvent = callback; }
 	void SetReverse(bool set);
+
+	bool IsPlaying() { return _isPlay; }
 private:
 	string _name;
 	vector<Clip> _clips;
@@ -51,5 +56,7 @@ private:
 
 	CallBack _endEvent = nullptr;
 	CallBackInt _endEventInt = nullptr;
+	CallBackDI _endEventDI = nullptr;
+	CallBack _playEvent = nullptr;
 };
 

@@ -10,7 +10,8 @@ public:
 		DOWN_PLAYER = (1 << 3),
 		ATTACK_PLAYER = (1 << 4),
 		LOCK_PLAYER = (1 << 5),
-		DAMAGED_PLAYER = (1 << 6)
+		DAMAGED_PLAYER = (1 << 6),
+		DEAD_PLAYER = (1 << 7)
 	};
 
 	enum Action_State
@@ -33,6 +34,7 @@ public:
 		AIM_DIAGONAL_UP_ACTION,
 		AIM_DIAGONAL_DOWN_ACTION,
 		HIT_ACTION
+
 	};
 
 	MainCharacter();
@@ -48,6 +50,8 @@ public:
 	shared_ptr<CircleCollider> GetCollider() { return _col; }
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	vector<shared_ptr<class Bullet>>& GetBullets() { return _bullets; }
+
+	void GetDamage(int amount);
 
 private:
 	void CreateAction(string name, float speed = 1.0f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
@@ -88,5 +92,7 @@ private:
 
 	float _moveSpeed = 300.0f;
 	float _jumpSpeed = 500.0f;
+
+	int _hp = 4;
 };
 
