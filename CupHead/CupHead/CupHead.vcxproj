@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Obj\BackGround.h" />
     <ClInclude Include="Object\Obj\Bullet.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
     <ClInclude Include="Framework\TextureMapping\BlendState.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Obj\BackGround.cpp" />
     <ClCompile Include="Object\Obj\Bullet.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
     <ClCompile Include="Framework\TextureMapping\BlendState.cpp" />

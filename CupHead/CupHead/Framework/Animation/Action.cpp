@@ -14,33 +14,16 @@ void Action::Update()
 		{
 		case Action::END:
 		{
-			if (!_isReverse)
-			{
-				_curClipIndex++;
+			_curClipIndex++;
 
-				if (_curClipIndex >= _clips.size())
-					Stop();
-			}
-			else
-			{
-				_curClipIndex--;
-
-				if (_curClipIndex < 0)
-					Stop();
-			}
-			
+			if (_curClipIndex >= _clips.size())
+				Stop();
 			break;
 		}
 		case Action::LOOP:
 		{
-			if (!_isReverse)
-			{
-				_curClipIndex = (_curClipIndex + 1) % _clips.size();
-			}
-			else
-			{
-				_curClipIndex = (_curClipIndex - 1) % _clips.size();
-			}
+			_curClipIndex = (_curClipIndex + 1) % _clips.size();
+			
 			break;
 		}
 		case Action::PINGPONG:
