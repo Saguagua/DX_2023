@@ -17,6 +17,8 @@ Program::Program()
 
 	_proj->SetMatrix(temp);
 	_proj->Update_Resource();
+
+	Timer::GetInstance()->LockRunTime(60.0);
 }
 
 Program::~Program()
@@ -44,9 +46,24 @@ void Program::Render()
 	ALPHA->SetState();
 	_curScene->Render();
 
+	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]); 
+	ImGui::SetWindowFontScale(1.2f);
+	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f)); 
+	
+	ImGui::Text("Timer");
+
+	ImGui::PopFont();
+	ImGui::PopStyleColor();
+	ImGui::SetWindowFontScale(1.0f);
+
 	ImGui::Text("FPS : %d", FPS);
 	ImGui::Text("DeltaTime : %1f", DELTA_TIME);
 	ImGui::Text("RunTime : %1f", RUN_TIME);
+
+	ImGui::Spacing();
+	ImGui::Separator();
+	ImGui::Spacing();
+
 	_curScene->PostRender();
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

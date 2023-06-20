@@ -9,7 +9,7 @@ Bullet::Bullet(string path, float size)
 	_col->SetPos(CENTER - Vector2(WIN_WIDTH/2, 0));
 	_col->SetAngle(-90 * PI / 180);
 
-	_transform->SetPos(Vector2(0, -70));
+	_transform->SetPos(Vector2(0, -60));
 	_transform->SetParent(_col->GetTransform());
 
 	CreateAction(path + "_Intro", 0.1, Action::Type::END, std::bind(&Bullet::ToLoop, this));

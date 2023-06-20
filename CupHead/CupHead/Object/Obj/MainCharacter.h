@@ -33,8 +33,9 @@ public:
 		AIM_DOWN_ACTION,
 		AIM_DIAGONAL_UP_ACTION,
 		AIM_DIAGONAL_DOWN_ACTION,
-		HIT_ACTION
-
+		HIT_ACTION,
+		AIR_HIT_ACTION,
+		GHOST_ACTION
 	};
 
 	MainCharacter();
@@ -55,18 +56,24 @@ public:
 
 private:
 	void CreateAction(string name, float speed = 1.0f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
-	void SetAction(Action_State state, bool reverse = false);
+	void SetAction(Action_State state);
+	
 	void Input();
+	void Fire(Vector2 pos, Vector2 dir, Action_State state, int front);
+	
+	//Callback
 	void SetIdle();
 	void SetAim();
-	void Fire(Vector2 pos, Vector2 dir, Action_State state, int front);
 	void FireEnd();
+	void DamageEnd();
+	void StateChange(int state);
 
 	void SetLeft()
 	{
 		for (auto sprite : _sprites)
 			sprite->SetLeft();
 	}
+
 	void SetRight()
 	{
 		for (auto sprite : _sprites)
@@ -81,17 +88,18 @@ private:
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite>> _sprites;
 
-	Action_State _state = Action_State::IDLE_ACTION;
+	MainCharacter::Action_State _state = Action_State::IDLE_ACTION;
 	
 	unsigned int _bitFlag = 0;
 	
 	Vector2 _dir = {1,0};
 
-	bool _spaceDown;
-	double _jumpDuration;
+	double _jumpPower;
+	double _maxGravity = -500.0;
+	double _gravity = 18.6;
+	double _disableTimer = 0;
 
 	float _moveSpeed = 300.0f;
-	float _jumpSpeed = 500.0f;
 
 	int _hp = 4;
 };

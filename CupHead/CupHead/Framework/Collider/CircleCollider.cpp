@@ -55,6 +55,8 @@ bool CircleCollider::IsCollision(Vector2 other)
 bool CircleCollider::IsCollision(shared_ptr<class CircleCollider> other)
 {
 	float length = (_transform->GetWorldPos() - other->GetWorldPos()).Length();
+	float rad = GetWorldRadius() + other->GetWorldRadius();
+
 	return length <= GetWorldRadius() + other->GetWorldRadius();
 }
 

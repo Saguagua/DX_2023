@@ -20,7 +20,7 @@ MainCharacter::MainCharacter()
 	CallBack SetIdle = std::bind(&MainCharacter::SetIdle, this);
 
 	CreateAction("Idle", 0.06f, Action::Type::PINGPONG);
-	CreateAction("Run", 0.07f);
+	CreateAction("Run", 0.06f);
 	CreateAction("Jump", 0.07f);
 	CreateAction("Duck", 0.07f, Action::Type::END, SetIdle);
 	CreateAction("DuckIdle", 0.07f, Action::Type::LOOP);
@@ -36,8 +36,16 @@ MainCharacter::MainCharacter()
 	CreateAction("AimDown", 0.08f, Action::Type::LOOP);
 	CreateAction("AimDiagonalUp", 0.08f, Action::Type::LOOP);
 	CreateAction("AimDiagonalDown", 0.08f, Action::Type::LOOP);
+	CreateAction("Player_Hit", 0.08f, Action::Type::END);
+	CreateAction("Player_Air_Hit", 0.08f, Action::Type::END);
+	CreateAction("Player_Ghost", 0.08f, Action::Type::LOOP);
 
 	_actions[Action_State::IDLE_ACTION]->Play();
+
+	_actions[Action_State::HIT_ACTION]->SetEndEventInt(std::bind(&MainCharacter::StateChange, this, Player_State::DAMAGED_PLAYER));
+	_actions[Action_State::AIR_HIT_ACTION]->SetEndEventInt(std::bind(&MainCharacter::StateChange, this, Player_State::DAMAGED_PLAYER));
+	_actions[Action_State::HIT_ACTION]->SetEndEvent(std::bind(&MainCharacter::DamageEnd, this));
+	_actions[Action_State::AIR_HIT_ACTION]->SetEndEvent(std::bind(&MainCharacter::DamageEnd, this));
 
 	for (int i = 0; i < 50; i++)
 	{
@@ -48,20 +56,17 @@ MainCharacter::MainCharacter()
 
 void MainCharacter::Update()
 {
-	Input();
+	if (!(_bitFlag & Player_State::DEAD_PLAYER))
+		Input();
 
-	if (_bitFlag & Player_State::ONAIR_PLAYER)
+	if (_bitFlag & Player_State::ONAIR_PLAYER || _bitFlag & Player_State::DEAD_PLAYER)
 	{
-		_jumpDuration -= DELTA_TIME;
+		_jumpPower -= _gravity;
 
-		if (_jumpDuration > 0)
-		{
-			_col->GetTransform()->AddPos(UP_VECTOR * DELTA_TIME * _jumpSpeed);
-		}
-		else
-		{
-			_col->GetTransform()->AddPos(-UP_VECTOR * DELTA_TIME * GRAVITY);
-		}
+		if (_jumpPower <= _maxGravity)
+			_jumpPower = _maxGravity;
+
+		_col->GetTransform()->AddPos(UP_VECTOR * _jumpPower * DELTA_TIME);
 	}
 
 	_col->Update();
@@ -93,15 +98,26 @@ void MainCharacter::Render()
 
 void MainCharacter::PostRender()
 {
-	ImGui::SliderInt("State", (int*)&_state, 0, 16);
-	ImGui::SliderInt("BitFlag", (int*)&_bitFlag, 0, 63);
-	ImGui::SliderFloat("DirectionX", (float*)&_dir.x, -1, 1);
-	ImGui::SliderFloat("DirectionY", (float*)&_dir.y, -1, 1);
+	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
+	ImGui::SetWindowFontScale(1.2f);
+	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+	ImGui::Text("Player");
+
+	ImGui::PopFont();
+	ImGui::PopStyleColor();
+	ImGui::SetWindowFontScale(1.0f);
+
+
+	ImGui::SliderInt("Player_HP", (int*)&_hp, 0, 4);
+	ImGui::SliderInt("Player_State", (int*)&_state, 0, 19);
+	ImGui::SliderInt("Player_BitFlag", (int*)&_bitFlag, 0, 255);
+	ImGui::SliderFloat("Player_DirectionX", (float*)&_dir.x, -1, 1);
+	ImGui::SliderFloat("Player_DirectionY", (float*)&_dir.y, -1, 1);
 }
 
 void MainCharacter::Input()
 {
-
 	if (KEY_PRESS(VK_UP))
 	{
 		_dir.y = 1;
@@ -372,19 +388,17 @@ void MainCharacter::Input()
 #pragma region jump
 	if (KEY_DOWN('Z') && !(_bitFlag & Player_State::ONAIR_PLAYER))
 	{
-		_spaceDown = true;
- 		_jumpDuration = RUN_TIME;
+		_jumpPower = RUN_TIME;
 	}
 	else if (KEY_UP('Z') && !(_bitFlag & Player_State::ONAIR_PLAYER))
 	{
-		_spaceDown = false;
-		_jumpDuration = (RUN_TIME - _jumpDuration);
-		if (_jumpDuration > 0.25)
+		_jumpPower = (RUN_TIME - _jumpPower);
+		if (_jumpPower < 0.25)
 		{
-			_jumpDuration = 0.5;
+			_jumpPower = 600.0;
 		}
 		else
-			_jumpDuration = 0.3;
+			_jumpPower = 800.0;
 
 		SetAction(Action_State::JUMP_ACTION);
 		_bitFlag = _bitFlag | Player_State::ONAIR_PLAYER;
@@ -442,6 +456,7 @@ void MainCharacter::SetAim()
 	}
 	case Action_State::ATTACK_UP_ACTION:
 	{
+	
 		_state = Action_State::AIM_UP_ACTION;
 		break;
 	}
@@ -498,13 +513,40 @@ void MainCharacter::FireEnd()
 	_bitFlag = _bitFlag & (~Player_State::ATTACK_PLAYER);
 }
 
+void MainCharacter::DamageEnd()
+{
+	if (_bitFlag & Player_State::ONAIR_PLAYER)
+		SetAction(Action_State::JUMP_ACTION);
+	else if (_bitFlag & Player_State::RUN_PLAYER)
+		SetAction(Action_State::RUN_ACTION);
+	else if (_bitFlag & Player_State::DOWN_PLAYER)
+		SetAction(Action_State::DOWNIDLE_ACTION);
+	else
+		SetAction(Action_State::IDLE_ACTION);
+}
+
+void MainCharacter::StateChange(int state)
+{
+	_bitFlag = _bitFlag ^ state;
+}
+
 void MainCharacter::GetDamage(int amount)
 {
+	if (_bitFlag & Player_State::DAMAGED_PLAYER || _bitFlag & Player_State::DEAD_PLAYER)
+		return;
+
 	_hp -= amount;
 
 	if (_hp <= 0)
 	{
-
+		_bitFlag = Player_State::DEAD_PLAYER;
+		_gravity = -9.8;
+		SetAction(Action_State::DOWNIDLE_ACTION);
+	}
+	else
+	{
+		_bitFlag = Player_State::DAMAGED_PLAYER;
+		SetAction(Action_State::AIR_HIT_ACTION);
 	}
 }
 
@@ -555,8 +597,15 @@ void MainCharacter::CreateAction(string name, float speed, Action::Type type, Ca
 	_sprites.push_back(sprite);
 }
 
-void MainCharacter::SetAction(Action_State state, bool reverse)
+void MainCharacter::SetAction(Action_State state)
 {
+	
+	if (_bitFlag & Player_State::DEAD_PLAYER && state != Action_State::GHOST_ACTION)
+		state = Action_State::GHOST_ACTION;
+	if (_bitFlag & Player_State::DAMAGED_PLAYER && state != Action_State::HIT_ACTION)
+		state = Action_State::HIT_ACTION;
+	if (_bitFlag & Player_State::ONAIR_PLAYER && state != Action_State::JUMP_ACTION)
+		state = Action_State::JUMP_ACTION;
 	if (_state == state)
 		return;
 
@@ -564,12 +613,14 @@ void MainCharacter::SetAction(Action_State state, bool reverse)
 	_actions[_state]->Pause();
 
 	_state = state;
-	_actions[_state]->SetReverse(reverse);
 	_actions[_state]->Play();
 }
 
 void MainCharacter::SetOnGround()
 {
+	if (_bitFlag & Player_State::DEAD_PLAYER)
+		return;
+	
 	_bitFlag = _bitFlag & (~Player_State::ONAIR_PLAYER);
 	if (_state == Action_State::JUMP_ACTION)
 	{
@@ -582,6 +633,8 @@ void MainCharacter::SetOnGround()
 
 void MainCharacter::SetOnAir()
 {
+	if (_bitFlag & Player_State::DAMAGED_PLAYER || _bitFlag & Player_State::DEAD_PLAYER)
+		return;
 	_bitFlag = _bitFlag | Player_State::ONAIR_PLAYER;
 	SetAction(Action_State::JUMP_ACTION);
 }

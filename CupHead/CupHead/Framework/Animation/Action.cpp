@@ -16,6 +16,8 @@ void Action::Update()
 		{
 			if (_playEvent != nullptr)
 				_playEvent();
+			if (_playEventBool != nullptr)
+				_playEventBool(true);
 
 			_curClipIndex++;
 
@@ -27,6 +29,8 @@ void Action::Update()
 		{
 			if (_playEvent != nullptr)
 				_playEvent();
+			if (_playEventBool != nullptr)
+				_playEventBool(true);
 
 			_curClipIndex = (_curClipIndex + 1) % _clips.size();
 			
@@ -37,18 +41,22 @@ void Action::Update()
 			if (_isReverse)
 			{
 				_curClipIndex--;
-				if (_playEvent != nullptr)
-					_playEvent();
 				if (_curClipIndex <= 0)
 					_isReverse = false;
+				if (_playEvent != nullptr)
+					_playEvent();
+				if (_playEventBool != nullptr)
+					_playEventBool(true);
 			}
 			else
 			{
 				_curClipIndex++;
-				if (_playEvent != nullptr)
-					_playEvent();
 				if (_curClipIndex >= _clips.size() - 1)
 					_isReverse = true;
+				if (_playEvent != nullptr)
+					_playEvent();
+				if (_playEventBool != nullptr)
+					_playEventBool(true);
 			}
 			break;
 		}
@@ -64,6 +72,11 @@ void Action::Play()
 	_isReverse = false;
 	_curClipIndex = 0;
 	_time = 0.0f;
+
+	if (_startEvent != nullptr)
+		_startEvent();
+	if (_startEventBool != nullptr)
+		_startEventBool(true);
 }
 
 void Action::UnPause()
@@ -82,12 +95,14 @@ void Action::Stop()
 	_curClipIndex = 0;
 	_time = 0.0f;
 
-	if (_endEvent != nullptr)
-		_endEvent();
 	if (_endEventInt != nullptr)
 		_endEventInt(5);
+	if (_endEvent != nullptr)
+		_endEvent();
 	if (_endEventDI != nullptr)
 		_endEventDI(1, 1);
+	if (_endEventBool != nullptr)
+		_endEventBool(true);
 }
 
 void Action::Reset()

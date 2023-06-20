@@ -3,7 +3,7 @@
 
 Crown::Crown()
 {
-	_main_col = make_shared<CircleCollider>(70);
+	_main_col = make_shared<CircleCollider>(80);
 	_main_trans = make_shared<Transform>();
 
 	_second_col = make_shared<CircleCollider>(70);
@@ -11,6 +11,8 @@ Crown::Crown()
 
 	_main_trans->SetParent(_main_col->GetTransform());
 	_second_trans->SetParent(_second_col->GetTransform());
+
+	_main_trans->SetPos(Vector2(10,20));
 
 	CreateAction("Clown_Intro_Idle", 0.5, 0.05, Action::Type::END);
 	CreateAction("Clown_Intro_1", 0.5, 0.05, Action::Type::END);
@@ -26,32 +28,38 @@ Crown::Crown()
 	CreateAction("Clown_Page_Two_Intro",0.5, 0.1, Action::Type::END);
 	CreateAction("Clown_Page_Two_Idle",0.5, 0.1, Action::Type::LOOP);
 
-	_actions[Action_State::INTRO_IDLE]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 1));
-	_actions[Action_State::INTRO_1]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 2));
-	_actions[Action_State::INTRO_2]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 3));
-	
-	_actions[Action_State::MOVE_1]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 4));
-	_actions[Action_State::MOVE_BREAK_1]->SetEndEventDI(std::bind(&Crown::MoveDelay, this, 1, 5));
-	_actions[Action_State::MOVE_2]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 6));
-	_actions[Action_State::MOVE_BREAK_2]->SetEndEventDI(std::bind(&Crown::MoveDelay, this, 0.5, 7));
-	_actions[Action_State::MOVE_3]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 3));
+	Init_Stage1();
 
 	_actions[Action_State::INTRO_IDLE]->Play();
 
 	for (int i = 0; i < 50; i++)
 	{
 		shared_ptr<Bullet> bullet = make_shared<Bullet>("Bullet", 20);
+		bullet->SetSpeed(300);
 		_bullets.push_back(bullet);
 	}
 }
 
 void Crown::Update()
 {
+	if (_redTimer > 0)
+		_redTimer -= DELTA_TIME;
+	
+
 	_main_col->Update();
 	_main_trans->Update();
 
 	if (_stopTimer > 0.0)
+	{
 		_stopTimer -= DELTA_TIME;
+		_shootTimer -= DELTA_TIME;
+
+		if (_shootTimer < 0.0)
+		{
+			Shoot();
+			_shootTimer = 1;
+		}
+	}
 	else if (_stopTimer < 0.0 && !_actions[_mainIndex]->IsPlaying())
 	{
 		SetAction(_nextIndex);
@@ -60,6 +68,11 @@ void Crown::Update()
 	if (_stage == 0 && _actions[_mainIndex]->IsPlaying())
 	{
 		Move();
+
+		if (_isLeft)
+			_main_trans->SetPos(Vector2(20, 20));
+		else
+			_main_trans->SetPos(Vector2(-20, 20));
 	}
 
 	_actions[_mainIndex]->Update();
@@ -81,6 +94,11 @@ void Crown::Update()
 		_sprites[_secondState]->SetCurClip(_actions[_secondState]->GetCurClip());
 		_sprites[_secondState]->Update();
 	}
+
+	for (shared_ptr<Bullet> bullet : _bullets)
+	{
+		bullet->Update();
+	}
 }
 
 void Crown::Render()
@@ -97,10 +115,64 @@ void Crown::Render()
 
 		_second_col->Render();
 	}
+
+	for (shared_ptr<Bullet> bullet : _bullets)
+	{
+		bullet->Render();
+	}
+}
+
+void Crown::PostRender()
+{
+	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
+	ImGui::SetWindowFontScale(1.2f);
+	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+	ImGui::Text("Crown");
+
+	ImGui::PopFont();
+	ImGui::PopStyleColor();
+	ImGui::SetWindowFontScale(1.0f);
+
+	ImGui::SliderInt("Crown_HP", (int*)&_hp, 0, 100);
+	ImGui::SliderInt("Crown_State", (int*)&_mainIndex, 0, 16);
+	ImGui::Checkbox("Crown_Disable", (bool*)&_isDisable);
+}
+
+void Crown::GetDamage(int amount)
+{
+	_hp -= amount;
+
+	if (_hp <= 90)
+	{
+		NextStage();
+	}
+}
+
+void Crown::Init_Stage1()
+{
+	_actions[Action_State::INTRO_IDLE]->SetStartEventBool(std::bind(&Crown::SetDisable, this, true));
+	_actions[Action_State::INTRO_2]->SetEndEventBool(std::bind(&Crown::SetDisable, this, false));
+
+	_actions[Action_State::INTRO_IDLE]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 1));
+	_actions[Action_State::INTRO_1]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 2));
+	_actions[Action_State::INTRO_2]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 3));
+
+	_actions[Action_State::MOVE_1]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 4));
+	_actions[Action_State::MOVE_BREAK_1]->SetEndEventDI(std::bind(&Crown::MoveDelay, this, 1, 5));
+	_actions[Action_State::MOVE_2]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 6));
+	_actions[Action_State::MOVE_BREAK_2]->SetEndEventDI(std::bind(&Crown::MoveDelay, this, 1, 7));
+	_actions[Action_State::MOVE_3]->SetEndEventInt(std::bind(&Crown::NextIndex, this, 3));
+}
+
+void Crown::Init_Stage2()
+{
+
 }
 
 void Crown::NextStage()
 {
+
 }
 
 void Crown::CreateAction(string name, float scale, float speed, Action::Type type, CallBack callBack)
@@ -149,6 +221,22 @@ void Crown::CreateAction(string name, float scale, float speed, Action::Type typ
 	shared_ptr<Sprite> sprite = make_shared<Sprite>(srvPath, Vector2(averageW / count * scale, averageH / count * scale));
 	_sprites.push_back(sprite);
 }
+void Crown::Shoot()
+{
+	if (_mainCharacter.expired() == false)
+	{
+		for (shared_ptr<Bullet> bullet : _bullets)
+	{
+		if (!bullet->IsActive())
+		{				
+			Vector2 dir = _mainCharacter.lock()->GetCollider()->GetWorldPos() - _main_col->GetWorldPos();
+			dir.Normalize();
+			bullet->Shoot(_main_col->GetWorldPos(), dir);
+			break;
+		}
+	}
+	}
+}
 void Crown::SetAction(int state)
 {
 	if (_mainIndex == state)
@@ -171,6 +259,7 @@ void Crown::Move()
 {
 	if (_mainIndex <= 2 || _mainIndex >= 8)
 		return;
+
 	if (_isLeft)
 	{
 		_main_col->AddPos(-RIGHT_VECTOR * DELTA_TIME * 400.0f);
@@ -182,11 +271,11 @@ void Crown::Move()
 
 	Vector2 wPos = _main_col->GetWorldPos();
 
-	if (wPos.x <= 40)
+	if (wPos.x <= 0)
 	{
 		_isLeft = false;
 	}
-	else if (wPos.x >= WIN_WIDTH - 40)
+	else if (wPos.x >= WIN_WIDTH)
 	{
 		_isLeft = true;
 	}

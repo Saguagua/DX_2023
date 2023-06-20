@@ -31,7 +31,7 @@ public:
 	int GetFPS() { return _frameRate; }
 	double GetDeltaTime() { return _deltaTime; }
 	double GetRunTime() { return _runTime; }
-
+	void LockRunTime(double val) { _lockFPS = val; }
 private:
 	static Timer* _instance;
 

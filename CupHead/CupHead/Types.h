@@ -42,4 +42,5 @@
 //CallBack
 using CallBack = function<void()>; 
 using CallBackInt = function<void(int)>;
+using CallBackBool = function<void(bool)>;
 using CallBackDI = function<void(double, int)>;
