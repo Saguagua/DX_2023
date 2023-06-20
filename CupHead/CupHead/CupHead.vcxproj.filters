@@ -698,6 +698,8 @@
     <FxCompile Include="Shader\TextureVS.hlsl" />
     <FxCompile Include="Shader\ActionPS.hlsl" />
     <FxCompile Include="Shader\TexturePS.hlsl" />
+    <FxCompile Include="Shader\FilterPS.hlsl" />
+    <FxCompile Include="Shader\ActionFilterPS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\MainCharacter\AimDiagonalDown.xml" />

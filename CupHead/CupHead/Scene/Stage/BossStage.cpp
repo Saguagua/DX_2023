@@ -98,4 +98,8 @@ void BossStage::PostRender()
 	ImGui::Separator();
 	ImGui::Spacing();
 	_crown->PostRender();
+	ImGui::Spacing();
+	ImGui::Separator();
+	ImGui::Spacing();
+	_track->PostRender();
 }

@@ -8,6 +8,10 @@ public:
 
 	void Render();
 
+	void SetPS(shared_ptr<PixelShader> ps) { _pShader = ps; }
+	void SetVS(shared_ptr<VertexShader> vs) { _vShader = vs; }
+	
+	Vector2 GetImageSize() { return _srv.lock()->GetImageSize(); }
 private:
 	void CreateVertices();
 	void CreateData();

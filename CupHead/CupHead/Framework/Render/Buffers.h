@@ -71,6 +71,9 @@ struct ActionBuffer : public ConstantBuffer
 		_data.fullSize = full;
 	}
 
+	Vector2 GetClipSize() { return _data.clipSize; }
+	Vector2 GetFullSize() { return _data.fullSize; }
+	Vector2 GetStartPos() { return _data.startPos; }
 private:
 	struct Data
 	{
@@ -110,4 +113,44 @@ private:
 	};
 
 	Data _data;
+};
+
+struct FilterBuffer :public ConstantBuffer
+{
+	FilterBuffer()
+		:ConstantBuffer(&_data, sizeof(_data))
+	{}
+
+	virtual ~FilterBuffer() {}
+
+	void SetType(int val) { _data.type = val; }
+	void SetVal1(int val) { _data.val1 = val; }
+	void SetVal2(int val) { _data.val2 = val; }
+	void SetVal3(int val) { _data.val3 = val; }
+	void SetImageSize(Vector2 v) { _data.imageSize = v; }
+	void SetRadialCenter(Vector2 v) { _data.radialCenter = v; }
+
+	int GetType() { return _data.type; }
+	int GetVal1() { return _data.val1; }
+	int GetVal2() { return _data.val2; }
+	int GetVal3() { return _data.val3; }
+	Vector2 GetSize() { return _data.imageSize; }
+	Vector2 GetRadial() { return _data.radialCenter; }
+
+	struct Data
+	{
+		int type = 0;
+		int val1 = 0;
+		int val2 = 0;
+		int val3 = 0;
+
+		Vector2 imageSize;
+		Vector2 radialCenter;
+	};
+
+	Data _data;
+ private:
+	
+
+	
 };

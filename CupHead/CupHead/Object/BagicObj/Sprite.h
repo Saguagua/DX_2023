@@ -14,8 +14,11 @@ public:
 
 	void SetRight() { _rBuffer->SetSlot1(0); }
 	void SetLeft() { _rBuffer->SetSlot1(1); }
-	int GetFront() { return _rBuffer->GetSlot1(); }
 	void SetFront(int val) { _rBuffer->SetSlot1(val); }
+	
+	int GetFront() { return _rBuffer->GetSlot1(); }
+	Vector2 GetClipSize() { return _aBuffer->GetClipSize(); }
+
 private:
 	void CreateVertices();
 	void CreateData(wstring path);

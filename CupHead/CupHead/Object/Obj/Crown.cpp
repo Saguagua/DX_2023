@@ -9,6 +9,8 @@ Crown::Crown()
 	_second_col = make_shared<CircleCollider>(70);
 	_second_trans = make_shared<Transform>();
 
+	_fBuffer = make_shared<FilterBuffer>();
+
 	_main_trans->SetParent(_main_col->GetTransform());
 	_second_trans->SetParent(_second_col->GetTransform());
 
@@ -42,6 +44,20 @@ Crown::Crown()
 
 void Crown::Update()
 {
+	if (_isDisable)
+		return;
+
+	else if (_hp <= 0.0)
+	{
+		_fBuffer->_data.type = 1;
+		if (_fBuffer->_data.val2 < 70)
+			_fBuffer->_data.val2++;
+		else
+			_isDisable = true;
+		_fBuffer->Update_Resource();
+		return;
+	}
+
 	if (_redTimer > 0)
 		_redTimer -= DELTA_TIME;
 	
@@ -99,11 +115,17 @@ void Crown::Update()
 	{
 		bullet->Update();
 	}
+
+	_fBuffer->SetImageSize(_sprites[_mainIndex]->GetClipSize());
+	_fBuffer->Update_Resource();
 }
 
 void Crown::Render()
 {
+	if (_isDisable)
+		return;
 	_main_trans->Set_World(0);
+	_fBuffer->SetPS_Buffer(2);
 	_sprites[_mainIndex]->Render();
 
 	_main_col->Render();
@@ -137,6 +159,11 @@ void Crown::PostRender()
 	ImGui::SliderInt("Crown_HP", (int*)&_hp, 0, 100);
 	ImGui::SliderInt("Crown_State", (int*)&_mainIndex, 0, 16);
 	ImGui::Checkbox("Crown_Disable", (bool*)&_isDisable);
+
+	ImGui::SliderInt("selected", &_fBuffer->_data.type, 0, 5);
+	ImGui::SliderInt("value1", &_fBuffer->_data.val1, 0, 300);
+	ImGui::SliderInt("value2", &_fBuffer->_data.val2, 0, 300);
+	ImGui::SliderInt("value3", &_fBuffer->_data.val3, 0, 300);
 }
 
 void Crown::GetDamage(int amount)

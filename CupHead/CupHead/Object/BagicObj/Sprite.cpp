@@ -91,7 +91,7 @@ void Sprite::CreateData(wstring path)
 	_vBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size());
 	_iBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
 	_vs = ADD_VS(L"Shader/TextureVS.hlsl");
-	_ps = ADD_PS(L"Shader/ActionPS.hlsl");
+	_ps = ADD_PS(L"Shader/ActionFilterPS.hlsl");
 
 	_rBuffer = make_shared<IntBuffer>();
 }

@@ -63,6 +63,8 @@ private:
 	shared_ptr<CircleCollider> _main_col;
 	shared_ptr<CircleCollider> _second_col;
 
+	shared_ptr<FilterBuffer> _fBuffer;
+
 	vector<shared_ptr<Sprite>> _sprites;
 	vector<shared_ptr<Action>> _actions;
 
@@ -72,7 +74,7 @@ private:
 	Action_State _secondState = Action_State::HEAD_INTRO_IDLE;
 
 	bool _isLeft = true;
-	bool _isDisable = true;
+	bool _isDisable = false;
 
 	int _mainIndex = 0;
 	int _nextIndex = 0;

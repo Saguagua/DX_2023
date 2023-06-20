@@ -23,7 +23,7 @@ void Quad::Render()
 {
 	_vBuffer->SetIA_VertexBuffer();
 	_iBuffer->SetIA_IndexBuffer();
-	_vShader.lock()->SetIA_InputLayout();
+    _vShader.lock()->SetIA_InputLayout();
 
 	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
