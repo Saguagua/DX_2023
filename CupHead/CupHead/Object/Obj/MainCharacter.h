@@ -52,6 +52,7 @@ public:
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	vector<shared_ptr<class Bullet>>& GetBullets() { return _bullets; }
 
+	bool IsDead() { return _bitFlag & Player_State::DEAD_PLAYER; }
 	void GetDamage(int amount);
 
 private:
@@ -87,6 +88,7 @@ private:
 	shared_ptr<Transform> _bulletSlot;
 	vector<shared_ptr<Action>> _actions;
 	vector<shared_ptr<Sprite>> _sprites;
+	shared_ptr<FilterBuffer> _fBuffer;
 
 	MainCharacter::Action_State _state = Action_State::IDLE_ACTION;
 	

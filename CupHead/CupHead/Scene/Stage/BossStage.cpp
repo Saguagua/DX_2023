@@ -5,6 +5,7 @@
 #include "../../Object/Obj/Bullet.h"
 #include "../../Object/Obj/BackGround.h"
 #include "../../Object/Obj/Crown.h"
+#include "../../Object/BagicObj/Effect.h"
 
 BossStage::BossStage()
 {
@@ -12,6 +13,7 @@ BossStage::BossStage()
 	_track = make_shared<Track>(Vector2(WIN_WIDTH, WIN_HEIGHT / 3));
 	_background = make_shared<BackGround>();
 	_crown = make_shared<Crown>();
+	_effect = make_shared<Effect>("Hyper_Shot", Vector2(100, 100));
 	
 	_main->GetCollider()->GetTransform()->SetPos(Vector2(WIN_WIDTH/2, WIN_HEIGHT - 300));
 	_track->GetCollider()->GetTransform()->SetPos(Vector2(WIN_WIDTH/2, 30));
@@ -21,6 +23,7 @@ BossStage::BossStage()
 	_track->Update();
 	_background->Update();
 	_crown->Update();
+	_effect->SetAngle(PI / 2);
 }
 
 BossStage::~BossStage()
@@ -29,7 +32,40 @@ BossStage::~BossStage()
 
 void BossStage::Update()
 {
-	if (_main->GetCollider()->IsCollision(_crown->GetCollider()))
+	
+	if (!_main->IsDead())
+	{
+		
+
+		for (shared_ptr<Bullet> bullet : _main->GetBullets())
+		{
+			if (!bullet->IsActive())
+				continue;
+
+			if (bullet->GetCollider()->IsCollision(_crown->GetCollider()))
+			{
+				_crown->GetCollider()->SetColor(RED);
+				_crown->SetRedTimer(1);
+				_crown->GetDamage(1);
+				bullet->SetActive(false);
+				_effect->Play(_crown->GetCollider()->GetWorldPos());
+			}
+		}
+
+		for (shared_ptr<Bullet> bullet : _crown->GetBullets())
+		{
+			if (!bullet->IsActive())
+				continue;
+
+			if (bullet->GetCollider()->IsCollision(_main->GetCollider()))
+			{
+				_main->GetCollider()->SetColor(RED);
+				_main->GetDamage(1);
+				bullet->SetActive(false);
+			}
+		}		
+	}
+	if (_main->GetCollider()->IsCollision(_crown->GetCollider()) && !_main->IsDead())
 	{
 		_main->GetCollider()->SetColor(RED);
 		_crown->GetCollider()->SetColor(RED);
@@ -41,37 +77,7 @@ void BossStage::Update()
 		_crown->GetCollider()->SetColor(GREEN);
 	}
 
-	for (shared_ptr<Bullet> bullet : _main->GetBullets())
-	{
-		if (!bullet->IsActive())
-			continue;
-
-		if (bullet->GetCollider()->IsCollision(_crown->GetCollider()))
-		{
-			_crown->GetCollider()->SetColor(RED);
-			_crown->SetRedTimer(1);
-			_crown->GetDamage(1);
-			bullet->SetActive(false);
-		}
-	}
-	
-	for (shared_ptr<Bullet> bullet : _crown->GetBullets())
-	{
-		if (!bullet->IsActive())
-			continue;
-
-		if (bullet->GetCollider()->IsCollision(_main->GetCollider()))
-		{
-			_main->GetCollider()->SetColor(RED);
-			_main->GetDamage(1);
-			bullet->SetActive(false);
-		}
-	}
-
 	_main->Update();
-	_track->Update();
-	_background->Update();
-	_crown->Update();
 
 	if (!_track->GetCollider()->Block(_main->GetCollider()))
 	{
@@ -81,6 +87,11 @@ void BossStage::Update()
 	{
 		_main->SetOnGround();
 	}
+	
+	_track->Update();
+	_background->Update();
+	_crown->Update();
+	_effect->Update();
 }
 
 void BossStage::Render()
@@ -89,6 +100,7 @@ void BossStage::Render()
 	_track->Render();
 	_crown->Render();
 	_main->Render();
+	_effect->Render();
 }
 
 void BossStage::PostRender()

@@ -14,4 +14,5 @@ private:
 	shared_ptr<class Track> _track;
 	shared_ptr<class BackGround> _background;
 	shared_ptr<class Crown> _crown;
+	shared_ptr<class Effect> _effect;
 };

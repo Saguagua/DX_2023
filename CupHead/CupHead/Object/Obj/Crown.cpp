@@ -137,11 +137,14 @@ void Crown::Render()
 
 		_second_col->Render();
 	}
-
-	for (shared_ptr<Bullet> bullet : _bullets)
+	if (!_mainCharacter.lock()->IsDead())
 	{
-		bullet->Render();
+		for (shared_ptr<Bullet> bullet : _bullets)
+		{
+			bullet->Render();
+		}
 	}
+	
 }
 
 void Crown::PostRender()

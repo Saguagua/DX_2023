@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\BagicObj\Effect.h" />
     <ClInclude Include="Object\Obj\Crown.h" />
     <ClInclude Include="Object\Obj\BackGround.h" />
     <ClInclude Include="Object\Obj\Bullet.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\BagicObj\Effect.cpp" />
     <ClCompile Include="Object\Obj\Crown.cpp" />
     <ClCompile Include="Object\Obj\BackGround.cpp" />
     <ClCompile Include="Object\Obj\Bullet.cpp" />
@@ -296,6 +298,9 @@
     <Image Include="Resource\Bullet\Hyper_Shot_Loop.png" />
     <Image Include="Resource\Bullet\Special_Bullet_Intro.png" />
     <Image Include="Resource\Bullet\Special_Bullet_Loop.png" />
+    <Image Include="Resource\Effect\Hyper_Shot_End.png" />
+    <Image Include="Resource\Effect\Hyper_Shot_Intro.png" />
+    <Image Include="Resource\Effect\Hyper_Shot_Loop.png" />
     <Image Include="Resource\MainCharacter\AimDiagonalDown.png" />
     <Image Include="Resource\MainCharacter\AimDiagonalDownCharge.png" />
     <Image Include="Resource\MainCharacter\AimDiagonalDownShot.png" />
@@ -507,6 +512,9 @@
     <Xml Include="Resource\Bullet\Hyper_Shot_Loop.xml" />
     <Xml Include="Resource\Bullet\Special_Bullet_Intro.xml" />
     <Xml Include="Resource\Bullet\Special_Bullet_Loop.xml" />
+    <Xml Include="Resource\Effect\Hyper_Shot_End.xml" />
+    <Xml Include="Resource\Effect\Hyper_Shot_Intro.xml" />
+    <Xml Include="Resource\Effect\Hyper_Shot_Loop.xml" />
     <Xml Include="Resource\MainCharacter\AimDiagonalDown.xml" />
     <Xml Include="Resource\MainCharacter\AimDiagonalDownCharge.xml" />
     <Xml Include="Resource\MainCharacter\AimDiagonalDownShot.xml" />

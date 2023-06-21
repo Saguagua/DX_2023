@@ -4,6 +4,8 @@
 MainCharacter::MainCharacter()
 {
 	_col = make_shared<CircleCollider>(50);
+	_fBuffer = make_shared<FilterBuffer>();
+
 	_col->GetTransform()->SetScale(Vector2(0.7f, 0.7f));
 	_transform = make_shared<Transform>();
 	_bulletSlot = make_shared<Transform>();
@@ -56,6 +58,14 @@ MainCharacter::MainCharacter()
 
 void MainCharacter::Update()
 {
+	
+	if (_bitFlag & Player_State::DEAD_PLAYER)
+	{
+		if (_fBuffer->_data.val2 < 70)
+			_fBuffer->_data.val2++;
+		else return;
+	}
+
 	if (!(_bitFlag & Player_State::DEAD_PLAYER))
 		Input();
 
@@ -77,6 +87,9 @@ void MainCharacter::Update()
 	_sprites[_state]->SetCurClip(_actions[_state]->GetCurClip());
 	_sprites[_state]->Update();
 
+	_fBuffer->SetImageSize(_sprites[_state]->GetClipSize());
+	_fBuffer->Update_Resource();
+
 	for (shared_ptr<Bullet> bullet : _bullets)
 	{
 		bullet->Update();
@@ -85,7 +98,10 @@ void MainCharacter::Update()
 
 void MainCharacter::Render()
 {
+	if (_fBuffer->_data.val2 >= 70)
+		return;
 	_transform->Set_World(0);
+	_fBuffer->SetPS_Buffer(2);
 	_sprites[_state]->Render();
 
 	_col->Render();
@@ -539,6 +555,7 @@ void MainCharacter::GetDamage(int amount)
 
 	if (_hp <= 0)
 	{
+		_fBuffer->SetType(1);
 		_bitFlag = Player_State::DEAD_PLAYER;
 		_gravity = -9.8;
 		SetAction(Action_State::DOWNIDLE_ACTION);
