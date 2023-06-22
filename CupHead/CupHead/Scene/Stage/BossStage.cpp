@@ -13,7 +13,7 @@ BossStage::BossStage()
 	_track = make_shared<Track>(Vector2(WIN_WIDTH, WIN_HEIGHT / 3));
 	_background = make_shared<BackGround>();
 	_crown = make_shared<Crown>();
-	_effect = make_shared<Effect>("Hyper_Shot", Vector2(100, 100));
+	EFFECT->AddEffect("Hyper_Shot", Vector2(100, 100), -PI / 2);
 	
 	_main->GetCollider()->GetTransform()->SetPos(Vector2(WIN_WIDTH/2, WIN_HEIGHT - 300));
 	_track->GetCollider()->GetTransform()->SetPos(Vector2(WIN_WIDTH/2, 30));
@@ -23,7 +23,7 @@ BossStage::BossStage()
 	_track->Update();
 	_background->Update();
 	_crown->Update();
-	_effect->SetAngle(PI / 2);
+	//_effect.lock()->SetAngle(PI / 2);
 }
 
 BossStage::~BossStage()
@@ -48,7 +48,7 @@ void BossStage::Update()
 				_crown->SetRedTimer(1);
 				_crown->GetDamage(1);
 				bullet->SetActive(false);
-				_effect->Play(_crown->GetCollider()->GetWorldPos());
+				EFFECT->Play("Hyper_Shot", _crown->GetCollider()->GetWorldPos());
 			}
 		}
 
@@ -91,7 +91,7 @@ void BossStage::Update()
 	_track->Update();
 	_background->Update();
 	_crown->Update();
-	_effect->Update();
+	EFFECT->Update();
 }
 
 void BossStage::Render()
@@ -100,7 +100,7 @@ void BossStage::Render()
 	_track->Render();
 	_crown->Render();
 	_main->Render();
-	_effect->Render();
+	EFFECT->Render();
 }
 
 void BossStage::PostRender()

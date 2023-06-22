@@ -27,9 +27,12 @@ Program::~Program()
 
 void Program::Update()
 {
+	
+
 	Timer::GetInstance()->Update();
 	InputManager::GetInstance()->Update();
 	_curScene->Update();
+	EFFECT->Update();
 }
 
 void Program::Render()
@@ -45,6 +48,7 @@ void Program::Render()
 
 	ALPHA->SetState();
 	_curScene->Render();
+	EFFECT->Render();
 
 	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]); 
 	ImGui::SetWindowFontScale(1.2f);

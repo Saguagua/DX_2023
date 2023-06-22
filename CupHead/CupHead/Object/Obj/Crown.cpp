@@ -144,7 +144,6 @@ void Crown::Render()
 			bullet->Render();
 		}
 	}
-	
 }
 
 void Crown::PostRender()
@@ -197,12 +196,10 @@ void Crown::Init_Stage1()
 
 void Crown::Init_Stage2()
 {
-
 }
 
 void Crown::NextStage()
 {
-
 }
 
 void Crown::CreateAction(string name, float scale, float speed, Action::Type type, CallBack callBack)

@@ -49,6 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ShaderManager::Create();
     StateManager::Create();
     SRVManager::Create();
+    EffectManager::Create();
 
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
@@ -80,7 +81,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
 
-
+    EffectManager::Delete();
     SRVManager::Delete();
     StateManager::Delete();
     ShaderManager::Delete();
