@@ -14,6 +14,8 @@ public:
 	void SetScale(Vector2 scale) { _transform->SetScale(scale); }
 	void SetAngle(float angle) { _transform->SetAngle(angle); }
 
+	bool IsActive() {return _isActive;}
+
 private:
 	void CreateAction(string name, float speed = 1.0f, Action::Type type = Action::Type::LOOP, CallBack callBack = nullptr);
 	void EndEvent();

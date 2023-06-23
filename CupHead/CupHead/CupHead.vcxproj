@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\BagicObj\EffectManager.h" />
     <ClInclude Include="Object\BagicObj\Effect.h" />
     <ClInclude Include="Object\Obj\Crown.h" />
     <ClInclude Include="Object\Obj\BackGround.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\BagicObj\EffectManager.cpp" />
     <ClCompile Include="Object\BagicObj\Effect.cpp" />
     <ClCompile Include="Object\Obj\Crown.cpp" />
     <ClCompile Include="Object\Obj\BackGround.cpp" />

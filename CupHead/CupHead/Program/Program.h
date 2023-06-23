@@ -13,6 +13,5 @@ private:
 	
 	shared_ptr<MatrixBuffer> _view;
 	shared_ptr<MatrixBuffer> _proj;
-
 };
 

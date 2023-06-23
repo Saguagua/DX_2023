@@ -20,6 +20,7 @@
 #define BLEND		StateManager::GetInstance()->GetBlend()
 #define SAMPLER		StateManager::GetInstance()->GetSampler()
 #define ADD_SRV(k)		SRVManager::GetInstance()->AddSRV(k)
+
 // Timer
 #define FPS				Timer::GetInstance()->GetFPS()
 #define DELTA_TIME		Timer::GetInstance()->GetDeltaTime()
@@ -38,6 +39,9 @@
 //Shader
 #define ADD_VS(k) ShaderManager::GetInstance()->Add_Vs(k)
 #define ADD_PS(k) ShaderManager::GetInstance()->Add_Ps(k)
+
+// EffectManager
+#define EFFECT EffectManager::GetInstance()
 
 //CallBack
 using CallBack = function<void()>; 
