@@ -23,6 +23,10 @@ BossStage::BossStage()
 	_track->Update();
 	_background->Update();
 	_crown->Update();
+	SOUND->Add("bgm1", "Resource/Sound/BGM.mp3", true);
+	SOUND->Add("attack", "Resource/Sound/attack.wav");
+
+	SOUND->Play("bgm1");
 	//_effect.lock()->SetAngle(PI / 2);
 }
 
@@ -62,6 +66,7 @@ void BossStage::Update()
 				_main->GetCollider()->SetColor(RED);
 				_main->GetDamage(1);
 				bullet->SetActive(false);
+				SOUND->Play("attack");
 			}
 		}		
 	}

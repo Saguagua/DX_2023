@@ -43,6 +43,9 @@
 // EffectManager
 #define EFFECT EffectManager::GetInstance()
 
+// SoundManager
+#define SOUND	SoundManager::GetInstance()
+
 //CallBack
 using CallBack = function<void()>; 
 using CallBackInt = function<void(int)>;
