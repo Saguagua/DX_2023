@@ -46,6 +46,9 @@
 // SoundManager
 #define SOUND	SoundManager::GetInstance()
 
+//Camera
+#define CAMERA	Camera::GetInstance()
+
 //CallBack
 using CallBack = function<void()>; 
 using CallBackInt = function<void(int)>;
